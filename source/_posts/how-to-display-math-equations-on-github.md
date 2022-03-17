@@ -1,13 +1,9 @@
 ---
 title: How To Display Math Equations on GitHub
 date: 2022-03-16 22:03:13
-tags: 
-    - github
-    - api
+categories: github
+tags: github
 ---
-<!-- 
-###### tags: `github` -->
-
 ## Use this API
 ```
 <img src="https://render.githubusercontent.com/render/math?math=O(n^2)">
