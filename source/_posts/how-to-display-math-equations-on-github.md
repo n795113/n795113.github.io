@@ -1,7 +1,7 @@
 ---
 title: How To Display Math Equations on GitHub
 date: 2022-03-16 22:03:13
-categories: github
+categories: Tech
 tags: github
 ---
 ## Use this API

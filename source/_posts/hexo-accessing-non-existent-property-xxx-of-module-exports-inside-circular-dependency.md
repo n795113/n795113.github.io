@@ -2,7 +2,7 @@
 title: >-
   Hexo: Accessing non-existent property 'xxx' of module exports inside circular dependency
 date: 2022-03-18 10:08:04
-categories: troubleshooting
+categories: Tech
 tags:
   - hexo
   - troubleshooting
