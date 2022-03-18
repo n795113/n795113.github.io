@@ -71,6 +71,66 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-hexo-accessing-non-existent-property-xxx-of-module-exports-inside-circular-dependency" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/03/18/hexo-accessing-non-existent-property-xxx-of-module-exports-inside-circular-dependency/" class="article-date">
+  <time class="dt-published" datetime="2022-03-18T02:08:04.000Z" itemprop="datePublished">2022-03-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/troubleshooting/">troubleshooting</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/03/18/hexo-accessing-non-existent-property-xxx-of-module-exports-inside-circular-dependency/">Hexo: Accessing non-existent property &#39;xxx&#39; of module exports inside circular dependency</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Error"><a href="#Error" class="headerlink" title="Error"></a>Error</h2><p>I got this error when I run <code>hexo server</code>. The site still works but it made feel unsatisfied…</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(node:87224) Warning: Accessing non-existent property &#x27;lineno&#x27; of module exports inside circular dependency</span><br><span class="line">(Use `node --trace-warnings ...` to show where the warning was created)</span><br><span class="line">(node:87224) Warning: Accessing non-existent property &#x27;column&#x27; of module exports inside circular dependency</span><br><span class="line">(node:87224) Warning: Accessing non-existent property &#x27;filename&#x27; of module exports inside circular dependency</span><br><span class="line">(node:87224) Warning: Accessing non-existent property &#x27;lineno&#x27; of module exports inside circular dependency</span><br><span class="line">(node:87224) Warning: Accessing non-existent property &#x27;column&#x27; of module exports inside circular dependency</span><br><span class="line">(node:87224) Warning: Accessing non-existent property &#x27;filename&#x27; of module exports inside circular dependency</span><br></pre></td></tr></table></figure>
+
+<h3 id="My-dependencies"><a href="#My-dependencies" class="headerlink" title="My dependencies:"></a>My dependencies:</h3><ul>
+<li>node: v16.8.0</li>
+<li>hexo: 6.1.0</li>
+<li>hexo-cli: 4.3.0</li>
+</ul>
+<hr>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Append below code to <code>package.json</code> then run <code>yarn install</code> or <code>npm install</code>. The error should be fixed.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;resolutions&quot;: &#123;</span><br><span class="line">  &quot;stylus&quot;: &quot;^0.54.8&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.haoyizebo.com/posts/710984d0/">https://www.haoyizebo.com/posts/710984d0/</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://n795113.github.io/2022/03/18/hexo-accessing-non-existent-property-xxx-of-module-exports-inside-circular-dependency/" data-id="cl0vsdx9i00002xc516j1d7rl" data-title="Hexo: Accessing non-existent property &#39;xxx&#39; of module exports inside circular dependency" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/troubleshooting/" rel="tag">troubleshooting</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-involution" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/03/17/involution/" class="article-date">
@@ -473,7 +533,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/crypto/">crypto</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/github/">github</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/laravel/">laravel</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/crypto/">crypto</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/github/">github</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/laravel/">laravel</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/troubleshooting/">troubleshooting</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li></ul>
     </div>
   </div>
 
@@ -483,7 +543,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/bnb/" rel="tag">bnb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/" rel="tag">crypto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/" rel="tag">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/" rel="tag">laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%A7%E5%8D%B7/" rel="tag">內卷</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A4%BE%E6%9C%83%E5%AD%B8/" rel="tag">社會學</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/bnb/" rel="tag">bnb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/" rel="tag">crypto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/" rel="tag">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/" rel="tag">laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/troubleshooting/" rel="tag">troubleshooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%A7%E5%8D%B7/" rel="tag">內卷</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A4%BE%E6%9C%83%E5%AD%B8/" rel="tag">社會學</a></li></ul>
     </div>
   </div>
 
@@ -493,7 +553,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/bnb/" style="font-size: 10px;">bnb</a> <a href="/tags/crypto/" style="font-size: 10px;">crypto</a> <a href="/tags/database/" style="font-size: 20px;">database</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/laravel/" style="font-size: 20px;">laravel</a> <a href="/tags/%E5%85%A7%E5%8D%B7/" style="font-size: 10px;">內卷</a> <a href="/tags/%E7%A4%BE%E6%9C%83%E5%AD%B8/" style="font-size: 10px;">社會學</a>
+      <a href="/tags/bnb/" style="font-size: 10px;">bnb</a> <a href="/tags/crypto/" style="font-size: 10px;">crypto</a> <a href="/tags/database/" style="font-size: 20px;">database</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/laravel/" style="font-size: 20px;">laravel</a> <a href="/tags/troubleshooting/" style="font-size: 10px;">troubleshooting</a> <a href="/tags/%E5%85%A7%E5%8D%B7/" style="font-size: 10px;">內卷</a> <a href="/tags/%E7%A4%BE%E6%9C%83%E5%AD%B8/" style="font-size: 10px;">社會學</a>
     </div>
   </div>
 
@@ -515,6 +575,10 @@
       <ul>
         
           <li>
+            <a href="/2022/03/18/hexo-accessing-non-existent-property-xxx-of-module-exports-inside-circular-dependency/">Hexo: Accessing non-existent property &#39;xxx&#39; of module exports inside circular dependency</a>
+          </li>
+        
+          <li>
             <a href="/2022/03/17/involution/">內卷 Involution</a>
           </li>
         
@@ -528,10 +592,6 @@
         
           <li>
             <a href="/2022/03/17/laravel-sync-data-from-an-existing-database/">Laravel | Sync Data From an Existing Database</a>
-          </li>
-        
-          <li>
-            <a href="/2022/03/17/laravel-migration-from-an-existing-database/">Laravel | Migration From an Existing Database</a>
           </li>
         
       </ul>
