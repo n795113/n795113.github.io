@@ -1,7 +1,7 @@
 ---
 title: Burn of BNB
 date: 2022-03-17 12:48:03
-categories: crypto
+categories: Crypto
 tags:
     - crypto
     - bnb

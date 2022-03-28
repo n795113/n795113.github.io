@@ -1,7 +1,7 @@
 ---
 title: Laravel | Migration From an Existing Database
 date: 2022-03-17 08:49:12
-categories: Tech
+categories: [Tech, PHP]
 tags: 
     - laravel 
     - database

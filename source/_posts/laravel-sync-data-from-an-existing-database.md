@@ -1,7 +1,7 @@
 ---
 title: Laravel | Sync Data From an Existing Database
 date: 2022-03-17 09:29:18
-categories: Tech
+categories: [Tech, PHP]
 tags:
     - laravel
     - database
