@@ -4,9 +4,14 @@
 
 # Site
 title: Great Plateau
-subtitle: ''
-description: ''
+subtitle: 工程師的初始台地
+description: '學習筆記、轉職諮詢'
 keywords:
+  - web develop
+  - backend
+  - php
+  - react
+  - crypto
 author: Leon Chen
 language: en
 timezone: 'Asia/Taipei'
@@ -31,7 +36,7 @@ i18n_dir: :lang
 skip_render:
 
 # Writing
-new_post_name: :title.md # File name of new posts
+new_post_name: :year/:month/:title.md # File name of new posts
 default_layout: post
 titlecase: false # Transform title into titlecase
 external_link:
