@@ -13,7 +13,7 @@ keywords:
   - react
   - crypto
 author: Leon Chen
-language: en
+language: zh-TW
 timezone: 'Asia/Taipei'
 
 # URL
@@ -111,3 +111,8 @@ deploy:
   repo: https://github.com/n795113/n795113.github.io
   # example, https://github.com/hexojs/hexojs.github.io
   branch: gh-pages
+
+nofollow:
+  enable: true
+  field: site
+  #exclude:
