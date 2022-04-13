@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Rust: String 101 | Great Plateau</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="123456789101112131415161718192021222324252627282930313233343536fn main() &amp;#123;    &#x2F;&#x2F; let mut str &#x3D; &quot;Hello &quot;; &lt;- this won&amp;#x27;t work    let mut str &#x3D; String::from(&quot;Hello &quot;);">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rust: String 101">
+<meta property="og:url" content="http://n795113.github.io/rust-string-101">
+<meta property="og:site_name" content="Great Plateau">
+<meta property="og:description" content="123456789101112131415161718192021222324252627282930313233343536fn main() &amp;#123;    &#x2F;&#x2F; let mut str &#x3D; &quot;Hello &quot;; &lt;- this won&amp;#x27;t work    let mut str &#x3D; String::from(&quot;Hello &quot;);">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-04-13T15:28:05.000Z">
+<meta property="article:modified_time" content="2022-04-13T15:29:33.405Z">
+<meta property="article:author" content="Leon Chen">
+<meta property="article:tag" content="rust">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Great Plateau" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Great Plateau</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">工程師的初始台地</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/service">Service</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <a id="nav-github-link" class="nav-icon" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/n795113" title="github">github</a>
+        <a id="nav-linkedin-link" style="margin-right: 1em;" class="nav-icon" target="_blank" rel="noopener external nofollow noreferrer" href="https://www.linkedin.com/in/leon-chen-dev" title="linkedin">linkedin</a>
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜尋"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://n795113.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-rust-string-101" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/rust-string-101" class="article-date">
+  <time class="dt-published" datetime="2022-04-13T15:28:05.000Z" itemprop="datePublished">2022-04-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Tech/">Tech</a>►<a class="article-category-link" href="/categories/Tech/Rust/">Rust</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Rust: String 101
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="comment">// let mut str = &quot;Hello &quot;; &lt;- this won&#x27;t work</span></span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">str</span> = String::<span class="title function_ invoke__">from</span>(<span class="string">&quot;Hello &quot;</span>);</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Now str: &#123;&#125;&quot;</span>, <span class="type">str</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Get length &amp; capacity of a string</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Length: &#123;&#125; Capacity: &#123;&#125;&quot;</span>, <span class="type">str</span>.<span class="title function_ invoke__">len</span>(), <span class="type">str</span>.<span class="title function_ invoke__">capacity</span>());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Push char</span></span><br><span class="line">    <span class="type">str</span>.<span class="title function_ invoke__">push</span>(<span class="string">&#x27;R&#x27;</span>);</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Now str: &#123;&#125;&quot;</span>, <span class="type">str</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Push string</span></span><br><span class="line">    <span class="type">str</span>.<span class="title function_ invoke__">push_str</span>(<span class="string">&quot;ust&quot;</span>); <span class="comment">// capacity is doubled to 12</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Now str: &#123;&#125;&quot;</span>, <span class="type">str</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Check if empty</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Is empty: &#123;&#125;&quot;</span>, <span class="type">str</span>.<span class="title function_ invoke__">is_empty</span>());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Check if contains</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Contains &#x27;PHP&#x27;? &#123;&#125;&quot;</span>, <span class="type">str</span>.<span class="title function_ invoke__">contains</span>(<span class="string">&quot;PHP&quot;</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Replace substring with</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Replace output: &#123;&#125;&quot;</span>, <span class="type">str</span>.<span class="title function_ invoke__">replace</span>(<span class="string">&quot;Rust&quot;</span>, <span class="string">&quot;Solana&quot;</span>));</span><br><span class="line">    <span class="comment">// replace is not a in-place operation</span></span><br><span class="line">    <span class="comment">// so value of str is still &quot;Hello Rust&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Iterate a string by word (whitespace)</span></span><br><span class="line">    <span class="keyword">for</span> <span class="variable">word</span> <span class="keyword">in</span> <span class="type">str</span>.<span class="title function_ invoke__">split_whitespace</span>() &#123;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, word);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Create a string with capacity</span></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">str_with_cap_10</span> = String::<span class="title function_ invoke__">with_capacity</span>(<span class="number">10</span>);</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Length: &#123;&#125; Capacity: &#123;&#125;&quot;</span>, str_with_cap_10.<span class="title function_ invoke__">len</span>(), str_with_cap_10.<span class="title function_ invoke__">capacity</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The above outputs the following:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Now str: Hello </span><br><span class="line">Length: 6 Capacity: 6</span><br><span class="line">Now str: Hello R</span><br><span class="line">Now str: Hello Rust</span><br><span class="line">Is empty: false</span><br><span class="line">Contains &#x27;PHP&#x27;? false</span><br><span class="line">Replace output: Hello Solana</span><br><span class="line">Hello</span><br><span class="line">Rust</span><br><span class="line">Length: 0 Capacity: 10</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://n795113.github.io/rust-string-101" data-id="cl1xqaozo0000wuc53nk78akv" data-title="Rust: String 101" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rust/" rel="tag">rust</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/rust-print-and-formatting" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Rust: Print &amp; Formatting</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分類</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Crypto/">Crypto</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tech/">Tech</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tech/CSS/">CSS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tech/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tech/React/">React</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tech/Rust/">Rust</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/bnb/" rel="tag">bnb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/" rel="tag">crypto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/" rel="tag">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flex/" rel="tag">flex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/" rel="tag">laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rust/" rel="tag">rust</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/troubleshooting/" rel="tag">troubleshooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%A7%E5%8D%B7/" rel="tag">內卷</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%B2%E5%AD%B8/" rel="tag">哲學</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AD%98%E8%AB%96/" rel="tag">知識論</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A4%BE%E6%9C%83%E5%AD%B8/" rel="tag">社會學</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">彙整</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/rust-string-101">Rust: String 101</a>
+          </li>
+        
+          <li>
+            <a href="/rust-print-and-formatting">Rust: Print &amp; Formatting</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/28/css-use-pseudo-elements-create-hover-effect/">CSS: Use Pseudo Elements Create Hover Effect</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/28/react-how-to-append-jsx/">React: How To Append JSX</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/22/css-flex/">CSS Flex</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Leon Chen<br>
+      Powered by <a href="https://hexo.io/" rel="external nofollow noreferrer" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/service" class="mobile-nav-link">Service</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
