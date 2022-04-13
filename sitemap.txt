@@ -1,3 +1,4 @@
+http://n795113.github.io/rust-print-and-formatting
 http://n795113.github.io/about/index.html
 http://n795113.github.io/categories/index.html
 http://n795113.github.io/tags/index.html
@@ -27,9 +28,11 @@ http://n795113.github.io/tags/%E7%9F%A5%E8%AD%98%E8%AB%96/
 http://n795113.github.io/tags/css/
 http://n795113.github.io/tags/flex/
 http://n795113.github.io/tags/react/
+http://n795113.github.io/tags/rust/
 http://n795113.github.io/categories/%E5%AD%B8%E7%BF%92/
 http://n795113.github.io/categories/Tech/
 http://n795113.github.io/categories/Crypto/
 http://n795113.github.io/categories/Tech/PHP/
 http://n795113.github.io/categories/Tech/CSS/
 http://n795113.github.io/categories/Tech/React/
+http://n795113.github.io/categories/Tech/Rust/

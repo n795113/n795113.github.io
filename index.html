@@ -90,6 +90,54 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-rust-print-and-formatting" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/rust-print-and-formatting" class="article-date">
+  <time class="dt-published" datetime="2022-04-13T14:39:22.000Z" itemprop="datePublished">2022-04-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Tech/">Tech</a>►<a class="article-category-link" href="/categories/Tech/Rust/">Rust</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/rust-print-and-formatting">Rust: Print &amp; Formatting</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>List some ways to format the value to be printable.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="comment">// Print to console</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Hello Rust&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Basic Formatting</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125; is &#123;&#125;&quot;</span>, <span class="string">&quot;Rust&quot;</span>, <span class="string">&quot;rusty&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Positional arguments</span></span><br><span class="line">    <span class="built_in">println!</span>(</span><br><span class="line">        <span class="string">&quot;&#123;0&#125; is a &#123;1&#125;, and &#123;0&#125; is &#123;2&#125;&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Rust&quot;</span>, <span class="string">&quot;programming language&quot;</span>, <span class="string">&quot;efficient&quot;</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Named arguments</span></span><br><span class="line">    <span class="built_in">println!</span>(</span><br><span class="line">        <span class="string">&quot;&#123;target&#125; supports &#123;noun&#125;&quot;</span>,</span><br><span class="line">        target = <span class="string">&quot;Rust&quot;</span>,</span><br><span class="line">        noun = <span class="string">&quot;concurrent programming&quot;</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Placeholder traits</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Binary: &#123;:b&#125; Hex: &#123;:x&#125; Octal: &#123;:o&#125;&quot;</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Placeholder for debug trait</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;:?&#125;&quot;</span>, (<span class="number">100</span>, <span class="literal">false</span>, <span class="string">&quot;Rust&quot;</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The above outputs the following:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Hello Rust</span><br><span class="line">Rust is rusty</span><br><span class="line">Rust is a programming language, and Rust is efficient</span><br><span class="line">Rust supports concurrent programming</span><br><span class="line">Binary: 1010 Hex: a Octal: 12</span><br><span class="line">(100, false, &quot;Rust&quot;)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://n795113.github.io/rust-print-and-formatting" data-id="cl1xon09000002gc5606hcwru" data-title="Rust: Print &amp; Formatting" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rust/" rel="tag">rust</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-css-use-pseudo-elements-create-hover-effect" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/03/28/css-use-pseudo-elements-create-hover-effect/" class="article-date">
@@ -729,54 +777,12 @@
 
 
   
-    <article id="post-how-to-display-math-equations-on-github" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/03/16/how-to-display-math-equations-on-github/" class="article-date">
-  <time class="dt-published" datetime="2022-03-16T14:03:13.000Z" itemprop="datePublished">2022-03-16</time>
-</a>
+
+
+  <nav id="page-nav">
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Tech/">Tech</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/03/16/how-to-display-math-equations-on-github/">How To Display Math Equations on GitHub</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="Use-this-API"><a href="#Use-this-API" class="headerlink" title="Use this API"></a>Use this API</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;https://render.githubusercontent.com/render/math?math=O(n^2)&quot;&gt;</span><br></pre></td></tr></table></figure>
-<p>Result: <img src="https://render.githubusercontent.com/render/math?math=O(n^2)"></p>
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://gist.github.com/a-rodin/fef3f543412d6e1ec5b6cf55bf197d7b">https://gist.github.com/a-rodin/fef3f543412d6e1ec5b6cf55bf197d7b</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://n795113.github.io/2022/03/16/how-to-display-math-equations-on-github/" data-id="cl0uqx7420007ahc59oko5x13" data-title="How To Display Math Equations on GitHub" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/" rel="tag">github</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一頁 &raquo;</a>
+  </nav>
 
 </section>
         
@@ -786,7 +792,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分類</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Crypto/">Crypto</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tech/">Tech</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tech/CSS/">CSS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tech/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tech/React/">React</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Crypto/">Crypto</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tech/">Tech</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tech/CSS/">CSS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tech/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tech/React/">React</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tech/Rust/">Rust</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li></ul>
     </div>
   </div>
 
@@ -796,7 +802,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">標籤</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/bnb/" rel="tag">bnb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/" rel="tag">crypto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/" rel="tag">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flex/" rel="tag">flex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/" rel="tag">laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/troubleshooting/" rel="tag">troubleshooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%A7%E5%8D%B7/" rel="tag">內卷</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%B2%E5%AD%B8/" rel="tag">哲學</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AD%98%E8%AB%96/" rel="tag">知識論</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A4%BE%E6%9C%83%E5%AD%B8/" rel="tag">社會學</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/bnb/" rel="tag">bnb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/" rel="tag">crypto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/" rel="tag">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flex/" rel="tag">flex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/" rel="tag">laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rust/" rel="tag">rust</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/troubleshooting/" rel="tag">troubleshooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%A7%E5%8D%B7/" rel="tag">內卷</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%B2%E5%AD%B8/" rel="tag">哲學</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AD%98%E8%AB%96/" rel="tag">知識論</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A4%BE%E6%9C%83%E5%AD%B8/" rel="tag">社會學</a></li></ul>
     </div>
   </div>
 
@@ -806,7 +812,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">彙整</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li></ul>
     </div>
   </div>
 
@@ -817,6 +823,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/rust-print-and-formatting">Rust: Print &amp; Formatting</a>
+          </li>
         
           <li>
             <a href="/2022/03/28/css-use-pseudo-elements-create-hover-effect/">CSS: Use Pseudo Elements Create Hover Effect</a>
@@ -832,10 +842,6 @@
         
           <li>
             <a href="/2022/03/18/meta-knowledge/">知識</a>
-          </li>
-        
-          <li>
-            <a href="/2022/03/18/hexo-accessing-non-existent-property-xxx-of-module-exports-inside-circular-dependency/">Hexo: Accessing non-existent property &#39;xxx&#39; of module exports inside circular dependency</a>
           </li>
         
       </ul>

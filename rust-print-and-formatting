@@ -4,21 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>Tag: react | Great Plateau</title>
+  <title>Rust: Print &amp; Formatting | Great Plateau</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="學習筆記、轉職諮詢">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Great Plateau">
-<meta property="og:url" content="http://n795113.github.io/tags/react/index.html">
+  <meta name="description" content="List some ways to format the value to be printable. 1234567891011121314151617181920212223242526fn main() &amp;#123;    &#x2F;&#x2F; Print to console    println!(&quot;Hello Rust&quot;);    &#x2F;&#x2F; Basic Formatting    pr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rust: Print &amp; Formatting">
+<meta property="og:url" content="http://n795113.github.io/rust-print-and-formatting">
 <meta property="og:site_name" content="Great Plateau">
-<meta property="og:description" content="學習筆記、轉職諮詢">
+<meta property="og:description" content="List some ways to format the value to be printable. 1234567891011121314151617181920212223242526fn main() &amp;#123;    &#x2F;&#x2F; Print to console    println!(&quot;Hello Rust&quot;);    &#x2F;&#x2F; Basic Formatting    pr">
 <meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-04-13T14:39:22.000Z">
+<meta property="article:modified_time" content="2022-04-13T14:44:26.178Z">
 <meta property="article:author" content="Leon Chen">
-<meta property="article:tag" content="web develop">
-<meta property="article:tag" content="backend">
-<meta property="article:tag" content="php">
-<meta property="article:tag" content="react">
-<meta property="article:tag" content="crypto">
+<meta property="article:tag" content="rust">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Great Plateau" type="application/atom+xml">
@@ -88,39 +86,62 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2022/03/28/react-how-to-append-jsx/" class="archive-article-date">
-  <time class="dt-published" datetime="2022-03-28T13:27:22.000Z" itemprop="datePublished">3月 28</time>
+        <section id="main"><article id="post-rust-print-and-formatting" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/rust-print-and-formatting" class="article-date">
+  <time class="dt-published" datetime="2022-04-13T14:39:22.000Z" itemprop="datePublished">2022-04-13</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Tech/">Tech</a>►<a class="article-category-link" href="/categories/Tech/Rust/">Rust</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/03/28/react-how-to-append-jsx/">React: How To Append JSX</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      Rust: Print &amp; Formatting
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>List some ways to format the value to be printable.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="comment">// Print to console</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Hello Rust&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Basic Formatting</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125; is &#123;&#125;&quot;</span>, <span class="string">&quot;Rust&quot;</span>, <span class="string">&quot;rusty&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Positional arguments</span></span><br><span class="line">    <span class="built_in">println!</span>(</span><br><span class="line">        <span class="string">&quot;&#123;0&#125; is a &#123;1&#125;, and &#123;0&#125; is &#123;2&#125;&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Rust&quot;</span>, <span class="string">&quot;programming language&quot;</span>, <span class="string">&quot;efficient&quot;</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Named arguments</span></span><br><span class="line">    <span class="built_in">println!</span>(</span><br><span class="line">        <span class="string">&quot;&#123;target&#125; supports &#123;noun&#125;&quot;</span>,</span><br><span class="line">        target = <span class="string">&quot;Rust&quot;</span>,</span><br><span class="line">        noun = <span class="string">&quot;concurrent programming&quot;</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Placeholder traits</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Binary: &#123;:b&#125; Hex: &#123;:x&#125; Octal: &#123;:o&#125;&quot;</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Placeholder for debug trait</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;:?&#125;&quot;</span>, (<span class="number">100</span>, <span class="literal">false</span>, <span class="string">&quot;Rust&quot;</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The above outputs the following:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Hello Rust</span><br><span class="line">Rust is rusty</span><br><span class="line">Rust is a programming language, and Rust is efficient</span><br><span class="line">Rust supports concurrent programming</span><br><span class="line">Binary: 1010 Hex: a Octal: 12</span><br><span class="line">(100, false, &quot;Rust&quot;)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://n795113.github.io/rust-print-and-formatting" data-id="cl1xon09000002gc5606hcwru" data-title="Rust: Print &amp; Formatting" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rust/" rel="tag">rust</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/03/28/css-use-pseudo-elements-create-hover-effect/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">CSS: Use Pseudo Elements Create Hover Effect</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 
 </section>
