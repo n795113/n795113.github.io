@@ -90,6 +90,53 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-stepn-should-i-mint-shoebox" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/stepn-should-i-mint-shoebox" class="article-date">
+  <time class="dt-published" datetime="2022-04-14T16:51:20.000Z" itemprop="datePublished">2022-04-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Crypto/">Crypto</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/stepn-should-i-mint-shoebox">STEPN 我該鑄造鞋子來賣嗎？ Should I Mint Shoes To Sell Now?</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>最近剛入坑，雖然知道風險很高，但還是抱持著體驗的心情衝進來了😅</p>
+<p>相信很多人進場後都會面臨這個問題：該跑步就好，還是生鞋子來賣？<br>因為鑄造鞋子會花費 GST，但賣鞋時的獲利是 SOL。<br>所以當 GST 價格偏低時，比較適合鑄造新鞋子，因為可以用較便宜的 GST 去套利 SOL。</p>
+<p>以下就分享一個超讚的計算機，幫我們以當前幣價估算，建議你目前該跑步還是生鞋！<br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.workitwallet.com/post/stepn-buy-vs-mint">workitwallet</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://n795113.github.io/stepn-should-i-mint-shoebox" data-id="cl1z92iet0000fic58bik75my" data-title="STEPN 我該鑄造鞋子來賣嗎？ Should I Mint Shoes To Sell Now?" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gamefi/" rel="tag">gamefi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/solana/" rel="tag">solana</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stepn/" rel="tag">stepn</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-rust-string-101" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/rust-string-101" class="article-date">
@@ -658,89 +705,6 @@
 
 
   
-    <article id="post-laravel-sync-data-from-an-existing-database" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/03/17/laravel-sync-data-from-an-existing-database/" class="article-date">
-  <time class="dt-published" datetime="2022-03-17T01:29:18.000Z" itemprop="datePublished">2022-03-17</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Tech/">Tech</a>►<a class="article-category-link" href="/categories/Tech/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/03/17/laravel-sync-data-from-an-existing-database/">Laravel | Sync Data From an Existing Database</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>I got a mission to clone an existing service, which has its database separately from the original.</p>
-<p>Here is my to-do list:</p>
-<ol>
-<li>create tables</li>
-<li>sync data</li>
-</ol>
-<p>This article will focus on how to sync data. To read how to create tables from the old database check out <a href="/laravel-migration-from-an-existing-database">here</a></p>
-<h2 id="Laravel-Database-Sync"><a href="#Laravel-Database-Sync" class="headerlink" title="Laravel Database Sync"></a>Laravel Database Sync</h2><p>I found this great tool to do this task: <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/waelwalid/laravel-database-sync">https://github.com/waelwalid/laravel-database-sync</a></p>
-<p>Please follow the instructions to install the tool.</p>
-<h2 id="Adjustments"><a href="#Adjustments" class="headerlink" title="Adjustments"></a>Adjustments</h2><p>I run my app in a php-fpm-alpine docker container so some adjustments need to do or the tool won’t work.</p>
-<ol>
-<li>Make the container can run the shell scripts</li>
-<li>Install mysql-client</li>
-<li>Disable LOCK TABLE if you are NOT a root user in the synced database when executing mysqldump</li>
-</ol>
-<h3 id="1-Make-the-container-can-run-the-shell-scripts"><a href="#1-Make-the-container-can-run-the-shell-scripts" class="headerlink" title="1. Make the container can run the shell scripts"></a>1. Make the container can run the shell scripts</h3><p>The sync-tool is implemented by shell scripts, and with the header, <code>#!/bin/bash</code>, so only bash can run it.</p>
-<p>And since I used an alpine image, which doesn’t have the Bash installed by default so I had two options:</p>
-<ol>
-<li>Change the header to <code>#!/bin/sh</code></li>
-<li>Install Bash or just use an Ubuntu image for convenience</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># add this to the Dockerfile</span><br><span class="line">RUN apk add --no-cache --upgrade bash</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-Install-mysql-client"><a href="#2-Install-mysql-client" class="headerlink" title="2. Install mysql-client"></a>2. Install mysql-client</h3><p>Still, by default, the alpine image doesn’t come with mysql-client, which is used in the shell script so we need to install it.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apk add --no-cache mysql-client</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-Disable-LOCK-TABLE-if-you-are-NOT-a-root-user-in-the-synced-database"><a href="#3-Disable-LOCK-TABLE-if-you-are-NOT-a-root-user-in-the-synced-database" class="headerlink" title="3. Disable LOCK TABLE if you are NOT a root user in the synced database"></a>3. Disable LOCK TABLE if you are NOT a root user in the synced database</h3><p>Since I sync the data using a user who ONLY has SELECT privilege, I need to disable LOCK TABLE, and PROCESS when dumping the data.</p>
-<p>Open <code>vendor/waelwalid/laravel-database-sync/database-update.sh</code>.</p>
-<p>Add <code>--single-transaction=TRUE --no-tablespaces</code> after <code>mysqldump</code> command.</p>
-<p>Like this: </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -v --single-transaction=TRUE --no-tablespaces \</span><br><span class="line">-h $REMOTE_DATABASE_HOST -u $REMOTE_DATABASE_USER \</span><br><span class="line">-p $REMOTE_DATABASE_PASS $REMOTE_DATABASE_NAME \</span><br><span class="line">&gt; $CONFIG/dumps/remote-database-$CURRENT_TIME.sql</span><br></pre></td></tr></table></figure>
-
-<p>If you use login as root, or other users with LOCK TABLE, and PROCESS privileges, you can skip this step.</p>
-<p>Quote from the document:</p>
-<blockquote>
-<p>mysqldump requires at least the SELECT privilege for dumped tables, SHOW VIEW for dumped views, TRIGGER for dumped triggers, LOCK TABLES if the –single-transaction option is not used, and (as of MySQL 8.0.21) PROCESS if the –no-tablespaces option is not used. Certain options might require other privileges as noted in the option descriptions.</p>
-</blockquote>
-<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html">Check out for more details about mysqldump</a></p>
-<h2 id="After-all"><a href="#After-all" class="headerlink" title="After all"></a>After all</h2><p>Now you can run <code>composer database-update</code> to sync the data, or just execute <code>.vendor/waelwalid/laravel-database-sync/database-update.sh</code> which is the same, cheers :)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://n795113.github.io/2022/03/17/laravel-sync-data-from-an-existing-database/" data-id="cl0uqx7440009ahc5e8x9720r" data-title="Laravel | Sync Data From an Existing Database" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/database/" rel="tag">database</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/laravel/" rel="tag">laravel</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -766,7 +730,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">標籤</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/bnb/" rel="tag">bnb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/" rel="tag">crypto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/" rel="tag">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flex/" rel="tag">flex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/" rel="tag">laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rust/" rel="tag">rust</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/troubleshooting/" rel="tag">troubleshooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%A7%E5%8D%B7/" rel="tag">內卷</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%B2%E5%AD%B8/" rel="tag">哲學</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AD%98%E8%AB%96/" rel="tag">知識論</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A4%BE%E6%9C%83%E5%AD%B8/" rel="tag">社會學</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/bnb/" rel="tag">bnb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/" rel="tag">crypto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/" rel="tag">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flex/" rel="tag">flex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gamefi/" rel="tag">gamefi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/" rel="tag">laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rust/" rel="tag">rust</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/solana/" rel="tag">solana</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stepn/" rel="tag">stepn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/troubleshooting/" rel="tag">troubleshooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%A7%E5%8D%B7/" rel="tag">內卷</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%B2%E5%AD%B8/" rel="tag">哲學</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AD%98%E8%AB%96/" rel="tag">知識論</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A4%BE%E6%9C%83%E5%AD%B8/" rel="tag">社會學</a></li></ul>
     </div>
   </div>
 
@@ -789,6 +753,10 @@
       <ul>
         
           <li>
+            <a href="/stepn-should-i-mint-shoebox">STEPN 我該鑄造鞋子來賣嗎？ Should I Mint Shoes To Sell Now?</a>
+          </li>
+        
+          <li>
             <a href="/rust-string-101">Rust: String 101</a>
           </li>
         
@@ -802,10 +770,6 @@
         
           <li>
             <a href="/2022/03/28/react-how-to-append-jsx/">React: How To Append JSX</a>
-          </li>
-        
-          <li>
-            <a href="/2022/03/22/css-flex/">CSS Flex</a>
           </li>
         
       </ul>
