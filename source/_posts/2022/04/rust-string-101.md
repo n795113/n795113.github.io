@@ -9,8 +9,9 @@ tags:
 ---
 ```rust
 fn main() {
-    // let mut str = "Hello "; <- this won't work
     let mut str = String::from("Hello ");
+    // let mut str = "Hello "; <- this won't work
+    // let mut str = "Hello ".to_string(); <- this works
     println!("Now str: {}", str);
     
     // Get length & capacity of a string
@@ -58,4 +59,24 @@ Replace output: Hello Solana
 Hello
 Rust
 Length: 0 Capacity: 10
+```
+
+## Use "+" to append string
+
+```rust
+let s1 = String::from("Hello");
+let s2 = String::from(" Rust");
+let s3 = s1 + &s2; // Note: s1 is no longer valid since it's ownership is moved to s3
+// s3 = "Hello Rust"
+```
+
+## Use format! macro to combine strings
+imagine we need to append strings by dashes
+```rust
+let s1 = "rust";
+let s2 = "ruby";
+let s3 = "ray";
+
+let combined_str = format!("{}-{}-{}", s1, s2, s3);
+// combined_str = "rust-rude-ray"
 ```
