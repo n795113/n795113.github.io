@@ -1,7 +1,7 @@
+http://n795113.github.io/about/index.html
 http://n795113.github.io/rust-string-101
 http://n795113.github.io/stepn-should-i-mint-shoebox
 http://n795113.github.io/rust-print-and-formatting
-http://n795113.github.io/about/index.html
 http://n795113.github.io/categories/index.html
 http://n795113.github.io/tags/index.html
 http://n795113.github.io/service/index.html
