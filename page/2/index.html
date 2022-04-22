@@ -90,6 +90,66 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-hexo-accessing-non-existent-property-xxx-of-module-exports-inside-circular-dependency" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/03/18/hexo-accessing-non-existent-property-xxx-of-module-exports-inside-circular-dependency/" class="article-date">
+  <time class="dt-published" datetime="2022-03-18T02:08:04.000Z" itemprop="datePublished">2022-03-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Tech/">Tech</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/03/18/hexo-accessing-non-existent-property-xxx-of-module-exports-inside-circular-dependency/">Hexo: Accessing non-existent property &#39;xxx&#39; of module exports inside circular dependency</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Error"><a href="#Error" class="headerlink" title="Error"></a>Error</h2><p>I got this error when I run <code>hexo server</code>. The site still works but it made feel unsatisfied…</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(node:87224) Warning: Accessing non-existent property &#x27;lineno&#x27; of module exports inside circular dependency</span><br><span class="line">(Use `node --trace-warnings ...` to show where the warning was created)</span><br><span class="line">(node:87224) Warning: Accessing non-existent property &#x27;column&#x27; of module exports inside circular dependency</span><br><span class="line">(node:87224) Warning: Accessing non-existent property &#x27;filename&#x27; of module exports inside circular dependency</span><br><span class="line">(node:87224) Warning: Accessing non-existent property &#x27;lineno&#x27; of module exports inside circular dependency</span><br><span class="line">(node:87224) Warning: Accessing non-existent property &#x27;column&#x27; of module exports inside circular dependency</span><br><span class="line">(node:87224) Warning: Accessing non-existent property &#x27;filename&#x27; of module exports inside circular dependency</span><br></pre></td></tr></table></figure>
+
+<h3 id="My-dependencies"><a href="#My-dependencies" class="headerlink" title="My dependencies:"></a>My dependencies:</h3><ul>
+<li>node: v16.8.0</li>
+<li>hexo: 6.1.0</li>
+<li>hexo-cli: 4.3.0</li>
+</ul>
+<hr>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Append below code to <code>package.json</code> then run <code>yarn install</code> or <code>npm install</code>. The error should be fixed.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;resolutions&quot;: &#123;</span><br><span class="line">  &quot;stylus&quot;: &quot;^0.54.8&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.haoyizebo.com/posts/710984d0/">https://www.haoyizebo.com/posts/710984d0/</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://n795113.github.io/2022/03/18/hexo-accessing-non-existent-property-xxx-of-module-exports-inside-circular-dependency/" data-id="cl0vsdx9i00002xc516j1d7rl" data-title="Hexo: Accessing non-existent property &#39;xxx&#39; of module exports inside circular dependency" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/troubleshooting/" rel="tag">troubleshooting</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-involution" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/03/17/involution/" class="article-date">
@@ -479,6 +539,10 @@
       <ul>
         
           <li>
+            <a href="/understand-solana-token">超白話理解 Solana 代幣與 NFT</a>
+          </li>
+        
+          <li>
             <a href="/learn-solana-cli">Learn Solana CLI</a>
           </li>
         
@@ -492,10 +556,6 @@
         
           <li>
             <a href="/rust-string-101">Rust: String 101</a>
-          </li>
-        
-          <li>
-            <a href="/rust-print-and-formatting">Rust: Print &amp; Formatting</a>
           </li>
         
       </ul>
