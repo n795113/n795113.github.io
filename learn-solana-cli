@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Learn Solana CLI | Great Plateau</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Wallet types file paper hardware  Create walletcreate wallet (key-pair) 1234&#x2F;&#x2F; file walletsolana-keygen new --outfile YOUR-PRIVATE-KEY-FILE-PATH&#x2F;&#x2F; paper walletsolana-keygen new --no-outfile  the publi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Learn Solana CLI">
+<meta property="og:url" content="http://n795113.github.io/learn-solana-cli">
+<meta property="og:site_name" content="Great Plateau">
+<meta property="og:description" content="Wallet types file paper hardware  Create walletcreate wallet (key-pair) 1234&#x2F;&#x2F; file walletsolana-keygen new --outfile YOUR-PRIVATE-KEY-FILE-PATH&#x2F;&#x2F; paper walletsolana-keygen new --no-outfile  the publi">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-04-22T00:19:39.000Z">
+<meta property="article:modified_time" content="2022-04-22T00:22:38.472Z">
+<meta property="article:author" content="Leon Chen">
+<meta property="article:tag" content="crypto">
+<meta property="article:tag" content="solana">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Great Plateau" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Great Plateau</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">工程師的初始台地</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/service">Service</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <a id="nav-github-link" class="nav-icon" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/n795113" title="github">github</a>
+        <a id="nav-linkedin-link" style="margin-right: 1em;" class="nav-icon" target="_blank" rel="noopener external nofollow noreferrer" href="https://www.linkedin.com/in/leon-chen-dev" title="linkedin">linkedin</a>
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜尋"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://n795113.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-learn-solana-cli" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/learn-solana-cli" class="article-date">
+  <time class="dt-published" datetime="2022-04-22T00:19:39.000Z" itemprop="datePublished">2022-04-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Crypto/">Crypto</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Learn Solana CLI
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="Wallet-types"><a href="#Wallet-types" class="headerlink" title="Wallet types"></a>Wallet types</h3><ul>
+<li>file</li>
+<li>paper</li>
+<li>hardware</li>
+</ul>
+<h3 id="Create-wallet"><a href="#Create-wallet" class="headerlink" title="Create wallet"></a>Create wallet</h3><p>create wallet (key-pair)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// file wallet</span><br><span class="line">solana-keygen new --outfile YOUR-PRIVATE-KEY-FILE-PATH</span><br><span class="line">// paper wallet</span><br><span class="line">solana-keygen new --no-outfile</span><br></pre></td></tr></table></figure>
+
+<p>the public key will display on the terminal<br>if you didn’t save the pubkey, it’s fine.<br>we can get the pubkey from private-key</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">solana-keygen pubkey YOUR-PRIVATE-KEY-FILE-PATH</span><br></pre></td></tr></table></figure>
+
+<p>Verify key-pair</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">solana-keygen verify PUBKEY PRIVATE-KEY-FILE-PATH</span><br></pre></td></tr></table></figure>
+
+<h3 id="Interact-with-wallet"><a href="#Interact-with-wallet" class="headerlink" title="Interact with wallet"></a>Interact with wallet</h3><ul>
+<li><code>pubkey</code> aka. <code>address</code> aka. <code>wallet address</code></li>
+</ul>
+<p>config</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">solana config get</span><br></pre></td></tr></table></figure>
+
+<p>set URL to dev-net for developing</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">solana config set --url https://api.devnet.solana.com</span><br></pre></td></tr></table></figure>
+
+<p>send 1 SOL to address</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">solana airdrop 1 PUBKEY</span><br></pre></td></tr></table></figure>
+
+<p>get balance of address</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">solana balance PUBKEY</span><br></pre></td></tr></table></figure>
+
+<p>transfer</p>
+<ul>
+<li>from</li>
+<li>to</li>
+<li>amount</li>
+<li>fee-payer</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">solana transfer --from &lt;KEYPAIR&gt; \</span><br><span class="line">&lt;RECIPIENT_ACCOUNT_ADDRESS&gt; &lt;AMOUNT&gt; \</span><br><span class="line">--fee-payer &lt;KEYPAIR&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Stake"><a href="#Stake" class="headerlink" title="Stake"></a>Stake</h2><h3 id="create-stake-account"><a href="#create-stake-account" class="headerlink" title="create stake account"></a>create stake account</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// first create a keypair for account address</span><br><span class="line">solana-keygen new --no-passphrase -o stake-account.json</span><br><span class="line"></span><br><span class="line">// then create account</span><br><span class="line">solana create-stake-account --from &lt;KEYPAIR&gt; stake-account.json &lt;AMOUNT&gt; \</span><br><span class="line">    --stake-authority &lt;KEYPAIR&gt; --withdraw-authority &lt;KEYPAIR&gt; \</span><br><span class="line">    --fee-payer &lt;KEYPAIR&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="get-account"><a href="#get-account" class="headerlink" title="get account"></a>get account</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">solana stake-account &lt;STAKE_ACCOUNT_ADDRESS&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="update-account-auth"><a href="#update-account-auth" class="headerlink" title="update account auth"></a>update account auth</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">solana stake-authorize &lt;STAKE_ACCOUNT_ADDRESS&gt; \</span><br><span class="line">    --stake-authority &lt;KEYPAIR&gt; --new-stake-authority &lt;PUBKEY&gt; \</span><br><span class="line">    --fee-payer &lt;KEYPAIR&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Delegate-Stake-質押"><a href="#Delegate-Stake-質押" class="headerlink" title="Delegate Stake (質押)"></a>Delegate Stake (質押)</h2><h3 id="list-available-validators"><a href="#list-available-validators" class="headerlink" title="list available validators"></a>list available validators</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">solana validators</span><br></pre></td></tr></table></figure>
+<h3 id="delegate"><a href="#delegate" class="headerlink" title="delegate"></a>delegate</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">solana delegate-stake --stake-authority &lt;KEYPAIR&gt; &lt;STAKE_ACCOUNT_ADDRESS&gt; &lt;VOTE_ACCOUNT_ADDRESS&gt; \</span><br><span class="line">    --fee-payer &lt;KEYPAIR&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="deactive"><a href="#deactive" class="headerlink" title="deactive"></a>deactive</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">solana deactivate-stake --stake-authority &lt;KEYPAIR&gt; &lt;STAKE_ACCOUNT_ADDRESS&gt; \</span><br><span class="line">    --fee-payer &lt;KEYPAIR&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="withdraw-sol"><a href="#withdraw-sol" class="headerlink" title="withdraw sol"></a>withdraw sol</h3><p>only work when the stake-account deactived</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">solana withdraw-stake --withdraw-authority &lt;KEYPAIR&gt; &lt;STAKE_ACCOUNT_ADDRESS&gt; &lt;RECIPIENT_ADDRESS&gt; &lt;AMOUNT&gt; \</span><br><span class="line">    --fee-payer &lt;KEYPAIR&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="split"><a href="#split" class="headerlink" title="split"></a>split</h3><p>You may want to delegate stake to additional validators while your existing stake is not eligible for withdrawal. It might not be eligible because it is currently staked, cooling down, or locked up. To transfer tokens from an existing stake account to a new one</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">solana split-stake --stake-authority &lt;KEYPAIR&gt; &lt;STAKE_ACCOUNT_ADDRESS&gt; &lt;NEW_STAKE_ACCOUNT_KEYPAIR&gt; &lt;AMOUNT&gt; \</span><br><span class="line">    --fee-payer &lt;KEYPAIR&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h2><ul>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.solana.com/cli/usage">https://docs.solana.com/cli/usage</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://n795113.github.io/learn-solana-cli" data-id="cl29ov3j1000030c5f5nq2w3k" data-title="Learn Solana CLI" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/crypto/" rel="tag">crypto</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/solana/" rel="tag">solana</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/level-up-github-profile" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">升級個人 GitHub Profile</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分類</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Crypto/">Crypto</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tech/">Tech</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tech/CSS/">CSS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tech/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tech/React/">React</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tech/Rust/">Rust</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/bnb/" rel="tag">bnb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/" rel="tag">crypto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/" rel="tag">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flex/" rel="tag">flex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gamefi/" rel="tag">gamefi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/" rel="tag">laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rust/" rel="tag">rust</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/solana/" rel="tag">solana</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stepn/" rel="tag">stepn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/troubleshooting/" rel="tag">troubleshooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%A7%E5%8D%B7/" rel="tag">內卷</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%B2%E5%AD%B8/" rel="tag">哲學</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AD%98%E8%AB%96/" rel="tag">知識論</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A4%BE%E6%9C%83%E5%AD%B8/" rel="tag">社會學</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">彙整</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/learn-solana-cli">Learn Solana CLI</a>
+          </li>
+        
+          <li>
+            <a href="/level-up-github-profile">升級個人 GitHub Profile</a>
+          </li>
+        
+          <li>
+            <a href="/stepn-should-i-mint-shoebox">STEPN 我該鑄造鞋子來賣嗎？ Should I Mint Shoes To Sell Now?</a>
+          </li>
+        
+          <li>
+            <a href="/rust-string-101">Rust: String 101</a>
+          </li>
+        
+          <li>
+            <a href="/rust-print-and-formatting">Rust: Print &amp; Formatting</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Leon Chen<br>
+      Powered by <a href="https://hexo.io/" rel="external nofollow noreferrer" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/service" class="mobile-nav-link">Service</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
