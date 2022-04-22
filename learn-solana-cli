@@ -14,7 +14,7 @@
 <meta property="og:description" content="Wallet types file paper hardware  Create walletcreate wallet (key-pair) 1234&#x2F;&#x2F; file walletsolana-keygen new --outfile YOUR-PRIVATE-KEY-FILE-PATH&#x2F;&#x2F; paper walletsolana-keygen new --no-outfile  the publi">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2022-04-22T00:19:39.000Z">
-<meta property="article:modified_time" content="2022-04-22T00:22:38.472Z">
+<meta property="article:modified_time" content="2022-04-22T00:24:25.021Z">
 <meta property="article:author" content="Leon Chen">
 <meta property="article:tag" content="crypto">
 <meta property="article:tag" content="solana">
@@ -166,7 +166,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">solana withdraw-stake --withdraw-authority &lt;KEYPAIR&gt; &lt;STAKE_ACCOUNT_ADDRESS&gt; &lt;RECIPIENT_ADDRESS&gt; &lt;AMOUNT&gt; \</span><br><span class="line">    --fee-payer &lt;KEYPAIR&gt;</span><br></pre></td></tr></table></figure>
 <h3 id="split"><a href="#split" class="headerlink" title="split"></a>split</h3><p>You may want to delegate stake to additional validators while your existing stake is not eligible for withdrawal. It might not be eligible because it is currently staked, cooling down, or locked up. To transfer tokens from an existing stake account to a new one</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">solana split-stake --stake-authority &lt;KEYPAIR&gt; &lt;STAKE_ACCOUNT_ADDRESS&gt; &lt;NEW_STAKE_ACCOUNT_KEYPAIR&gt; &lt;AMOUNT&gt; \</span><br><span class="line">    --fee-payer &lt;KEYPAIR&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h2><ul>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
 <li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.solana.com/cli/usage">https://docs.solana.com/cli/usage</a></li>
 </ul>
 
