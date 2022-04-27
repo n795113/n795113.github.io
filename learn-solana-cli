@@ -247,6 +247,10 @@
       <ul>
         
           <li>
+            <a href="/rust_checked_sub_n_unwrap_or">Rust: checked_sub &amp; unwrap_or</a>
+          </li>
+        
+          <li>
             <a href="/understand-solana-token">超白話理解 Solana 代幣與 NFT</a>
           </li>
         
@@ -260,10 +264,6 @@
         
           <li>
             <a href="/stepn-should-i-mint-shoebox">STEPN 我該鑄造鞋子來賣嗎？ Should I Mint Shoes To Sell Now?</a>
-          </li>
-        
-          <li>
-            <a href="/rust-string-101">Rust: String 101</a>
           </li>
         
       </ul>

@@ -4,21 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>STEPN 我該鑄造鞋子來賣嗎？ Should I Mint Shoes To Sell Now? | Great Plateau</title>
+  <title>Rust: checked_sub &amp; unwrap_or | Great Plateau</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="最近剛入坑，雖然知道風險很高，但還是抱持著體驗的心情衝進來了😅 相信很多人進場後都會面臨這個問題：該跑步就好，還是生鞋子來賣？因為鑄造鞋子會花費 GST，但賣鞋時的獲利是 SOL。所以當 GST 價格偏低時，比較適合鑄造新鞋子，因為可以用較便宜的 GST 去套利 SOL。 以下就分享一個超讚的計算機，幫我們以當前幣價估算，建議你目前該跑步還是生鞋！workitwallet">
+  <meta name="description" content="Just a quick note for these two functions I learned today. checked_sub is used to check if the abstraction of an integer overflows. For example: 12345let mut num_u32: u32 &#x3D; 0;num_u32 -&#x3D; 1; &#x2F;&#x2F; overflow">
 <meta property="og:type" content="article">
-<meta property="og:title" content="STEPN 我該鑄造鞋子來賣嗎？ Should I Mint Shoes To Sell Now?">
-<meta property="og:url" content="http://n795113.github.io/stepn-should-i-mint-shoebox">
+<meta property="og:title" content="Rust: checked_sub &amp; unwrap_or">
+<meta property="og:url" content="http://n795113.github.io/rust_checked_sub_n_unwrap_or">
 <meta property="og:site_name" content="Great Plateau">
-<meta property="og:description" content="最近剛入坑，雖然知道風險很高，但還是抱持著體驗的心情衝進來了😅 相信很多人進場後都會面臨這個問題：該跑步就好，還是生鞋子來賣？因為鑄造鞋子會花費 GST，但賣鞋時的獲利是 SOL。所以當 GST 價格偏低時，比較適合鑄造新鞋子，因為可以用較便宜的 GST 去套利 SOL。 以下就分享一個超讚的計算機，幫我們以當前幣價估算，建議你目前該跑步還是生鞋！workitwallet">
+<meta property="og:description" content="Just a quick note for these two functions I learned today. checked_sub is used to check if the abstraction of an integer overflows. For example: 12345let mut num_u32: u32 &#x3D; 0;num_u32 -&#x3D; 1; &#x2F;&#x2F; overflow">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2022-04-14T16:51:20.000Z">
-<meta property="article:modified_time" content="2022-04-14T17:06:14.528Z">
+<meta property="article:published_time" content="2022-04-27T16:34:33.000Z">
+<meta property="article:modified_time" content="2022-04-27T16:35:50.493Z">
 <meta property="article:author" content="Leon Chen">
-<meta property="article:tag" content="solana">
-<meta property="article:tag" content="gamefi">
-<meta property="article:tag" content="stepn">
+<meta property="article:tag" content="rust">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Great Plateau" type="application/atom+xml">
@@ -88,14 +86,14 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-stepn-should-i-mint-shoebox" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-rust-checked-sub-n-unwrap-or" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/stepn-should-i-mint-shoebox" class="article-date">
-  <time class="dt-published" datetime="2022-04-14T16:51:20.000Z" itemprop="datePublished">2022-04-15</time>
+    <a href="/rust_checked_sub_n_unwrap_or" class="article-date">
+  <time class="dt-published" datetime="2022-04-27T16:34:33.000Z" itemprop="datePublished">2022-04-28</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Crypto/">Crypto</a>
+    <a class="article-category-link" href="/categories/Tech/">Tech</a>►<a class="article-category-link" href="/categories/Tech/Rust/">Rust</a>
   </div>
 
   </div>
@@ -106,7 +104,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      STEPN 我該鑄造鞋子來賣嗎？ Should I Mint Shoes To Sell Now?
+      Rust: checked_sub &amp; unwrap_or
     </h1>
   
 
@@ -114,18 +112,23 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>最近剛入坑，雖然知道風險很高，但還是抱持著體驗的心情衝進來了😅</p>
-<p>相信很多人進場後都會面臨這個問題：該跑步就好，還是生鞋子來賣？<br>因為鑄造鞋子會花費 GST，但賣鞋時的獲利是 SOL。<br>所以當 GST 價格偏低時，比較適合鑄造新鞋子，因為可以用較便宜的 GST 去套利 SOL。</p>
-<p>以下就分享一個超讚的計算機，幫我們以當前幣價估算，建議你目前該跑步還是生鞋！<br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.workitwallet.com/post/stepn-buy-vs-mint">workitwallet</a></p>
+        <p>Just a quick note for these two functions I learned today.</p>
+<p><code>checked_sub</code> is used to check if the abstraction of an integer overflows. For example:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">num_u32</span>: <span class="type">u32</span> = <span class="number">0</span>;</span><br><span class="line">num_u32 -= <span class="number">1</span>; <span class="comment">// overflow</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">num_i32</span> = i32::MIN; <span class="comment">// -2147483648</span></span><br><span class="line">num_i32 -= <span class="number">1</span>; <span class="comment">// overflow</span></span><br></pre></td></tr></table></figure>
+
+<p>To prevent it, we can use the combo of <code>checked_sub</code> and <code>unwrap_or</code>. <code>checked_sub</code> will return <code>Option&lt;self&gt;</code> which means if there is no overflow occurs, we get <code>Some(substraction_result)</code>, else we will get <code>None</code>. <code>unwarp_or</code> can then give the result a default value if we get <code>None</code> or just unwrap <code>Some(substraction_result)</code> to return <code>substraction_result</code>. Let’s look at the code.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">num_i32</span> = i32::MIN + <span class="number">1</span>; <span class="comment">// -2147483648 + 1</span></span><br><span class="line"></span><br><span class="line">num_i32 = num_i32.<span class="title function_ invoke__">checked_sub</span>(<span class="number">1</span>).<span class="title function_ invoke__">unwrap_or</span>(i32::MIN); <span class="comment">// -2147483648</span></span><br><span class="line"></span><br><span class="line">num_i32 = num_i32.<span class="title function_ invoke__">checked_sub</span>(<span class="number">1</span>).<span class="title function_ invoke__">unwrap_or</span>(<span class="number">100</span>); <span class="comment">// 100</span></span><br><span class="line"><span class="comment">// Since it overflows, it will return the default value </span></span><br><span class="line"><span class="comment">// that we give to unwrap_or which is 100 for this example</span></span><br></pre></td></tr></table></figure>
+
+<p>That’s it for today!</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://n795113.github.io/stepn-should-i-mint-shoebox" data-id="cl1z92iet0000fic58bik75my" data-title="STEPN 我該鑄造鞋子來賣嗎？ Should I Mint Shoes To Sell Now?" class="article-share-link">Share</a>
+      <a data-url="http://n795113.github.io/rust_checked_sub_n_unwrap_or" data-id="cl2hstpcx0000voc50igaaqlo" data-title="Rust: checked_sub &amp; unwrap_or" class="article-share-link">Share</a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gamefi/" rel="tag">gamefi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/solana/" rel="tag">solana</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stepn/" rel="tag">stepn</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rust/" rel="tag">rust</a></li></ul>
 
     </footer>
   </div>
@@ -133,19 +136,10 @@
     
 <nav id="article-nav">
   
-    <a href="/level-up-github-profile" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          升級個人 GitHub Profile
-        
-      </div>
-    </a>
   
-  
-    <a href="/rust-string-101" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/understand-solana-token" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Rust: String 101</div>
+      <div class="article-nav-title">超白話理解 Solana 代幣與 NFT</div>
     </a>
   
 </nav>
