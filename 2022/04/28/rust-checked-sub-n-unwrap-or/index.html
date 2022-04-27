@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"n795113.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="List some ways to format the value to be printable. 1234567891011121314151617181920212223242526fn main() &amp;#123;    &#x2F;&#x2F; Print to console    println!(&quot;Hello Rust&quot;);    &#x2F;&#x2F; Basic Formatting    pr">
+  <meta name="description" content="Just a quick note for these two functions I learned today. checked_sub is used to check if the abstraction of an integer overflows. For example: 12345let mut num_u32: u32 &#x3D; 0;num_u32 -&#x3D; 1; &#x2F;&#x2F; overflow">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Rust: Print &amp; Formatting">
-<meta property="og:url" content="http://n795113.github.io/rust-print-and-formatting">
+<meta property="og:title" content="Rust: checked_sub &amp; unwrap_or">
+<meta property="og:url" content="http://n795113.github.io/2022/04/28/rust-checked-sub-n-unwrap-or/index.html">
 <meta property="og:site_name" content="Great Plateau">
-<meta property="og:description" content="List some ways to format the value to be printable. 1234567891011121314151617181920212223242526fn main() &amp;#123;    &#x2F;&#x2F; Print to console    println!(&quot;Hello Rust&quot;);    &#x2F;&#x2F; Basic Formatting    pr">
+<meta property="og:description" content="Just a quick note for these two functions I learned today. checked_sub is used to check if the abstraction of an integer overflows. For example: 12345let mut num_u32: u32 &#x3D; 0;num_u32 -&#x3D; 1; &#x2F;&#x2F; overflow">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2022-04-13T14:39:22.000Z">
-<meta property="article:modified_time" content="2022-04-13T14:44:26.178Z">
+<meta property="article:published_time" content="2022-04-27T16:34:33.000Z">
+<meta property="article:modified_time" content="2022-04-27T17:14:53.119Z">
 <meta property="article:author" content="Leon Chen">
 <meta property="article:tag" content="rust">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://n795113.github.io/rust-print-and-formatting">
+<link rel="canonical" href="http://n795113.github.io/2022/04/28/rust-checked-sub-n-unwrap-or/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>Rust: Print & Formatting | Great Plateau</title>
+  <title>Rust: checked_sub & unwrap_or | Great Plateau</title>
   
 
 
@@ -172,7 +172,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="http://n795113.github.io/rust-print-and-formatting">
+    <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/04/28/rust-checked-sub-n-unwrap-or/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -185,7 +185,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Rust: Print & Formatting
+          Rust: checked_sub & unwrap_or
         </h1>
 
         <div class="post-meta">
@@ -196,7 +196,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2022-04-13 22:39:22 / 修改時間：22:44:26" itemprop="dateCreated datePublished" datetime="2022-04-13T22:39:22+08:00">2022-04-13</time>
+              <time title="創建時間：2022-04-28 00:34:33 / 修改時間：01:14:53" itemprop="dateCreated datePublished" datetime="2022-04-28T00:34:33+08:00">2022-04-28</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -223,11 +223,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>List some ways to format the value to be printable.</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="comment">// Print to console</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Hello Rust&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Basic Formatting</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125; is &#123;&#125;&quot;</span>, <span class="string">&quot;Rust&quot;</span>, <span class="string">&quot;rusty&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Positional arguments</span></span><br><span class="line">    <span class="built_in">println!</span>(</span><br><span class="line">        <span class="string">&quot;&#123;0&#125; is a &#123;1&#125;, and &#123;0&#125; is &#123;2&#125;&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Rust&quot;</span>, <span class="string">&quot;programming language&quot;</span>, <span class="string">&quot;efficient&quot;</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Named arguments</span></span><br><span class="line">    <span class="built_in">println!</span>(</span><br><span class="line">        <span class="string">&quot;&#123;target&#125; supports &#123;noun&#125;&quot;</span>,</span><br><span class="line">        target = <span class="string">&quot;Rust&quot;</span>,</span><br><span class="line">        noun = <span class="string">&quot;concurrent programming&quot;</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Placeholder traits</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Binary: &#123;:b&#125; Hex: &#123;:x&#125; Octal: &#123;:o&#125;&quot;</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Placeholder for debug trait</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;:?&#125;&quot;</span>, (<span class="number">100</span>, <span class="literal">false</span>, <span class="string">&quot;Rust&quot;</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>Just a quick note for these two functions I learned today.</p>
+<p><code>checked_sub</code> is used to check if the abstraction of an integer overflows. For example:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">num_u32</span>: <span class="type">u32</span> = <span class="number">0</span>;</span><br><span class="line">num_u32 -= <span class="number">1</span>; <span class="comment">// overflow</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">num_i32</span> = i32::MIN; <span class="comment">// -2147483648</span></span><br><span class="line">num_i32 -= <span class="number">1</span>; <span class="comment">// overflow</span></span><br></pre></td></tr></table></figure>
 
-<p>The above outputs the following:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Hello Rust</span><br><span class="line">Rust is rusty</span><br><span class="line">Rust is a programming language, and Rust is efficient</span><br><span class="line">Rust supports concurrent programming</span><br><span class="line">Binary: 1010 Hex: a Octal: 12</span><br><span class="line">(100, false, &quot;Rust&quot;)</span><br></pre></td></tr></table></figure>
+<p>To prevent it, we can use the combo of <code>checked_sub</code> and <code>unwrap_or</code>. <code>checked_sub</code> will return <code>Option&lt;self&gt;</code> which means if there is no overflow occurs, we get <code>Some(substraction_result)</code>, else we will get <code>None</code>. <code>unwarp_or</code> can then give the result a default value if we get <code>None</code> or just unwrap <code>Some(substraction_result)</code> to return <code>substraction_result</code>. Let’s look at the code.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">num_i32</span> = i32::MIN + <span class="number">1</span>; <span class="comment">// -2147483648 + 1</span></span><br><span class="line"></span><br><span class="line">num_i32 = num_i32.<span class="title function_ invoke__">checked_sub</span>(<span class="number">1</span>).<span class="title function_ invoke__">unwrap_or</span>(i32::MIN); <span class="comment">// -2147483648</span></span><br><span class="line"></span><br><span class="line">num_i32 = num_i32.<span class="title function_ invoke__">checked_sub</span>(<span class="number">1</span>).<span class="title function_ invoke__">unwrap_or</span>(<span class="number">100</span>); <span class="comment">// 100</span></span><br><span class="line"><span class="comment">// Since it overflows, it will return the default value </span></span><br><span class="line"><span class="comment">// that we give to unwrap_or which is 100 for this example</span></span><br></pre></td></tr></table></figure>
+
+<p>That’s it for today!</p>
+
     </div>
 
     
@@ -245,13 +249,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/03/28/css-use-pseudo-elements-create-hover-effect/" rel="prev" title="CSS: Use Pseudo Elements Create Hover Effect">
-      <i class="fa fa-chevron-left"></i> CSS: Use Pseudo Elements Create Hover Effect
+    <a href="/2022/04/22/understand-solana-token/" rel="prev" title="超白話理解 Solana 代幣與 NFT">
+      <i class="fa fa-chevron-left"></i> 超白話理解 Solana 代幣與 NFT
     </a></div>
-      <div class="post-nav-item">
-    <a href="/rust-string-101" rel="next" title="Rust: String 101">
-      Rust: String 101 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
