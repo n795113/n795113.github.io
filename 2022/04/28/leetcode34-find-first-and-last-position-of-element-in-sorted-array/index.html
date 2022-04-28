@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"n795113.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="ThoughtsThe core concept is to find the target from a sorted array which is quite suitable to use binary serach I think. Here are my instructions:  Get the middle element, mid Compare the mid with the">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Solve Leetcode in Rust: 0034 Find The First And The Last Position of Element In A Sorted Array">
+<meta property="og:url" content="http://n795113.github.io/2022/04/28/leetcode34-find-first-and-last-position-of-element-in-sorted-array/index.html">
+<meta property="og:site_name" content="Great Plateau">
+<meta property="og:description" content="ThoughtsThe core concept is to find the target from a sorted array which is quite suitable to use binary serach I think. Here are my instructions:  Get the middle element, mid Compare the mid with the">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="http://n795113.github.io/2022/04/28/leetcode34-find-first-and-last-position-of-element-in-sorted-array/green_range.png">
+<meta property="og:image" content="http://n795113.github.io/2022/04/28/leetcode34-find-first-and-last-position-of-element-in-sorted-array/mid.png">
+<meta property="og:image" content="http://n795113.github.io/2022/04/28/leetcode34-find-first-and-last-position-of-element-in-sorted-array/seek_left_n_right.png">
+<meta property="article:published_time" content="2022-04-28T03:23:07.000Z">
+<meta property="article:modified_time" content="2022-04-28T04:30:22.392Z">
+<meta property="article:author" content="Leon Chen">
+<meta property="article:tag" content="web develop">
+<meta property="article:tag" content="backend">
+<meta property="article:tag" content="php">
+<meta property="article:tag" content="react">
+<meta property="article:tag" content="crypto">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://n795113.github.io/2022/04/28/leetcode34-find-first-and-last-position-of-element-in-sorted-array/green_range.png">
+
+<link rel="canonical" href="http://n795113.github.io/2022/04/28/leetcode34-find-first-and-last-position-of-element-in-sorted-array/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Solve Leetcode in Rust: 0034 Find The First And The Last Position of Element In A Sorted Array | Great Plateau</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Great Plateau</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">工程師的初始台地</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+        <li class="menu-item menu-item-service">
+
+    <a href="/service/" rel="section"><i class="icon-star fa-fw"></i>免費諮詢</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/04/28/leetcode34-find-first-and-last-position-of-element-in-sorted-array/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leon Chen">
+      <meta itemprop="description" content="學習筆記、轉職諮詢">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Great Plateau">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Solve Leetcode in Rust: 0034 Find The First And The Last Position of Element In A Sorted Array
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-04-28 11:23:07 / 修改時間：12:30:22" itemprop="dateCreated datePublished" datetime="2022-04-28T11:23:07+08:00">2022-04-28</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Thoughts"><a href="#Thoughts" class="headerlink" title="Thoughts"></a>Thoughts</h2><p>The core concept is to find the target from a sorted array which is quite suitable to use binary serach I think.</p>
+<p>Here are my instructions:</p>
+<ol>
+<li>Get the middle element, <code>mid</code></li>
+<li>Compare the <code>mid</code> with the target. there will be 3 branches:<br> a. <code>target</code> &lt; <code>mid</code>: continue to find the target from the LEFT side of the <code>mid</code><br> b. <code>target</code> &gt; <code>mid</code>: continue to find the target from the RIGHT side of the <code>mid</code><br> c. <code>target</code> &#x3D; <code>mid</code>: In this case, <code>[index_of_mid, index_of_mid]</code> will be our base answer so keep it. Then based on this answer, we need to go further to the both left and right to seek if there is other elements match to the search target.</li>
+</ol>
+<p>For example, if the given array is <code>[1, 2, 3, 4, 4, 4, 4, 6, 9]</code>, and the search target is <code>4</code>.</p>
+<p>Then we are trying to get this green range.</p>
+<p><img src="/2022/04/28/leetcode34-find-first-and-last-position-of-element-in-sorted-array/green_range.png"></p>
+<p>When we go through the instructions, we will get the middle element, and hit the c case.</p>
+<p><img src="/2022/04/28/leetcode34-find-first-and-last-position-of-element-in-sorted-array/mid.png"></p>
+<p>Then base on this position, we seek towar left and right to get the final range.</p>
+<p><img src="/2022/04/28/leetcode34-find-first-and-last-position-of-element-in-sorted-array/seek_left_n_right.png"></p>
+<p>So the answer should be <code>[3, 6]</code></p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><h3 id="Try-1"><a href="#Try-1" class="headerlink" title="Try #1"></a>Try #1</h3><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">impl</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="title function_">search_range</span>(nums: <span class="type">Vec</span>&lt;<span class="type">i32</span>&gt;, target: <span class="type">i32</span>) <span class="punctuation">-&gt;</span> <span class="type">Vec</span>&lt;<span class="type">i32</span>&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> nums.<span class="title function_ invoke__">len</span>() == <span class="number">0</span> &#123;<span class="keyword">return</span> <span class="built_in">vec!</span>[-<span class="number">1</span>,-<span class="number">1</span>]&#125;</span><br><span class="line">        <span class="title function_ invoke__">bst_search_index_rec</span>(&amp;nums, target, <span class="number">0</span>, (nums.<span class="title function_ invoke__">len</span>()-<span class="number">1</span>) <span class="keyword">as</span> <span class="type">i32</span>)</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">bst_search_index_rec</span>(arr: &amp;<span class="type">Vec</span>&lt;<span class="type">i32</span>&gt;, val: <span class="type">i32</span>, start_i: <span class="type">i32</span>, end_i: <span class="type">i32</span>) <span class="punctuation">-&gt;</span> <span class="type">Vec</span>&lt;<span class="type">i32</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> start_i &gt; end_i &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">vec!</span>[-<span class="number">1</span>, -<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">result</span>: <span class="type">Vec</span>&lt;<span class="type">i32</span>&gt; = <span class="built_in">vec!</span>[-<span class="number">1</span>, -<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">mid_i</span> = (start_i + end_i)/<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> val == arr[mid_i <span class="keyword">as</span> <span class="type">usize</span>] &#123;</span><br><span class="line">        result[<span class="number">0</span>] = mid_i <span class="keyword">as</span> <span class="type">i32</span>;</span><br><span class="line">        result[<span class="number">1</span>] = mid_i <span class="keyword">as</span> <span class="type">i32</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> <span class="variable">tmp_left_result</span> = <span class="title function_ invoke__">bst_search_index_rec</span>(&amp;arr, val, start_i, (mid_i-<span class="number">1</span>) <span class="keyword">as</span> <span class="type">i32</span>);</span><br><span class="line">        <span class="keyword">if</span> tmp_left_result[<span class="number">0</span>] != -<span class="number">1</span> &#123;</span><br><span class="line">            result[<span class="number">0</span>] = tmp_left_result[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> <span class="variable">tmp_right_result</span> = <span class="title function_ invoke__">bst_search_index_rec</span>(&amp;arr, val, (mid_i+<span class="number">1</span>) <span class="keyword">as</span> <span class="type">i32</span>, end_i);</span><br><span class="line">        <span class="keyword">if</span> tmp_right_result[<span class="number">1</span>] != -<span class="number">1</span> &#123;</span><br><span class="line">            result[<span class="number">1</span>] = tmp_right_result[<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> val &lt; arr[mid_i <span class="keyword">as</span> <span class="type">usize</span>] &#123;</span><br><span class="line">        result = <span class="title function_ invoke__">bst_search_index_rec</span>(&amp;arr, val, start_i, (mid_i - <span class="number">1</span>) <span class="keyword">as</span> <span class="type">i32</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> val &gt; arr[mid_i <span class="keyword">as</span> <span class="type">usize</span>] &#123;</span><br><span class="line">        result = <span class="title function_ invoke__">bst_search_index_rec</span>(&amp;arr, val, (mid_i + <span class="number">1</span>) <span class="keyword">as</span> <span class="type">i32</span>, end_i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Try-2"><a href="#Try-2" class="headerlink" title="Try #2"></a>Try #2</h3><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::cmp::Ordering; <span class="comment">// Don&#x27;t forget to import this</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">impl</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="title function_">search_range</span>(nums: <span class="type">Vec</span>&lt;<span class="type">i32</span>&gt;, target: <span class="type">i32</span>) <span class="punctuation">-&gt;</span> <span class="type">Vec</span>&lt;<span class="type">i32</span>&gt; &#123;</span><br><span class="line"></span><br><span class="line">        Solution::<span class="title function_ invoke__">bst_search_index_inner</span>(&amp;nums, target, <span class="number">0</span>, nums.<span class="title function_ invoke__">len</span>() <span class="keyword">as</span> <span class="type">i32</span> - <span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">fn</span> <span class="title function_">bst_search_index_inner</span>(arr: &amp;<span class="type">Vec</span>&lt;<span class="type">i32</span>&gt;, val: <span class="type">i32</span>, start_i: <span class="type">i32</span>, end_i: <span class="type">i32</span>) <span class="punctuation">-&gt;</span> <span class="type">Vec</span>&lt;<span class="type">i32</span>&gt; &#123;</span><br><span class="line">        <span class="comment">// return condition</span></span><br><span class="line">        <span class="keyword">if</span> start_i &gt; end_i || arr.<span class="title function_ invoke__">len</span>() == <span class="number">0</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">vec!</span>[-<span class="number">1</span>, -<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// avoid overflows rather than simply (start_i + end_i) / 2</span></span><br><span class="line">        <span class="keyword">let</span> <span class="variable">mid_i</span> = start_i + (end_i - start_i) / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">match</span> val.<span class="title function_ invoke__">cmp</span>(&amp;arr[mid_i <span class="keyword">as</span> <span class="type">usize</span>]) &#123;</span><br><span class="line">            Ordering::Less =&gt; Solution::<span class="title function_ invoke__">bst_search_index_inner</span>(&amp;arr, val, start_i, mid_i - <span class="number">1</span>),</span><br><span class="line">            Ordering::Greater =&gt; Solution::<span class="title function_ invoke__">bst_search_index_inner</span>(&amp;arr, val, mid_i + <span class="number">1</span>, end_i),</span><br><span class="line">            Ordering::Equal =&gt; &#123;</span><br><span class="line">                <span class="keyword">let</span> <span class="variable">l</span> = Solution::<span class="title function_ invoke__">bst_search_index_inner</span>(arr, val, start_i, mid_i - <span class="number">1</span>);</span><br><span class="line">                <span class="keyword">let</span> <span class="variable">r</span> = Solution::<span class="title function_ invoke__">bst_search_index_inner</span>(arr, val, mid_i + <span class="number">1</span>, end_i);</span><br><span class="line"></span><br><span class="line">                <span class="title function_ invoke__">match</span> (l[<span class="number">0</span>], r[<span class="number">1</span>]) &#123;</span><br><span class="line">                    (-<span class="number">1</span>, -<span class="number">1</span>) =&gt; <span class="built_in">vec!</span>[mid_i, mid_i],</span><br><span class="line">                    (-<span class="number">1</span>, new_r) =&gt; <span class="built_in">vec!</span>[mid_i, new_r],</span><br><span class="line">                    (new_l, -<span class="number">1</span>) =&gt; <span class="built_in">vec!</span>[new_l, mid_i],</span><br><span class="line">                    (new_l, new_r) =&gt; <span class="built_in">vec!</span>[new_l, new_r]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Conclusions"><a href="#Conclusions" class="headerlink" title="Conclusions"></a>Conclusions</h2><h3 id="Improvements"><a href="#Improvements" class="headerlink" title="Improvements"></a>Improvements</h3><ul>
+<li>avoid overflows in some edge cases</li>
+<li>move recursion function into <code>Solution</code> struct</li>
+<li>more rusty coding style</li>
+</ul>
+<h3 id="Notes"><a href="#Notes" class="headerlink" title="Notes:"></a>Notes:</h3><ul>
+<li>Combo of <code>cmp</code> &amp; <code>match</code></li>
+<li>How to use the function itself in the implementation -&gt; <code>Solution::bst_search_index_inner</code></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/04/28/rust-checked-sub-n-unwrap-or/" rel="prev" title="Rust: checked_sub & unwrap_or">
+      <i class="fa fa-chevron-left"></i> Rust: checked_sub & unwrap_or
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Thoughts"><span class="nav-number">1.</span> <span class="nav-text">Thoughts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code"><span class="nav-number">2.</span> <span class="nav-text">Code</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Try-1"><span class="nav-number">2.1.</span> <span class="nav-text">Try #1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Try-2"><span class="nav-number">2.2.</span> <span class="nav-text">Try #2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusions"><span class="nav-number">3.</span> <span class="nav-text">Conclusions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Improvements"><span class="nav-number">3.1.</span> <span class="nav-text">Improvements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Notes"><span class="nav-number">3.2.</span> <span class="nav-text">Notes:</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Leon Chen</p>
+  <div class="site-description" itemprop="description">學習筆記、轉職諮詢</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/n795113" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;n795113" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lightfish.uhuhu@gmail.com" title="E-Mail → mailto:lightfish.uhuhu@gmail.com" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/leon-chen-dev" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;leon-chen-dev" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-linkedin fa-fw"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://medium.com/@lightfish-uhuhu" title="Medium → https:&#x2F;&#x2F;medium.com&#x2F;@lightfish-uhuhu" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa-brands fa-medium fa-fw"></i>Medium</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leon Chen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener external nofollow noreferrer" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
