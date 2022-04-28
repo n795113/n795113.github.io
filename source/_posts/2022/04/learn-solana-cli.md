@@ -1,7 +1,5 @@
 ---
 title: Learn Solana CLI
-permalink: learn-solana-cli
-toc: false
 date: 2022-04-22 08:19:39
 categories: [ Crypto ]
 tags:

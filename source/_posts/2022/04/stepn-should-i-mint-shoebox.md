@@ -1,9 +1,7 @@
 ---
 title: "STEPN 我該鑄造鞋子來賣嗎？ Should I Mint Shoes To Sell Now?"
-permalink: stepn-should-i-mint-shoebox
-toc: false
 date: 2022-04-15 00:51:20
-categories: Crypto
+categories: [Crypto]
 tags:
     - solana
     - gamefi

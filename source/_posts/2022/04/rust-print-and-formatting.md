@@ -1,7 +1,5 @@
 ---
 title: "Rust: Print & Formatting"
-permalink: rust-print-and-formatting
-toc: false
 date: 2022-04-13 22:39:22
 categories: [Tech, Rust]
 tags:

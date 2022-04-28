@@ -1,9 +1,7 @@
 ---
 title: 超白話理解 Solana 代幣與 NFT
-permalink: understand-solana-token
-toc: false
 date: 2022-04-22 22:22:39
-categories: Crypto
+categories: [Crypto]
 tags:
   - solana
 ---

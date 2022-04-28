@@ -1,7 +1,5 @@
 ---
 title: "Rust: String 101"
-permalink: rust-string-101
-toc: false
 date: 2022-04-13 23:28:05
 categories: [Tech, Rust]
 tags:

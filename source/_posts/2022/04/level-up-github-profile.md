@@ -1,7 +1,5 @@
 ---
 title: 升級個人 GitHub Profile
-permalink: level-up-github-profile
-toc: false
 date: 2022-04-21 21:12:08
 categories:
 tags:

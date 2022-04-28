@@ -1,7 +1,5 @@
 ---
 title: "Rust: checked_sub & unwrap_or"
-permalink: rust_checked_sub_n_unwrap_or
-toc: false
 date: 2022-04-28 00:34:33
 categories: [Tech, Rust]
 tags:
