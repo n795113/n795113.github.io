@@ -39,6 +39,8 @@ http://n795113.github.io/tags/rust/
 http://n795113.github.io/tags/solana/
 http://n795113.github.io/tags/gamefi/
 http://n795113.github.io/tags/stepn/
+http://n795113.github.io/tags/leetcode/
+http://n795113.github.io/tags/bst/
 http://n795113.github.io/categories/%E5%AD%B8%E7%BF%92/
 http://n795113.github.io/categories/Tech/
 http://n795113.github.io/categories/Crypto/
