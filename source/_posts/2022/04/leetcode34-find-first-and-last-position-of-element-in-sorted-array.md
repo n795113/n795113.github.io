@@ -119,12 +119,12 @@ impl Solution {
 ```
 
 ## Conclusions
-### Improvements
+Improvements
 
 - avoid overflows in some edge cases
-- move recursion function into `Solution` struct
+- move the recursion function into `Solution` struct
 - more rusty coding style
 
-### Notes:
+Learned
 - Combo of `cmp` & `match`
 - How to use the function itself in the implementation -> `Solution::bst_search_index_inner`
