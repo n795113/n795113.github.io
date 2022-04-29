@@ -173,6 +173,91 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/04/30/koko-eating-bananas/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leon Chen">
+      <meta itemprop="description" content="學習筆記、轉職諮詢">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Great Plateau">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/04/30/koko-eating-bananas/" class="post-title-link" itemprop="url">Solve Leetcode in Rust: Koko Eating Bananas</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-04-30 00:05:19 / 修改時間：00:07:17" itemprop="dateCreated datePublished" datetime="2022-04-30T00:05:19+08:00">2022-04-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/Rust/" itemprop="url" rel="index"><span itemprop="name">Rust</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>Problem: <a target="_blank" rel="noopener external nofollow noreferrer" href="https://leetcode.com/problems/koko-eating-bananas/">Koko Eating Bananas</a></p>
+<p>Let’s draw some pictures to understand this quesiton. If there are 4 piles of bananas like below, the given array would be <code>[3, 2, 3, 4]</code>.</p>
+<p><img src="https://i.imgur.com/qLpwHkN.png"></p>
+<p>Then if Koko can eat 3 bananas per hour, it will takes her 5 hours to eat all the bananas like blow.</p>
+<p><img src="https://i.imgur.com/WTtMmez.png"></p>
+<p>Now, if the limit hours <code>h</code> is 5 then 3 bananas per hour satisfies. However, if <code>h</code>, for example, is 3, then Koko need to SPEEDS UP to finish all the bananas. On the other hand, if <code>h</code> is 10 which means we still have time right? So Koko can SLOW DOWN to certain speed to make herself chill but still can finish all the banan in time.</p>
+<p><img src="https://i.imgur.com/2QpNhfI.png"></p>
+<p>So what is the best eating speed is the question!</p>
+<h2 id="Thoughts"><a href="#Thoughts" class="headerlink" title="Thoughts"></a>Thoughts</h2><ul>
+<li>The maximum of speed should equals to the number of the bananas of the tallest pile</li>
+<li>The minimun of speed should equals to 1</li>
+</ul>
+<p>Which means we are trying to find the best from <code>1</code> ~ <code>piles.max()</code>. Searching a value from a sorted array… maybe binary search is a soslution.</p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><h3 id="Try-1"><a href="#Try-1" class="headerlink" title="Try #1"></a>Try #1</h3><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::cmp::Ordering;</span><br><span class="line"></span><br><span class="line"><span class="keyword">impl</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="title function_">min_eating_speed</span>(piles: <span class="type">Vec</span>&lt;<span class="type">i32</span>&gt;, h: <span class="type">i32</span>) <span class="punctuation">-&gt;</span> <span class="type">i32</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">sorted_piles</span> = piles.<span class="title function_ invoke__">clone</span>();</span><br><span class="line">        sorted_piles.<span class="title function_ invoke__">sort</span>();</span><br><span class="line">        Solution::<span class="title function_ invoke__">min_eating_speed_inner</span>(</span><br><span class="line">            &amp;sorted_piles,</span><br><span class="line">            h,</span><br><span class="line">            <span class="number">1</span>,</span><br><span class="line">            *sorted_piles.<span class="title function_ invoke__">last</span>().<span class="title function_ invoke__">unwrap</span>()</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">fn</span> <span class="title function_">min_eating_speed_inner</span>(piles: &amp;<span class="type">Vec</span>&lt;<span class="type">i32</span>&gt;, h: <span class="type">i32</span>, min: <span class="type">i32</span>, max: <span class="type">i32</span>) <span class="punctuation">-&gt;</span> <span class="type">i32</span> &#123;</span><br><span class="line">        <span class="comment">// return codition</span></span><br><span class="line">        <span class="keyword">if</span> piles.<span class="title function_ invoke__">len</span>() == <span class="number">0</span> || min &gt; max &#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// speeds arr is [min..max]</span></span><br><span class="line">        <span class="comment">// so the mid speed is (min + max) / 2</span></span><br><span class="line">        <span class="keyword">let</span> <span class="variable">mid</span> = min + (max - min) / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// piles divides speed return spend time</span></span><br><span class="line">        <span class="keyword">let</span> <span class="variable">time</span> = Solution::<span class="title function_ invoke__">count_eating_time</span>(&amp;piles, mid);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// find the matched speed or continue go down to sub tree</span></span><br><span class="line">        <span class="keyword">match</span> time.<span class="title function_ invoke__">cmp</span>(&amp;h) &#123;</span><br><span class="line">            <span class="comment">// spend too much time to eat, speed up</span></span><br><span class="line">            Ordering::Greater =&gt; Solution::<span class="title function_ invoke__">min_eating_speed_inner</span>(piles, h, mid + <span class="number">1</span>, max),</span><br><span class="line">            <span class="comment">// match, try to find a better (slower) speed</span></span><br><span class="line">            _ =&gt; &#123;</span><br><span class="line">                <span class="keyword">let</span> <span class="variable">new_speed</span> = Solution::<span class="title function_ invoke__">min_eating_speed_inner</span>(piles, h, min, mid - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> new_speed &gt; <span class="number">0</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> new_speed;</span><br><span class="line">                &#125;</span><br><span class="line">                mid</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">fn</span> <span class="title function_">count_eating_time</span>(piles: &amp;<span class="type">Vec</span>&lt;<span class="type">i32</span>&gt;, speed: <span class="type">i32</span>) <span class="punctuation">-&gt;</span> <span class="type">i32</span> &#123;</span><br><span class="line">        <span class="comment">// count the time to eat each pile and return sum</span></span><br><span class="line">        <span class="keyword">let</span> <span class="variable">sum</span> = piles</span><br><span class="line">            .<span class="title function_ invoke__">into_iter</span>()</span><br><span class="line">            .<span class="title function_ invoke__">map</span>(|pile| &#123;</span><br><span class="line">                <span class="keyword">if</span> pile % speed &gt; <span class="number">0</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> pile / speed + <span class="number">1</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> pile / speed</span><br><span class="line">            &#125;)</span><br><span class="line">            .<span class="title function_ invoke__">sum</span>();</span><br><span class="line"></span><br><span class="line">        sum</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/04/28/leetcode34-find-first-and-last-position-of-element-in-sorted-array/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -187,7 +272,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/04/28/leetcode34-find-first-and-last-position-of-element-in-sorted-array/" class="post-title-link" itemprop="url">Solve Leetcode in Rust: 0034 Find The First And The Last Position of Element In A Sorted Array</a>
+            <a href="/2022/04/28/leetcode34-find-first-and-last-position-of-element-in-sorted-array/" class="post-title-link" itemprop="url">Solve Leetcode in Rust: Find The First And The Last Position of Element In A Sorted Array</a>
         </h2>
 
         <div class="post-meta">
@@ -196,10 +281,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2022-04-28 11:23:07 / 修改時間：12:37:30" itemprop="dateCreated datePublished" datetime="2022-04-28T11:23:07+08:00">2022-04-28</time>
+              <time title="創建時間：2022-04-28 11:23:07" itemprop="dateCreated datePublished" datetime="2022-04-28T11:23:07+08:00">2022-04-28</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2022-04-30 00:10:33" itemprop="dateModified" datetime="2022-04-30T00:10:33+08:00">2022-04-30</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -252,7 +343,7 @@
 <p>Learned</p>
 <ul>
 <li>Combo of <code>cmp</code> &amp; <code>match</code></li>
-<li>How to use the function itself in the implementation -&gt; <code>Solution::bst_search_index_inner</code></li>
+<li>How to use the function itself in a implementation<br>  -&gt; <code>Solution::bst_search_index_inner</code></li>
 </ul>
 
       
@@ -1043,90 +1134,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/03/28/react-how-to-append-jsx/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Leon Chen">
-      <meta itemprop="description" content="學習筆記、轉職諮詢">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Great Plateau">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/03/28/react-how-to-append-jsx/" class="post-title-link" itemprop="url">React: How To Append JSX</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-              
-
-              <time title="創建時間：2022-03-28 21:27:22 / 修改時間：21:30:39" itemprop="dateCreated datePublished" datetime="2022-03-28T21:27:22+08:00">2022-03-28</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tech/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Use array!</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> collect = []</span><br><span class="line">items.<span class="title function_">map</span>(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">    collect.<span class="title function_">push</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;item&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>React example</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">ReactDOM</span> <span class="keyword">from</span> <span class="string">&quot;react-dom&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">App</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span> &#123;</span><br><span class="line">  <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> items = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">    <span class="keyword">const</span> collect = [<span class="language-xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>first row<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span>];</span><br><span class="line">    items.<span class="title function_">map</span>(<span class="function"><span class="params">item</span> =&gt;</span> collect.<span class="title function_">push</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;item&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span>))</span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;collect&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">ReactDOM</span>.<span class="title function_">render</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">App</span> /&gt;</span></span>, <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;container&quot;</span>));</span><br></pre></td></tr></table></figure>
-
-<p>Will print out this：</p>
-<ul>
-<li>first row</li>
-<li>1</li>
-<li>2</li>
-<li>3</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1196,7 +1203,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>

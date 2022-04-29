@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"n795113.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="ProblemProblem: Koko Eating Bananas Let’s draw some pictures to understand this quesiton. If there are 4 piles of bananas like below, the given array would be [3, 2, 3, 4].  Then if Koko can eat 3 ban">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Solve Leetcode in Rust: Koko Eating Bananas">
+<meta property="og:url" content="http://n795113.github.io/2022/04/30/koko-eating-bananas/index.html">
+<meta property="og:site_name" content="Great Plateau">
+<meta property="og:description" content="ProblemProblem: Koko Eating Bananas Let’s draw some pictures to understand this quesiton. If there are 4 piles of bananas like below, the given array would be [3, 2, 3, 4].  Then if Koko can eat 3 ban">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/qLpwHkN.png">
+<meta property="og:image" content="https://i.imgur.com/WTtMmez.png">
+<meta property="og:image" content="https://i.imgur.com/2QpNhfI.png">
+<meta property="article:published_time" content="2022-04-29T16:05:19.000Z">
+<meta property="article:modified_time" content="2022-04-29T16:07:17.492Z">
+<meta property="article:author" content="Leon Chen">
+<meta property="article:tag" content="rust">
+<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="bst">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/qLpwHkN.png">
+
+<link rel="canonical" href="http://n795113.github.io/2022/04/30/koko-eating-bananas/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Solve Leetcode in Rust: Koko Eating Bananas | Great Plateau</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Great Plateau</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">工程師的初始台地</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+        <li class="menu-item menu-item-service">
+
+    <a href="/service/" rel="section"><i class="icon-star fa-fw"></i>免費諮詢</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/04/30/koko-eating-bananas/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leon Chen">
+      <meta itemprop="description" content="學習筆記、轉職諮詢">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Great Plateau">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Solve Leetcode in Rust: Koko Eating Bananas
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-04-30 00:05:19 / 修改時間：00:07:17" itemprop="dateCreated datePublished" datetime="2022-04-30T00:05:19+08:00">2022-04-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/Rust/" itemprop="url" rel="index"><span itemprop="name">Rust</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>Problem: <a target="_blank" rel="noopener external nofollow noreferrer" href="https://leetcode.com/problems/koko-eating-bananas/">Koko Eating Bananas</a></p>
+<p>Let’s draw some pictures to understand this quesiton. If there are 4 piles of bananas like below, the given array would be <code>[3, 2, 3, 4]</code>.</p>
+<p><img src="https://i.imgur.com/qLpwHkN.png"></p>
+<p>Then if Koko can eat 3 bananas per hour, it will takes her 5 hours to eat all the bananas like blow.</p>
+<p><img src="https://i.imgur.com/WTtMmez.png"></p>
+<p>Now, if the limit hours <code>h</code> is 5 then 3 bananas per hour satisfies. However, if <code>h</code>, for example, is 3, then Koko need to SPEEDS UP to finish all the bananas. On the other hand, if <code>h</code> is 10 which means we still have time right? So Koko can SLOW DOWN to certain speed to make herself chill but still can finish all the banan in time.</p>
+<p><img src="https://i.imgur.com/2QpNhfI.png"></p>
+<p>So what is the best eating speed is the question!</p>
+<h2 id="Thoughts"><a href="#Thoughts" class="headerlink" title="Thoughts"></a>Thoughts</h2><ul>
+<li>The maximum of speed should equals to the number of the bananas of the tallest pile</li>
+<li>The minimun of speed should equals to 1</li>
+</ul>
+<p>Which means we are trying to find the best from <code>1</code> ~ <code>piles.max()</code>. Searching a value from a sorted array… maybe binary search is a soslution.</p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><h3 id="Try-1"><a href="#Try-1" class="headerlink" title="Try #1"></a>Try #1</h3><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::cmp::Ordering;</span><br><span class="line"></span><br><span class="line"><span class="keyword">impl</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="title function_">min_eating_speed</span>(piles: <span class="type">Vec</span>&lt;<span class="type">i32</span>&gt;, h: <span class="type">i32</span>) <span class="punctuation">-&gt;</span> <span class="type">i32</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">sorted_piles</span> = piles.<span class="title function_ invoke__">clone</span>();</span><br><span class="line">        sorted_piles.<span class="title function_ invoke__">sort</span>();</span><br><span class="line">        Solution::<span class="title function_ invoke__">min_eating_speed_inner</span>(</span><br><span class="line">            &amp;sorted_piles,</span><br><span class="line">            h,</span><br><span class="line">            <span class="number">1</span>,</span><br><span class="line">            *sorted_piles.<span class="title function_ invoke__">last</span>().<span class="title function_ invoke__">unwrap</span>()</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">fn</span> <span class="title function_">min_eating_speed_inner</span>(piles: &amp;<span class="type">Vec</span>&lt;<span class="type">i32</span>&gt;, h: <span class="type">i32</span>, min: <span class="type">i32</span>, max: <span class="type">i32</span>) <span class="punctuation">-&gt;</span> <span class="type">i32</span> &#123;</span><br><span class="line">        <span class="comment">// return codition</span></span><br><span class="line">        <span class="keyword">if</span> piles.<span class="title function_ invoke__">len</span>() == <span class="number">0</span> || min &gt; max &#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// speeds arr is [min..max]</span></span><br><span class="line">        <span class="comment">// so the mid speed is (min + max) / 2</span></span><br><span class="line">        <span class="keyword">let</span> <span class="variable">mid</span> = min + (max - min) / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// piles divides speed return spend time</span></span><br><span class="line">        <span class="keyword">let</span> <span class="variable">time</span> = Solution::<span class="title function_ invoke__">count_eating_time</span>(&amp;piles, mid);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// find the matched speed or continue go down to sub tree</span></span><br><span class="line">        <span class="keyword">match</span> time.<span class="title function_ invoke__">cmp</span>(&amp;h) &#123;</span><br><span class="line">            <span class="comment">// spend too much time to eat, speed up</span></span><br><span class="line">            Ordering::Greater =&gt; Solution::<span class="title function_ invoke__">min_eating_speed_inner</span>(piles, h, mid + <span class="number">1</span>, max),</span><br><span class="line">            <span class="comment">// match, try to find a better (slower) speed</span></span><br><span class="line">            _ =&gt; &#123;</span><br><span class="line">                <span class="keyword">let</span> <span class="variable">new_speed</span> = Solution::<span class="title function_ invoke__">min_eating_speed_inner</span>(piles, h, min, mid - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> new_speed &gt; <span class="number">0</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> new_speed;</span><br><span class="line">                &#125;</span><br><span class="line">                mid</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">fn</span> <span class="title function_">count_eating_time</span>(piles: &amp;<span class="type">Vec</span>&lt;<span class="type">i32</span>&gt;, speed: <span class="type">i32</span>) <span class="punctuation">-&gt;</span> <span class="type">i32</span> &#123;</span><br><span class="line">        <span class="comment">// count the time to eat each pile and return sum</span></span><br><span class="line">        <span class="keyword">let</span> <span class="variable">sum</span> = piles</span><br><span class="line">            .<span class="title function_ invoke__">into_iter</span>()</span><br><span class="line">            .<span class="title function_ invoke__">map</span>(|pile| &#123;</span><br><span class="line">                <span class="keyword">if</span> pile % speed &gt; <span class="number">0</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> pile / speed + <span class="number">1</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> pile / speed</span><br><span class="line">            &#125;)</span><br><span class="line">            .<span class="title function_ invoke__">sum</span>();</span><br><span class="line"></span><br><span class="line">        sum</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/rust/" rel="tag"># rust</a>
+              <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+              <a href="/tags/bst/" rel="tag"># bst</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/04/28/leetcode34-find-first-and-last-position-of-element-in-sorted-array/" rel="prev" title="Solve Leetcode in Rust: Find The First And The Last Position of Element In A Sorted Array">
+      <i class="fa fa-chevron-left"></i> Solve Leetcode in Rust: Find The First And The Last Position of Element In A Sorted Array
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem"><span class="nav-number">1.</span> <span class="nav-text">Problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Thoughts"><span class="nav-number">2.</span> <span class="nav-text">Thoughts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code"><span class="nav-number">3.</span> <span class="nav-text">Code</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Try-1"><span class="nav-number">3.1.</span> <span class="nav-text">Try #1</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Leon Chen</p>
+  <div class="site-description" itemprop="description">學習筆記、轉職諮詢</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/n795113" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;n795113" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lightfish.uhuhu@gmail.com" title="E-Mail → mailto:lightfish.uhuhu@gmail.com" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/leon-chen-dev" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;leon-chen-dev" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-linkedin fa-fw"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://medium.com/@lightfish-uhuhu" title="Medium → https:&#x2F;&#x2F;medium.com&#x2F;@lightfish-uhuhu" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa-brands fa-medium fa-fw"></i>Medium</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leon Chen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener external nofollow noreferrer" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
