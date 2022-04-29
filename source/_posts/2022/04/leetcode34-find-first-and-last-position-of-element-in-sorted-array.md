@@ -127,4 +127,5 @@ Improvements
 
 Learned
 - Combo of `cmp` & `match`
-- How to use the function itself in the implementation -> `Solution::bst_search_index_inner`
+- How to use the function itself in a implementation 
+    -> `Solution::bst_search_index_inner`
