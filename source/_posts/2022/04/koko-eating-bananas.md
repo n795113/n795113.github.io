@@ -19,7 +19,7 @@ Then if Koko can eat 3 bananas per hour, it will takes her 5 hours to eat all th
 
 ![](https://i.imgur.com/WTtMmez.png)
 
-Now, if the limit hours `h` is 5 then 3 bananas per hour satisfies. However, if `h`, for example, is 3, then Koko need to SPEEDS UP to finish all the bananas. On the other hand, if `h` is 10 which means we still have time right? So Koko can SLOW DOWN to certain speed to make herself chill but still can finish all the banan in time.
+Now, if the limit hours `h` is 5 then 3 bananas per hour satisfies. However, if `h`, for example, is 3, then Koko need to SPEEDS UP to finish all the bananas. On the other hand, if `h` is 10 which means we still have time right? So Koko should SLOW DOWN to certain speed to make herself chill but still can finish all the bananas in time.
 
 ![](https://i.imgur.com/2QpNhfI.png)
 
