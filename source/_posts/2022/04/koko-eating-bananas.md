@@ -11,7 +11,7 @@ tags:
 ## Problem
 Problem: [Koko Eating Bananas](https://leetcode.com/problems/koko-eating-bananas/)
 
-Let's draw some pictures to understand this quesiton. If there are 4 piles of bananas like below, the given array would be `[3, 2, 3, 4]`.
+Let's draw some pictures to understand this quesiton. If there are 4 piles of bananas like below, the given array would be `[3, 2, 4, 1]`.
 
 ![](https://i.imgur.com/qLpwHkN.png)
 
