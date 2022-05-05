@@ -173,6 +173,103 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/05/05/leetcode-str-str/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leon Chen">
+      <meta itemprop="description" content="學習筆記、轉職諮詢">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Great Plateau">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/05/05/leetcode-str-str/" class="post-title-link" itemprop="url">Solve Leetcode in Rust: Implement strStr()</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-05-05 12:10:55 / 修改時間：16:45:20" itemprop="dateCreated datePublished" datetime="2022-05-05T12:10:55+08:00">2022-05-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/Rust/" itemprop="url" rel="index"><span itemprop="name">Rust</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>Problem: <a target="_blank" rel="noopener external nofollow noreferrer" href="https://leetcode.com/problems/implement-strstr">Implement strStr()</a></p>
+<p>Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack. If needle is empty, return 0.</p>
+<h2 id="Thoughts"><a href="#Thoughts" class="headerlink" title="Thoughts"></a>Thoughts</h2><p>strategies:</p>
+<ul>
+<li>two pointers to compare each characters of needle and haystack (2 while loops)</li>
+<li>iterate through haystack to get slices to compare with needle</li>
+<li>iterate through haystack to get slices. Hash each slice and compare the hashed with the hashed needle</li>
+<li>use <code>find</code> method</li>
+</ul>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><h3 id="Two-While-Loops"><a href="#Two-While-Loops" class="headerlink" title="Two While Loops"></a>Two While Loops</h3><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">impl</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="title function_">str_str</span>(haystack: <span class="type">String</span>, needle: <span class="type">String</span>) <span class="punctuation">-&gt;</span> <span class="type">i32</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> <span class="variable">hay_vec</span>: <span class="type">Vec</span>&lt;<span class="type">char</span>&gt; = haystack.<span class="title function_ invoke__">chars</span>().<span class="title function_ invoke__">collect</span>();</span><br><span class="line">        <span class="keyword">let</span> <span class="variable">needle_vec</span>: <span class="type">Vec</span>&lt;<span class="type">char</span>&gt; = needle.<span class="title function_ invoke__">chars</span>().<span class="title function_ invoke__">collect</span>();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">i_hay</span>: <span class="type">usize</span> = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">i_needle</span>: <span class="type">usize</span> = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> i_hay &lt; hay_vec.<span class="title function_ invoke__">len</span>() &#123;</span><br><span class="line">            <span class="keyword">while</span> i_needle &lt; needle_vec.<span class="title function_ invoke__">len</span>() &#123;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">let</span> <span class="variable">offset_hay</span> = i_hay + i_needle;</span><br><span class="line">                <span class="keyword">if</span> offset_hay &gt;= hay_vec.<span class="title function_ invoke__">len</span>() &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> hay_vec[offset_hay] != needle_vec[i_needle] &#123;</span><br><span class="line">                    i_needle = <span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> hay_vec[offset_hay] == needle_vec[i_needle] &amp;&amp; i_needle == needle_vec.<span class="title function_ invoke__">len</span>() - <span class="number">1</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> i_hay <span class="keyword">as</span> <span class="type">i32</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                i_needle += <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            i_hay += <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Compare-String-Slice"><a href="#Compare-String-Slice" class="headerlink" title="Compare String Slice"></a>Compare String Slice</h3><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">impl</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="title function_">str_str</span>(haystack: <span class="type">String</span>, needle: <span class="type">String</span>) <span class="punctuation">-&gt;</span> <span class="type">i32</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> (hay_len, needle_len) = (haystack.<span class="title function_ invoke__">len</span>(), needle.<span class="title function_ invoke__">len</span>());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> needle_len == <span class="number">0</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> needle_len &gt; hay_len &#123; <span class="keyword">return</span> -<span class="number">1</span> &#125; <span class="comment">// avoid hay: &quot;aa&quot;, needle: &quot;aaaa&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> <span class="variable">i</span> <span class="keyword">in</span> <span class="number">0</span>..=hay_len - needle_len &#123;</span><br><span class="line">            <span class="keyword">if</span> haystack[i..i + needle_len] == needle &#123;</span><br><span class="line">                <span class="keyword">return</span> i <span class="keyword">as</span> <span class="type">i32</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        -<span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Use-Manual-Hash"><a href="#Use-Manual-Hash" class="headerlink" title="Use Manual Hash"></a>Use Manual Hash</h3><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> MAGIC_NUM: <span class="type">u64</span> = <span class="number">31</span>; <span class="comment">// can be any number but should not too big</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">fn</span> <span class="title function_">str_str</span>(haystack: <span class="type">String</span>, needle: <span class="type">String</span>) <span class="punctuation">-&gt;</span> <span class="type">i32</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> (hay_len, needle_len) = (haystack.<span class="title function_ invoke__">len</span>(), needle.<span class="title function_ invoke__">len</span>());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> needle_len == <span class="number">0</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> needle_len &gt; hay_len &#123; <span class="keyword">return</span> -<span class="number">1</span> &#125; <span class="comment">// avoid hay: &quot;aa&quot;, needle: &quot;aaaa&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">hash_needle</span> = <span class="title function_ invoke__">hash</span>(&amp;needle);</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">hash_hay</span>:<span class="type">u64</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">highest_pow</span> = MAGIC_NUM.<span class="title function_ invoke__">pow</span>(needle_len <span class="keyword">as</span> <span class="type">u32</span> - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> <span class="variable">i</span> <span class="keyword">in</span> <span class="number">0</span>..=hay_len - needle_len &#123;</span><br><span class="line">        <span class="keyword">if</span> hash_hay == <span class="number">0</span> &#123; </span><br><span class="line">            hash_hay = <span class="title function_ invoke__">hash</span>(&amp;haystack[i..i + needle_len]); </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">/* rolling hash */</span> </span><br><span class="line">            <span class="comment">// abc -&gt; _bc</span></span><br><span class="line">            <span class="keyword">let</span> <span class="variable">first_c</span> = haystack.<span class="title function_ invoke__">chars</span>().<span class="title function_ invoke__">nth</span>(i-<span class="number">1</span>).<span class="title function_ invoke__">unwrap</span>();</span><br><span class="line">            hash_hay -= first_c <span class="keyword">as</span> <span class="type">u64</span> * highest_pow;</span><br><span class="line">            <span class="comment">// _bc -&gt; bc_</span></span><br><span class="line">            hash_hay *= MAGIC_NUM;</span><br><span class="line">            <span class="comment">// bc_ -&gt; bcd</span></span><br><span class="line">            hash_hay += haystack.<span class="title function_ invoke__">chars</span>().<span class="title function_ invoke__">nth</span>(i + needle_len - <span class="number">1</span>).<span class="title function_ invoke__">unwrap</span>() <span class="keyword">as</span> <span class="type">u64</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> hash_hay == hash_needle &#123;</span><br><span class="line">            <span class="keyword">return</span> i <span class="keyword">as</span> <span class="type">i32</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    -<span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">hash</span>(<span class="type">str</span>: &amp;<span class="type">str</span>) <span class="punctuation">-&gt;</span> <span class="type">u64</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">buf</span>:<span class="type">u64</span> = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> <span class="variable">c</span> <span class="keyword">in</span> <span class="type">str</span>.<span class="title function_ invoke__">chars</span>() &#123;</span><br><span class="line">        buf *= MAGIC_NUM;</span><br><span class="line">        buf += c <span class="keyword">as</span> <span class="type">u64</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    buf</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Use-Find"><a href="#Use-Find" class="headerlink" title="Use Find"></a>Use Find</h3><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">impl</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="title function_">str_str</span>(haystack: <span class="type">String</span>, needle: <span class="type">String</span>) <span class="punctuation">-&gt;</span> <span class="type">i32</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> needle.<span class="title function_ invoke__">is_empty</span>() &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">match</span> &amp;haystack.<span class="title function_ invoke__">find</span>(&amp;needle) &#123;</span><br><span class="line">            <span class="title function_ invoke__">Some</span>(i) =&gt; *i <span class="keyword">as</span> <span class="type">i32</span>,</span><br><span class="line">            <span class="literal">None</span> =&gt; -<span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="If-An-Unicode-String-Given"><a href="#If-An-Unicode-String-Given" class="headerlink" title="If An Unicode String Given"></a>If An Unicode String Given</h2><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">str</span> = String::<span class="title function_ invoke__">from</span>(<span class="string">&quot;好&quot;</span>);</span><br><span class="line"><span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, <span class="type">str</span>.<span class="title function_ invoke__">len</span>()); <span class="comment">// This will print out 3</span></span><br></pre></td></tr></table></figure>
+
+<p>Since the <code>len()</code> returns the length of bytes not characters, we need to change our code if unicode strings given.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">impl</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="title function_">str_str</span>(haystack: <span class="type">String</span>, needle: <span class="type">String</span>) <span class="punctuation">-&gt;</span> <span class="type">i32</span> &#123;</span><br><span class="line">        <span class="comment">// Get length of chars instead of bytes</span></span><br><span class="line">        <span class="keyword">let</span> (hay_len, needle_len) = (</span><br><span class="line">            haystack.<span class="title function_ invoke__">chars</span>().<span class="title function_ invoke__">count</span>(),</span><br><span class="line">            needle.<span class="title function_ invoke__">chars</span>().<span class="title function_ invoke__">count</span>()</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Collect string into `Vec&lt;char&gt;`</span></span><br><span class="line">        <span class="keyword">let</span> (hay_chars, needle_chars) = (</span><br><span class="line">            haystack.<span class="title function_ invoke__">chars</span>().collect::&lt;<span class="type">Vec</span>&lt;<span class="type">char</span>&gt;&gt;(),</span><br><span class="line">            needle.<span class="title function_ invoke__">chars</span>().collect::&lt;<span class="type">Vec</span>&lt;<span class="type">char</span>&gt;&gt;()</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        <span class="comment">// The rest are same</span></span><br><span class="line">        <span class="keyword">if</span> needle_len == <span class="number">0</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> needle_len &gt; hay_len &#123; <span class="keyword">return</span> -<span class="number">1</span> &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> <span class="variable">i</span> <span class="keyword">in</span> <span class="number">0</span>..=hay_len - needle_len &#123;</span><br><span class="line">            <span class="keyword">if</span> hay_chars[i..i + needle_len] == needle_chars &#123;</span><br><span class="line">                <span class="keyword">return</span> i <span class="keyword">as</span> <span class="type">i32</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        -<span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Conculsion"><a href="#Conculsion" class="headerlink" title="Conculsion"></a>Conculsion</h2><ul>
+<li>utilize string slice or <code>find</code> looks easier.</li>
+<li>in some situations, hash may be useful. However, for this case, it may not be the best practise.</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/05/05/leetcode-rebuild-tree-from-inord-and-preord-traversal/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1039,91 +1136,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/04/13/rust-print-and-formatting/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Leon Chen">
-      <meta itemprop="description" content="學習筆記、轉職諮詢">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Great Plateau">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/04/13/rust-print-and-formatting/" class="post-title-link" itemprop="url">Rust: Print & Formatting</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2022-04-13 22:39:22" itemprop="dateCreated datePublished" datetime="2022-04-13T22:39:22+08:00">2022-04-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2022-04-28 01:16:35" itemprop="dateModified" datetime="2022-04-28T01:16:35+08:00">2022-04-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tech/Rust/" itemprop="url" rel="index"><span itemprop="name">Rust</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>List some ways to format the value to be printable.</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="comment">// Print to console</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Hello Rust&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Basic Formatting</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125; is &#123;&#125;&quot;</span>, <span class="string">&quot;Rust&quot;</span>, <span class="string">&quot;rusty&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Positional arguments</span></span><br><span class="line">    <span class="built_in">println!</span>(</span><br><span class="line">        <span class="string">&quot;&#123;0&#125; is a &#123;1&#125;, and &#123;0&#125; is &#123;2&#125;&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Rust&quot;</span>, <span class="string">&quot;programming language&quot;</span>, <span class="string">&quot;efficient&quot;</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Named arguments</span></span><br><span class="line">    <span class="built_in">println!</span>(</span><br><span class="line">        <span class="string">&quot;&#123;target&#125; supports &#123;noun&#125;&quot;</span>,</span><br><span class="line">        target = <span class="string">&quot;Rust&quot;</span>,</span><br><span class="line">        noun = <span class="string">&quot;concurrent programming&quot;</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Placeholder traits</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Binary: &#123;:b&#125; Hex: &#123;:x&#125; Octal: &#123;:o&#125;&quot;</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Placeholder for debug trait</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;:?&#125;&quot;</span>, (<span class="number">100</span>, <span class="literal">false</span>, <span class="string">&quot;Rust&quot;</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>The above outputs the following:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Hello Rust</span><br><span class="line">Rust is rusty</span><br><span class="line">Rust is a programming language, and Rust is efficient</span><br><span class="line">Rust supports concurrent programming</span><br><span class="line">Binary: 1010 Hex: a Octal: 12</span><br><span class="line">(100, false, &quot;Rust&quot;)</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一頁"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一頁"></i></a>
   </nav>
 
 
@@ -1189,7 +1205,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>

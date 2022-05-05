@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"n795113.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="ProblemProblem: Implement strStr() Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack. If needle is empty, r">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Solve Leetcode in Rust: Implement strStr()">
+<meta property="og:url" content="http://n795113.github.io/2022/05/05/leetcode-str-str/index.html">
+<meta property="og:site_name" content="Great Plateau">
+<meta property="og:description" content="ProblemProblem: Implement strStr() Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack. If needle is empty, r">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-05-05T04:10:55.000Z">
+<meta property="article:modified_time" content="2022-05-05T08:45:20.398Z">
+<meta property="article:author" content="Leon Chen">
+<meta property="article:tag" content="rust">
+<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="bst">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://n795113.github.io/2022/05/05/leetcode-str-str/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Solve Leetcode in Rust: Implement strStr() | Great Plateau</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Great Plateau</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">工程師的初始台地</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+        <li class="menu-item menu-item-service">
+
+    <a href="/service/" rel="section"><i class="icon-star fa-fw"></i>免費諮詢</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/05/05/leetcode-str-str/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leon Chen">
+      <meta itemprop="description" content="學習筆記、轉職諮詢">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Great Plateau">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Solve Leetcode in Rust: Implement strStr()
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-05-05 12:10:55 / 修改時間：16:45:20" itemprop="dateCreated datePublished" datetime="2022-05-05T12:10:55+08:00">2022-05-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/Rust/" itemprop="url" rel="index"><span itemprop="name">Rust</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>Problem: <a target="_blank" rel="noopener external nofollow noreferrer" href="https://leetcode.com/problems/implement-strstr">Implement strStr()</a></p>
+<p>Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack. If needle is empty, return 0.</p>
+<h2 id="Thoughts"><a href="#Thoughts" class="headerlink" title="Thoughts"></a>Thoughts</h2><p>strategies:</p>
+<ul>
+<li>two pointers to compare each characters of needle and haystack (2 while loops)</li>
+<li>iterate through haystack to get slices to compare with needle</li>
+<li>iterate through haystack to get slices. Hash each slice and compare the hashed with the hashed needle</li>
+<li>use <code>find</code> method</li>
+</ul>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><h3 id="Two-While-Loops"><a href="#Two-While-Loops" class="headerlink" title="Two While Loops"></a>Two While Loops</h3><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">impl</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="title function_">str_str</span>(haystack: <span class="type">String</span>, needle: <span class="type">String</span>) <span class="punctuation">-&gt;</span> <span class="type">i32</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> <span class="variable">hay_vec</span>: <span class="type">Vec</span>&lt;<span class="type">char</span>&gt; = haystack.<span class="title function_ invoke__">chars</span>().<span class="title function_ invoke__">collect</span>();</span><br><span class="line">        <span class="keyword">let</span> <span class="variable">needle_vec</span>: <span class="type">Vec</span>&lt;<span class="type">char</span>&gt; = needle.<span class="title function_ invoke__">chars</span>().<span class="title function_ invoke__">collect</span>();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">i_hay</span>: <span class="type">usize</span> = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">i_needle</span>: <span class="type">usize</span> = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> i_hay &lt; hay_vec.<span class="title function_ invoke__">len</span>() &#123;</span><br><span class="line">            <span class="keyword">while</span> i_needle &lt; needle_vec.<span class="title function_ invoke__">len</span>() &#123;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">let</span> <span class="variable">offset_hay</span> = i_hay + i_needle;</span><br><span class="line">                <span class="keyword">if</span> offset_hay &gt;= hay_vec.<span class="title function_ invoke__">len</span>() &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> hay_vec[offset_hay] != needle_vec[i_needle] &#123;</span><br><span class="line">                    i_needle = <span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> hay_vec[offset_hay] == needle_vec[i_needle] &amp;&amp; i_needle == needle_vec.<span class="title function_ invoke__">len</span>() - <span class="number">1</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> i_hay <span class="keyword">as</span> <span class="type">i32</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                i_needle += <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            i_hay += <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Compare-String-Slice"><a href="#Compare-String-Slice" class="headerlink" title="Compare String Slice"></a>Compare String Slice</h3><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">impl</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="title function_">str_str</span>(haystack: <span class="type">String</span>, needle: <span class="type">String</span>) <span class="punctuation">-&gt;</span> <span class="type">i32</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> (hay_len, needle_len) = (haystack.<span class="title function_ invoke__">len</span>(), needle.<span class="title function_ invoke__">len</span>());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> needle_len == <span class="number">0</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> needle_len &gt; hay_len &#123; <span class="keyword">return</span> -<span class="number">1</span> &#125; <span class="comment">// avoid hay: &quot;aa&quot;, needle: &quot;aaaa&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> <span class="variable">i</span> <span class="keyword">in</span> <span class="number">0</span>..=hay_len - needle_len &#123;</span><br><span class="line">            <span class="keyword">if</span> haystack[i..i + needle_len] == needle &#123;</span><br><span class="line">                <span class="keyword">return</span> i <span class="keyword">as</span> <span class="type">i32</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        -<span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Use-Manual-Hash"><a href="#Use-Manual-Hash" class="headerlink" title="Use Manual Hash"></a>Use Manual Hash</h3><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> MAGIC_NUM: <span class="type">u64</span> = <span class="number">31</span>; <span class="comment">// can be any number but should not too big</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">fn</span> <span class="title function_">str_str</span>(haystack: <span class="type">String</span>, needle: <span class="type">String</span>) <span class="punctuation">-&gt;</span> <span class="type">i32</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> (hay_len, needle_len) = (haystack.<span class="title function_ invoke__">len</span>(), needle.<span class="title function_ invoke__">len</span>());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> needle_len == <span class="number">0</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> needle_len &gt; hay_len &#123; <span class="keyword">return</span> -<span class="number">1</span> &#125; <span class="comment">// avoid hay: &quot;aa&quot;, needle: &quot;aaaa&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">hash_needle</span> = <span class="title function_ invoke__">hash</span>(&amp;needle);</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">hash_hay</span>:<span class="type">u64</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">highest_pow</span> = MAGIC_NUM.<span class="title function_ invoke__">pow</span>(needle_len <span class="keyword">as</span> <span class="type">u32</span> - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> <span class="variable">i</span> <span class="keyword">in</span> <span class="number">0</span>..=hay_len - needle_len &#123;</span><br><span class="line">        <span class="keyword">if</span> hash_hay == <span class="number">0</span> &#123; </span><br><span class="line">            hash_hay = <span class="title function_ invoke__">hash</span>(&amp;haystack[i..i + needle_len]); </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">/* rolling hash */</span> </span><br><span class="line">            <span class="comment">// abc -&gt; _bc</span></span><br><span class="line">            <span class="keyword">let</span> <span class="variable">first_c</span> = haystack.<span class="title function_ invoke__">chars</span>().<span class="title function_ invoke__">nth</span>(i-<span class="number">1</span>).<span class="title function_ invoke__">unwrap</span>();</span><br><span class="line">            hash_hay -= first_c <span class="keyword">as</span> <span class="type">u64</span> * highest_pow;</span><br><span class="line">            <span class="comment">// _bc -&gt; bc_</span></span><br><span class="line">            hash_hay *= MAGIC_NUM;</span><br><span class="line">            <span class="comment">// bc_ -&gt; bcd</span></span><br><span class="line">            hash_hay += haystack.<span class="title function_ invoke__">chars</span>().<span class="title function_ invoke__">nth</span>(i + needle_len - <span class="number">1</span>).<span class="title function_ invoke__">unwrap</span>() <span class="keyword">as</span> <span class="type">u64</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> hash_hay == hash_needle &#123;</span><br><span class="line">            <span class="keyword">return</span> i <span class="keyword">as</span> <span class="type">i32</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    -<span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">hash</span>(<span class="type">str</span>: &amp;<span class="type">str</span>) <span class="punctuation">-&gt;</span> <span class="type">u64</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">buf</span>:<span class="type">u64</span> = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> <span class="variable">c</span> <span class="keyword">in</span> <span class="type">str</span>.<span class="title function_ invoke__">chars</span>() &#123;</span><br><span class="line">        buf *= MAGIC_NUM;</span><br><span class="line">        buf += c <span class="keyword">as</span> <span class="type">u64</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    buf</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Use-Find"><a href="#Use-Find" class="headerlink" title="Use Find"></a>Use Find</h3><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">impl</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="title function_">str_str</span>(haystack: <span class="type">String</span>, needle: <span class="type">String</span>) <span class="punctuation">-&gt;</span> <span class="type">i32</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> needle.<span class="title function_ invoke__">is_empty</span>() &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">match</span> &amp;haystack.<span class="title function_ invoke__">find</span>(&amp;needle) &#123;</span><br><span class="line">            <span class="title function_ invoke__">Some</span>(i) =&gt; *i <span class="keyword">as</span> <span class="type">i32</span>,</span><br><span class="line">            <span class="literal">None</span> =&gt; -<span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="If-An-Unicode-String-Given"><a href="#If-An-Unicode-String-Given" class="headerlink" title="If An Unicode String Given"></a>If An Unicode String Given</h2><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">str</span> = String::<span class="title function_ invoke__">from</span>(<span class="string">&quot;好&quot;</span>);</span><br><span class="line"><span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, <span class="type">str</span>.<span class="title function_ invoke__">len</span>()); <span class="comment">// This will print out 3</span></span><br></pre></td></tr></table></figure>
+
+<p>Since the <code>len()</code> returns the length of bytes not characters, we need to change our code if unicode strings given.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">impl</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="title function_">str_str</span>(haystack: <span class="type">String</span>, needle: <span class="type">String</span>) <span class="punctuation">-&gt;</span> <span class="type">i32</span> &#123;</span><br><span class="line">        <span class="comment">// Get length of chars instead of bytes</span></span><br><span class="line">        <span class="keyword">let</span> (hay_len, needle_len) = (</span><br><span class="line">            haystack.<span class="title function_ invoke__">chars</span>().<span class="title function_ invoke__">count</span>(),</span><br><span class="line">            needle.<span class="title function_ invoke__">chars</span>().<span class="title function_ invoke__">count</span>()</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Collect string into `Vec&lt;char&gt;`</span></span><br><span class="line">        <span class="keyword">let</span> (hay_chars, needle_chars) = (</span><br><span class="line">            haystack.<span class="title function_ invoke__">chars</span>().collect::&lt;<span class="type">Vec</span>&lt;<span class="type">char</span>&gt;&gt;(),</span><br><span class="line">            needle.<span class="title function_ invoke__">chars</span>().collect::&lt;<span class="type">Vec</span>&lt;<span class="type">char</span>&gt;&gt;()</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        <span class="comment">// The rest are same</span></span><br><span class="line">        <span class="keyword">if</span> needle_len == <span class="number">0</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> needle_len &gt; hay_len &#123; <span class="keyword">return</span> -<span class="number">1</span> &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> <span class="variable">i</span> <span class="keyword">in</span> <span class="number">0</span>..=hay_len - needle_len &#123;</span><br><span class="line">            <span class="keyword">if</span> hay_chars[i..i + needle_len] == needle_chars &#123;</span><br><span class="line">                <span class="keyword">return</span> i <span class="keyword">as</span> <span class="type">i32</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        -<span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Conculsion"><a href="#Conculsion" class="headerlink" title="Conculsion"></a>Conculsion</h2><ul>
+<li>utilize string slice or <code>find</code> looks easier.</li>
+<li>in some situations, hash may be useful. However, for this case, it may not be the best practise.</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/rust/" rel="tag"># rust</a>
+              <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+              <a href="/tags/bst/" rel="tag"># bst</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/05/leetcode-rebuild-tree-from-inord-and-preord-traversal/" rel="prev" title="Solve Leetcode in Rust: Rebuild A Tree From An Inorder and A Preorder Traversal">
+      <i class="fa fa-chevron-left"></i> Solve Leetcode in Rust: Rebuild A Tree From An Inorder and A Preorder Traversal
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem"><span class="nav-number">1.</span> <span class="nav-text">Problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Thoughts"><span class="nav-number">2.</span> <span class="nav-text">Thoughts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code"><span class="nav-number">3.</span> <span class="nav-text">Code</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Two-While-Loops"><span class="nav-number">3.1.</span> <span class="nav-text">Two While Loops</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Compare-String-Slice"><span class="nav-number">3.2.</span> <span class="nav-text">Compare String Slice</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Use-Manual-Hash"><span class="nav-number">3.3.</span> <span class="nav-text">Use Manual Hash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Use-Find"><span class="nav-number">3.4.</span> <span class="nav-text">Use Find</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#If-An-Unicode-String-Given"><span class="nav-number">4.</span> <span class="nav-text">If An Unicode String Given</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conculsion"><span class="nav-number">5.</span> <span class="nav-text">Conculsion</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Leon Chen</p>
+  <div class="site-description" itemprop="description">學習筆記、轉職諮詢</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/n795113" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;n795113" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lightfish.uhuhu@gmail.com" title="E-Mail → mailto:lightfish.uhuhu@gmail.com" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/leon-chen-dev" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;leon-chen-dev" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-linkedin fa-fw"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://medium.com/@lightfish-uhuhu" title="Medium → https:&#x2F;&#x2F;medium.com&#x2F;@lightfish-uhuhu" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa-brands fa-medium fa-fw"></i>Medium</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leon Chen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener external nofollow noreferrer" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
