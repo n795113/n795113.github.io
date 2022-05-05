@@ -173,6 +173,90 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/05/05/leetcode-rebuild-tree-from-inord-and-preord-traversal/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leon Chen">
+      <meta itemprop="description" content="學習筆記、轉職諮詢">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Great Plateau">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/05/05/leetcode-rebuild-tree-from-inord-and-preord-traversal/" class="post-title-link" itemprop="url">Solve Leetcode in Rust: Rebuild A Tree From An Inorder and A Preorder Traversal</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-05-05 10:29:21 / 修改時間：11:26:44" itemprop="dateCreated datePublished" datetime="2022-05-05T10:29:21+08:00">2022-05-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/Rust/" itemprop="url" rel="index"><span itemprop="name">Rust</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>Given a inorder-traversal result and a preorder-traversal result of a tree, Figure out the tree structure.</p>
+<p><img src="/2022/05/05/leetcode-rebuild-tree-from-inord-and-preord-traversal/given-inorder-and-preorder.png"></p>
+<p>For example:</p>
+<ul>
+<li>inorder: 1,2,3,4,5,6,7</li>
+<li>preorder: 5,2,1,4,3,6,7</li>
+</ul>
+<p>What is the structure of this tree? Can we build a tree based on these two clues?</p>
+<h2 id="Thoughts"><a href="#Thoughts" class="headerlink" title="Thoughts"></a>Thoughts</h2><p>The first element of preorder-traversal must be the Root of a tree. On the other hand, we can determine left and right from inorder-traversal after we get the root. As the result, we can again get inorder and preorder result of left-sub-tree and right-sub-tree, then both left and right redo above process until they get no or only one element.</p>
+<p><img src="/2022/05/05/leetcode-rebuild-tree-from-inord-and-preord-traversal/process.png"></p>
+<p>Overview the tree for now</p>
+<p><img src="/2022/05/05/leetcode-rebuild-tree-from-inord-and-preord-traversal/result.png"></p>
+<p>So we can expect we can get the whole tree if we repeat the process.</p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">pub</span> <span class="keyword">struct</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">    <span class="keyword">pub</span> val: <span class="type">i32</span>,</span><br><span class="line">    <span class="keyword">pub</span> left: <span class="type">Option</span>&lt;<span class="type">Box</span>&lt;Node&gt;&gt;,</span><br><span class="line">    <span class="keyword">pub</span> right: <span class="type">Option</span>&lt;<span class="type">Box</span>&lt;Node&gt;&gt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">impl</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">    <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="title function_">new</span>(val: <span class="type">i32</span>) <span class="punctuation">-&gt;</span> <span class="keyword">Self</span> &#123;</span><br><span class="line">        Node &#123; </span><br><span class="line">            val,</span><br><span class="line">            left: <span class="literal">None</span>,</span><br><span class="line">            right: <span class="literal">None</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="title function_">inorder_traversal</span>(&amp;<span class="keyword">self</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> <span class="variable">Some</span>(left) = &amp;<span class="keyword">self</span>.left &#123;</span><br><span class="line">            left.<span class="title function_ invoke__">inorder_traversal</span>();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, &amp;<span class="keyword">self</span>.val);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> <span class="variable">Some</span>(right) = &amp;<span class="keyword">self</span>.right &#123;</span><br><span class="line">            right.<span class="title function_ invoke__">inorder_traversal</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="title function_">preorder_traversal</span>(&amp;<span class="keyword">self</span>) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, &amp;<span class="keyword">self</span>.val);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> <span class="variable">Some</span>(left) = &amp;<span class="keyword">self</span>.left &#123;</span><br><span class="line">            left.<span class="title function_ invoke__">preorder_traversal</span>();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> <span class="variable">Some</span>(right) = &amp;<span class="keyword">self</span>.right &#123;</span><br><span class="line">            right.<span class="title function_ invoke__">preorder_traversal</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">fn</span> <span class="title function_">rebuild_tree</span>(inord_arr: &amp;<span class="type">Vec</span>&lt;<span class="type">i32</span>&gt;, preord_arr: &amp;<span class="type">Vec</span>&lt;<span class="type">i32</span>&gt;) <span class="punctuation">-&gt;</span> Node &#123;</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">let</span> <span class="variable">root_val</span> = preord_arr[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">root</span> = Node::<span class="title function_ invoke__">new</span>(root_val);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Find the index of root from inorder result</span></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">inord_arr_root_i</span> = inord_arr</span><br><span class="line">        .<span class="title function_ invoke__">iter</span>()</span><br><span class="line">        .<span class="title function_ invoke__">position</span>(|&amp;x| x == root_val)</span><br><span class="line">        .<span class="title function_ invoke__">unwrap</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">inord_left_sub_len</span> = inord_arr_root_i;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> inord_left_sub_len == <span class="number">1</span> &#123;</span><br><span class="line">        root.left = <span class="title function_ invoke__">Some</span>(Box::<span class="title function_ invoke__">new</span>(Node::<span class="title function_ invoke__">new</span>(inord_arr[<span class="number">0</span>])));</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> inord_left_sub_len &gt; <span class="number">1</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> <span class="variable">preord_left_sub_vec</span> = preord_arr[<span class="number">1</span>..inord_left_sub_len+<span class="number">1</span>].<span class="title function_ invoke__">to_vec</span>();</span><br><span class="line">        <span class="keyword">let</span> <span class="variable">inord_left_sub_vec</span> = inord_arr[..inord_arr_root_i].<span class="title function_ invoke__">to_vec</span>();</span><br><span class="line">        root.left = <span class="title function_ invoke__">Some</span>(</span><br><span class="line">            Box::<span class="title function_ invoke__">new</span>(<span class="title function_ invoke__">rebuild_tree</span>(</span><br><span class="line">                &amp;inord_left_sub_vec,</span><br><span class="line">                &amp;preord_left_sub_vec</span><br><span class="line">            ))</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">inord_right_sub_len</span> = inord_arr.<span class="title function_ invoke__">len</span>() - inord_left_sub_len - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> inord_right_sub_len == <span class="number">1</span> &#123;</span><br><span class="line">        root.right = <span class="title function_ invoke__">Some</span>(Box::<span class="title function_ invoke__">new</span>(Node::<span class="title function_ invoke__">new</span>(inord_arr[inord_arr_root_i + <span class="number">1</span>])));</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> inord_right_sub_len &gt; <span class="number">1</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> <span class="variable">preord_right_sub_vec</span> = preord_arr[<span class="number">1</span>+inord_left_sub_len..].<span class="title function_ invoke__">to_vec</span>();</span><br><span class="line">        <span class="keyword">let</span> <span class="variable">inord_right_sub_vec</span> = inord_arr[inord_arr_root_i+<span class="number">1</span>..].<span class="title function_ invoke__">to_vec</span>();</span><br><span class="line">        root.right = <span class="title function_ invoke__">Some</span>(</span><br><span class="line">            Box::<span class="title function_ invoke__">new</span>(<span class="title function_ invoke__">rebuild_tree</span>(</span><br><span class="line">                &amp;inord_right_sub_vec,</span><br><span class="line">                &amp;preord_right_sub_vec</span><br><span class="line">            ))</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    root</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">inord_vec</span> = <span class="built_in">vec!</span>[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>];</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">preord_vec</span> = <span class="built_in">vec!</span>[<span class="number">5</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">7</span>];</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">rebuild_tree_n</span> = <span class="title function_ invoke__">rebuild_tree</span>(&amp;inord_vec, &amp;preord_vec);</span><br><span class="line"></span><br><span class="line">    rebuild_tree_n.<span class="title function_ invoke__">inorder_traversal</span>(); <span class="comment">// 1,2,3,4,5,6,7</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;--------&quot;</span>);</span><br><span class="line">    rebuild_tree_n.<span class="title function_ invoke__">preorder_traversal</span>(); <span class="comment">// 5,2,1,4,3,6,7</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/04/30/koko-eating-bananas/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1036,104 +1120,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/03/28/css-use-pseudo-elements-create-hover-effect/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Leon Chen">
-      <meta itemprop="description" content="學習筆記、轉職諮詢">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Great Plateau">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/03/28/css-use-pseudo-elements-create-hover-effect/" class="post-title-link" itemprop="url">CSS: Use Pseudo Elements Create Hover Effect</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-              
-
-              <time title="創建時間：2022-03-28 21:37:38 / 修改時間：21:49:50" itemprop="dateCreated datePublished" datetime="2022-03-28T21:37:38+08:00">2022-03-28</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tech/CSS/" itemprop="url" rel="index"><span itemprop="name">CSS</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="What-Is-Pesudo-Element"><a href="#What-Is-Pesudo-Element" class="headerlink" title="What Is Pesudo Element"></a>What Is Pesudo Element</h2><ul>
-<li>can be created <strong>before</strong> or <strong>after</strong> the target element</li>
-<li>must has content attribute</li>
-<li>each target element can only has one before and one after pseudo element</li>
-</ul>
-<p>In short, pesudo elements will be rendered before or after the target element.</p>
-<p>Below is an example, we use a label element as target element,<br>and use CSS to render pesudo elements next to our target element.</p>
-<p class="codepen" data-height="300" data-default-tab="css,result" data-slug-hash="VwymKLx" data-user="n795113" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-  <span>See the Pen <a target="_blank" rel="noopener external nofollow noreferrer" href="https://codepen.io/n795113/pen/VwymKLx">
-  Demo Pseudo Element</a> by Leon (<a target="_blank" rel="noopener external nofollow noreferrer" href="https://codepen.io/n795113">@n795113</a>)
-  on <a target="_blank" rel="noopener external nofollow noreferrer" href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-
-<h2 id="What-Can-Pseudo-Elements-Do"><a href="#What-Can-Pseudo-Elements-Do" class="headerlink" title="What Can Pseudo Elements Do"></a>What Can Pseudo Elements Do</h2><p>We can use pseudo elements to create a simple hover effect</p>
-<p class="codepen" data-height="300" data-default-tab="css,result" data-slug-hash="GRyNqLB" data-user="n795113" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-  <span>See the Pen <a target="_blank" rel="noopener external nofollow noreferrer" href="https://codepen.io/n795113/pen/GRyNqLB">
-  Untitled</a> by Leon (<a target="_blank" rel="noopener external nofollow noreferrer" href="https://codepen.io/n795113">@n795113</a>)
-  on <a target="_blank" rel="noopener external nofollow noreferrer" href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-
-<p>If you know other great usages, please share with me X)</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.youtube.com/watch?v=OtBpgtqrjyo">Learn CSS Pseudo Elements In 8 Minutes
-</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1203,7 +1189,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
