@@ -173,6 +173,122 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/03/17/laravel-migration-from-an-existing-database/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leon Chen">
+      <meta itemprop="description" content="學習筆記、轉職諮詢">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Great Plateau">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/17/laravel-migration-from-an-existing-database/" class="post-title-link" itemprop="url">Laravel | Migration From an Existing Database</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-03-17 08:49:12" itemprop="dateCreated datePublished" datetime="2022-03-17T08:49:12+08:00">2022-03-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2022-03-18 23:38:00" itemprop="dateModified" datetime="2022-03-18T23:38:00+08:00">2022-03-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>I got a mission to clone an existing service, which has its database separately from the original.</p>
+<p>Here is my to-do list:</p>
+<ol>
+<li>create tables</li>
+<li>sync data</li>
+</ol>
+<p>This article will only record the first step. the next step will be written in the second episode.</p>
+<h2 id="How-to-create-tables-from-the-existing-database"><a href="#How-to-create-tables-from-the-existing-database" class="headerlink" title="How to create tables from the existing database"></a>How to create tables from the existing database</h2><p>Since this project is a Laravel app, but without migration files so I came out with 2 solutions:</p>
+<ol>
+<li>Create migrations from the existing database, then run <code>php artisan migrate</code> to create the same tables to my new database</li>
+<li>Create create-table-SQLs from the existing database, then somehow run these SQLs</li>
+</ol>
+<h3 id="Migration-Generator"><a href="#Migration-Generator" class="headerlink" title="Migration Generator"></a>Migration Generator</h3><p>I thought the first one is more ideal since it is easier for other developers to maintain so I googled “laravel create migration …” then google returned me a bunch of packages to do these tasks, nice!</p>
+<p>here is a couple of choices:</p>
+<ul>
+<li>composer package:<ul>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/Xethron/migrations-generator">https://github.com/Xethron/migrations-generator</a></li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/barryvdh/laravel-migration-generator">https://github.com/barryvdh/laravel-migration-generator</a></li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/adamkearsley/laravel-convert-migrations">https://github.com/adamkearsley/laravel-convert-migrations</a></li>
+</ul>
+</li>
+<li>online convertor<ul>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://laravelarticle.com/laravel-migration-generator-online">https://laravelarticle.com/laravel-migration-generator-online</a></li>
+</ul>
+</li>
+</ul>
+<p>So I generated all the migrations in seconds, lovely!<br>Then I run <code>php artisan migrate</code>!</p>
+<p>CRASH!</p>
+<p>Checked out the migrations, found that the generator didn’t generate the codes properly. It missed some details, like lacking index, so I needed to go through each file to debug… which was not my purpose to use a tool so I tried the second solution, create tables by pure SQL</p>
+<h3 id="How-to-Execute-SQL-Files-in-Laravel"><a href="#How-to-Execute-SQL-Files-in-Laravel" class="headerlink" title="How to Execute SQL Files in Laravel"></a>How to Execute SQL Files in Laravel</h3><p>It is easier than I thought</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">Facades</span>\<span class="title">DB</span>;</span><br><span class="line"></span><br><span class="line">DB::<span class="title function_ invoke__">unprepared</span>(<span class="title function_ invoke__">file_get_contents</span>(<span class="string">&#x27;path/to/sql.sql&#x27;</span>));</span><br></pre></td></tr></table></figure>
+<p>I test a table and it worked properly, created exactly same table as the original without error</p>
+<h2 id="Implement"><a href="#Implement" class="headerlink" title="Implement"></a>Implement</h2><p>So I exported the table structure in SQL from phpMyAdmin manually (the total number of tables is still acceptable for me to do this).</p>
+<p>Instead of creating a command to do this task, I still generated migrations matched to the tables since I would like to have the ROLLBACK feature in Laravel migration. Remember? We can create migrations in seconds by using one of the mentioned packages. Don’t forget to edit <code>.env</code> to switch to the original database, And after generating, switch back to the NEW database.</p>
+<p>Here is my migration code. I put all the SQL in <code>database/sql_migrations</code> but you can put them anywhere you like.</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Database</span>\<span class="title">Migrations</span>\<span class="title">Migration</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Database</span>\<span class="title">Schema</span>\<span class="title">Blueprint</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CreateNewTable</span> <span class="keyword">extends</span> <span class="title">Migration</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Run the migrations.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">up</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$sqlpath</span> = <span class="string">&#x27;database/sql_migrations/&#x27;</span>.<span class="title function_ invoke__">basename</span>(<span class="keyword">__FILE__</span>, <span class="string">&quot;.php&quot;</span>).<span class="string">&#x27;.sql&#x27;</span>;</span><br><span class="line">            Illuminate\Support\Facades\DB::<span class="title function_ invoke__">unprepared</span>(<span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$sqlpath</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Reverse the migrations.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">down</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="title class_">Schema</span>::<span class="title function_ invoke__">drop</span>(<span class="string">&#x27;new&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>After all files are set, we can easily run <code>php artisan migrate</code> to create tables, and <code>php artisan migrate:rollback</code> to rollback.</p>
+<p><a href="/laravel-sync-data-from-an-existing-database">Laravel | Sync Data From an Existing Database</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/03/16/how-to-display-math-equations-on-github/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -314,20 +430,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>

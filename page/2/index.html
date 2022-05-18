@@ -173,6 +173,91 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/04/13/rust-string-101/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leon Chen">
+      <meta itemprop="description" content="學習筆記、轉職諮詢">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Great Plateau">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/04/13/rust-string-101/" class="post-title-link" itemprop="url">Rust: String 101</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-04-13 23:28:05" itemprop="dateCreated datePublished" datetime="2022-04-13T23:28:05+08:00">2022-04-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2022-04-28 01:16:38" itemprop="dateModified" datetime="2022-04-28T01:16:38+08:00">2022-04-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/Rust/" itemprop="url" rel="index"><span itemprop="name">Rust</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">str</span> = String::<span class="title function_ invoke__">from</span>(<span class="string">&quot;Hello &quot;</span>);</span><br><span class="line">    <span class="comment">// let mut str = &quot;Hello &quot;; &lt;- this won&#x27;t work</span></span><br><span class="line">    <span class="comment">// let mut str = &quot;Hello &quot;.to_string(); &lt;- this works</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Now str: &#123;&#125;&quot;</span>, <span class="type">str</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Get length &amp; capacity of a string</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Length: &#123;&#125; Capacity: &#123;&#125;&quot;</span>, <span class="type">str</span>.<span class="title function_ invoke__">len</span>(), <span class="type">str</span>.<span class="title function_ invoke__">capacity</span>());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Push char</span></span><br><span class="line">    <span class="type">str</span>.<span class="title function_ invoke__">push</span>(<span class="string">&#x27;R&#x27;</span>);</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Now str: &#123;&#125;&quot;</span>, <span class="type">str</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Push string</span></span><br><span class="line">    <span class="type">str</span>.<span class="title function_ invoke__">push_str</span>(<span class="string">&quot;ust&quot;</span>); <span class="comment">// capacity is doubled to 12</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Now str: &#123;&#125;&quot;</span>, <span class="type">str</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Check if empty</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Is empty: &#123;&#125;&quot;</span>, <span class="type">str</span>.<span class="title function_ invoke__">is_empty</span>());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Check if contains</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Contains &#x27;PHP&#x27;? &#123;&#125;&quot;</span>, <span class="type">str</span>.<span class="title function_ invoke__">contains</span>(<span class="string">&quot;PHP&quot;</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Replace substring with</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Replace output: &#123;&#125;&quot;</span>, <span class="type">str</span>.<span class="title function_ invoke__">replace</span>(<span class="string">&quot;Rust&quot;</span>, <span class="string">&quot;Solana&quot;</span>));</span><br><span class="line">    <span class="comment">// replace is not a in-place operation</span></span><br><span class="line">    <span class="comment">// so value of str is still &quot;Hello Rust&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Iterate a string by word (whitespace)</span></span><br><span class="line">    <span class="keyword">for</span> <span class="variable">word</span> <span class="keyword">in</span> <span class="type">str</span>.<span class="title function_ invoke__">split_whitespace</span>() &#123;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, word);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Create a string with capacity</span></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">str_with_cap_10</span> = String::<span class="title function_ invoke__">with_capacity</span>(<span class="number">10</span>);</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Length: &#123;&#125; Capacity: &#123;&#125;&quot;</span>, str_with_cap_10.<span class="title function_ invoke__">len</span>(), str_with_cap_10.<span class="title function_ invoke__">capacity</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The above outputs the following:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Now str: Hello </span><br><span class="line">Length: 6 Capacity: 6</span><br><span class="line">Now str: Hello R</span><br><span class="line">Now str: Hello Rust</span><br><span class="line">Is empty: false</span><br><span class="line">Contains &#x27;PHP&#x27;? false</span><br><span class="line">Replace output: Hello Solana</span><br><span class="line">Hello</span><br><span class="line">Rust</span><br><span class="line">Length: 0 Capacity: 10</span><br></pre></td></tr></table></figure>
+
+<h2 id="Use-“-”-to-append-string"><a href="#Use-“-”-to-append-string" class="headerlink" title="Use “+” to append string"></a>Use “+” to append string</h2><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">s1</span> = String::<span class="title function_ invoke__">from</span>(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">s2</span> = String::<span class="title function_ invoke__">from</span>(<span class="string">&quot; Rust&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">s3</span> = s1 + &amp;s2; <span class="comment">// Note: s1 is no longer valid since it&#x27;s ownership is moved to s3</span></span><br><span class="line"><span class="comment">// s3 = &quot;Hello Rust&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Use-format-macro-to-combine-strings"><a href="#Use-format-macro-to-combine-strings" class="headerlink" title="Use format! macro to combine strings"></a>Use format! macro to combine strings</h2><p>imagine we need to append strings by dashes</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">s1</span> = <span class="string">&quot;rust&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> <span class="variable">s2</span> = <span class="string">&quot;ruby&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> <span class="variable">s3</span> = <span class="string">&quot;ray&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="variable">combined_str</span> = <span class="built_in">format!</span>(<span class="string">&quot;&#123;&#125;-&#123;&#125;-&#123;&#125;&quot;</span>, s1, s2, s3);</span><br><span class="line"><span class="comment">// combined_str = &quot;rust-rude-ray&quot;</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/04/13/rust-print-and-formatting/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1018,122 +1103,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/03/17/laravel-migration-from-an-existing-database/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Leon Chen">
-      <meta itemprop="description" content="學習筆記、轉職諮詢">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Great Plateau">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/03/17/laravel-migration-from-an-existing-database/" class="post-title-link" itemprop="url">Laravel | Migration From an Existing Database</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2022-03-17 08:49:12" itemprop="dateCreated datePublished" datetime="2022-03-17T08:49:12+08:00">2022-03-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2022-03-18 23:38:00" itemprop="dateModified" datetime="2022-03-18T23:38:00+08:00">2022-03-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tech/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>I got a mission to clone an existing service, which has its database separately from the original.</p>
-<p>Here is my to-do list:</p>
-<ol>
-<li>create tables</li>
-<li>sync data</li>
-</ol>
-<p>This article will only record the first step. the next step will be written in the second episode.</p>
-<h2 id="How-to-create-tables-from-the-existing-database"><a href="#How-to-create-tables-from-the-existing-database" class="headerlink" title="How to create tables from the existing database"></a>How to create tables from the existing database</h2><p>Since this project is a Laravel app, but without migration files so I came out with 2 solutions:</p>
-<ol>
-<li>Create migrations from the existing database, then run <code>php artisan migrate</code> to create the same tables to my new database</li>
-<li>Create create-table-SQLs from the existing database, then somehow run these SQLs</li>
-</ol>
-<h3 id="Migration-Generator"><a href="#Migration-Generator" class="headerlink" title="Migration Generator"></a>Migration Generator</h3><p>I thought the first one is more ideal since it is easier for other developers to maintain so I googled “laravel create migration …” then google returned me a bunch of packages to do these tasks, nice!</p>
-<p>here is a couple of choices:</p>
-<ul>
-<li>composer package:<ul>
-<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/Xethron/migrations-generator">https://github.com/Xethron/migrations-generator</a></li>
-<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/barryvdh/laravel-migration-generator">https://github.com/barryvdh/laravel-migration-generator</a></li>
-<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/adamkearsley/laravel-convert-migrations">https://github.com/adamkearsley/laravel-convert-migrations</a></li>
-</ul>
-</li>
-<li>online convertor<ul>
-<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://laravelarticle.com/laravel-migration-generator-online">https://laravelarticle.com/laravel-migration-generator-online</a></li>
-</ul>
-</li>
-</ul>
-<p>So I generated all the migrations in seconds, lovely!<br>Then I run <code>php artisan migrate</code>!</p>
-<p>CRASH!</p>
-<p>Checked out the migrations, found that the generator didn’t generate the codes properly. It missed some details, like lacking index, so I needed to go through each file to debug… which was not my purpose to use a tool so I tried the second solution, create tables by pure SQL</p>
-<h3 id="How-to-Execute-SQL-Files-in-Laravel"><a href="#How-to-Execute-SQL-Files-in-Laravel" class="headerlink" title="How to Execute SQL Files in Laravel"></a>How to Execute SQL Files in Laravel</h3><p>It is easier than I thought</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">Facades</span>\<span class="title">DB</span>;</span><br><span class="line"></span><br><span class="line">DB::<span class="title function_ invoke__">unprepared</span>(<span class="title function_ invoke__">file_get_contents</span>(<span class="string">&#x27;path/to/sql.sql&#x27;</span>));</span><br></pre></td></tr></table></figure>
-<p>I test a table and it worked properly, created exactly same table as the original without error</p>
-<h2 id="Implement"><a href="#Implement" class="headerlink" title="Implement"></a>Implement</h2><p>So I exported the table structure in SQL from phpMyAdmin manually (the total number of tables is still acceptable for me to do this).</p>
-<p>Instead of creating a command to do this task, I still generated migrations matched to the tables since I would like to have the ROLLBACK feature in Laravel migration. Remember? We can create migrations in seconds by using one of the mentioned packages. Don’t forget to edit <code>.env</code> to switch to the original database, And after generating, switch back to the NEW database.</p>
-<p>Here is my migration code. I put all the SQL in <code>database/sql_migrations</code> but you can put them anywhere you like.</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Database</span>\<span class="title">Migrations</span>\<span class="title">Migration</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Database</span>\<span class="title">Schema</span>\<span class="title">Blueprint</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CreateNewTable</span> <span class="keyword">extends</span> <span class="title">Migration</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Run the migrations.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">up</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$sqlpath</span> = <span class="string">&#x27;database/sql_migrations/&#x27;</span>.<span class="title function_ invoke__">basename</span>(<span class="keyword">__FILE__</span>, <span class="string">&quot;.php&quot;</span>).<span class="string">&#x27;.sql&#x27;</span>;</span><br><span class="line">            Illuminate\Support\Facades\DB::<span class="title function_ invoke__">unprepared</span>(<span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$sqlpath</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Reverse the migrations.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">down</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="title class_">Schema</span>::<span class="title function_ invoke__">drop</span>(<span class="string">&#x27;new&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>After all files are set, we can easily run <code>php artisan migrate</code> to create tables, and <code>php artisan migrate:rollback</code> to rollback.</p>
-<p><a href="/laravel-sync-data-from-an-existing-database">Laravel | Sync Data From an Existing Database</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1203,20 +1172,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
