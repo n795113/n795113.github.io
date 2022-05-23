@@ -173,6 +173,83 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/05/23/rust-borsh-serialize/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leon Chen">
+      <meta itemprop="description" content="學習筆記、轉職諮詢">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Great Plateau">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/05/23/rust-borsh-serialize/" class="post-title-link" itemprop="url">Rust: Borsh Serialize</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-05-23 22:13:57 / 修改時間：22:24:06" itemprop="dateCreated datePublished" datetime="2022-05-23T22:13:57+08:00">2022-05-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/Rust/" itemprop="url" rel="index"><span itemprop="name">Rust</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Study how to use Borsh Serialize. When we write vanila Solana program, we need to serialize and deserialize accounts’ data by ourselves.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Cargo.toml</span></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">[dependencies]</span><br><span class="line">borsh = <span class="string">&quot;0.9.3&quot;</span></span><br><span class="line">borsh-derive = <span class="string">&quot;0.9.1&quot;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.rs</span></span><br><span class="line"><span class="keyword">use</span> borsh::&#123;BorshDeserialize, BorshSerialize&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#[derive(BorshSerialize, BorshDeserialize, Debug)]</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">    num: <span class="type">i32</span>,</span><br><span class="line">    <span class="type">str</span>: <span class="type">String</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">uint</span>:<span class="type">i32</span> = <span class="number">256</span>; <span class="comment">// 2^8 -&gt; 1 byte</span></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">node</span> = Node&#123;</span><br><span class="line">        num: uint.<span class="title function_ invoke__">pow</span>(<span class="number">0</span>) + uint.<span class="title function_ invoke__">pow</span>(<span class="number">1</span>)*<span class="number">2</span> + uint.<span class="title function_ invoke__">pow</span>(<span class="number">2</span>)*<span class="number">3</span> + uint.<span class="title function_ invoke__">pow</span>(<span class="number">3</span>)*<span class="number">4</span>, <span class="comment">// [1, 2, 3, 4]</span></span><br><span class="line">        <span class="type">str</span>: String::<span class="title function_ invoke__">from</span>(<span class="string">&quot;好&quot;</span>) <span class="comment">// first 4 bytes represents how many bytes of this string</span></span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> <span class="variable">Ok</span>(buf) = node.<span class="title function_ invoke__">try_to_vec</span>() &#123;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">&quot;serialized: &#123;:?&#125;&quot;</span>, buf);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> <span class="variable">Ok</span>(deserz_node) = Node::<span class="title function_ invoke__">try_from_slice</span>(&amp;buf) &#123;</span><br><span class="line">            <span class="built_in">println!</span>(<span class="string">&quot;deserialized: &#123;:?&#125;&quot;</span>, deserz_node);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Run the code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cargo run</span><br><span class="line">serialized: [1, 2, 3, 4, 3, 0, 0, 0, 229, 165, 189]</span><br><span class="line">deserialized: Node &#123; num: 67305985, str: &quot;好&quot; &#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/05/18/js-rest-parameter/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1055,82 +1132,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/04/15/stepn-should-i-mint-shoebox/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Leon Chen">
-      <meta itemprop="description" content="學習筆記、轉職諮詢">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Great Plateau">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/04/15/stepn-should-i-mint-shoebox/" class="post-title-link" itemprop="url">STEPN 我該鑄造鞋子來賣嗎？ Should I Mint Shoes To Sell Now?</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2022-04-15 00:51:20" itemprop="dateCreated datePublished" datetime="2022-04-15T00:51:20+08:00">2022-04-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2022-04-28 01:24:43" itemprop="dateModified" datetime="2022-04-28T01:24:43+08:00">2022-04-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Crypto/" itemprop="url" rel="index"><span itemprop="name">Crypto</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>最近剛入坑，雖然知道風險很高，但還是抱持著體驗的心情衝進來了😅</p>
-<p>相信很多人進場後都會面臨這個問題：該跑步就好，還是生鞋子來賣？<br>因為鑄造鞋子會花費 GST，但賣鞋時的獲利是 SOL。<br>所以當 GST 價格偏低時，比較適合鑄造新鞋子，因為可以用較便宜的 GST 去套利 SOL。</p>
-<p>以下就分享一個超讚的計算機，幫我們以當前幣價估算，建議你目前該跑步還是生鞋！<br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.workitwallet.com/post/stepn-buy-vs-mint">workitwallet</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1200,7 +1201,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
