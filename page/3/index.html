@@ -178,6 +178,100 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/03/17/burn-of-bnb/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leon Chen">
+      <meta itemprop="description" content="學習筆記、轉職諮詢">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Great Plateau">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/17/burn-of-bnb/" class="post-title-link" itemprop="url">Burn of BNB</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-03-17 12:48:03" itemprop="dateCreated datePublished" datetime="2022-03-17T12:48:03+08:00">2022-03-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2022-03-18 14:58:01" itemprop="dateModified" datetime="2022-03-18T14:58:01+08:00">2022-03-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Crypto/" itemprop="url" rel="index"><span itemprop="name">Crypto</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="About-burn"><a href="#About-burn" class="headerlink" title="About burn"></a>About burn</h2><h3 id="When"><a href="#When" class="headerlink" title="When"></a>When</h3><ul>
+<li>burn as gas fee (<a target="_blank" rel="noopener external nofollow noreferrer" href="https://academy.binance.com/en/glossary/bep-95">BEP-95</a>)</li>
+<li>burn by quarter</li>
+<li>burn by price (<a href="###Auto-Burn">Auto-Burn</a>)</li>
+<li>some smart contracts also burn BNB in some conditions</li>
+</ul>
+<h3 id="Why"><a href="#Why" class="headerlink" title="Why"></a>Why</h3><p>To make deflation</p>
+<h3 id="How"><a href="#How" class="headerlink" title="How"></a>How</h3><p>Send tokens to an address without a private key, which means no one can access the tokens anymore.</p>
+<h2 id="BEP-95"><a href="#BEP-95" class="headerlink" title="BEP-95"></a>BEP-95</h2><h3 id="Why-1"><a href="#Why-1" class="headerlink" title="Why"></a>Why</h3><p>To fasten the burn efficiency.</p>
+<h3 id="How-1"><a href="#How-1" class="headerlink" title="How"></a>How</h3><p>Since the solution is to burn partial of validators’ reward, the more users use BSC (which means more blocks need to be validated by validators), the more BNB would be burned.</p>
+<h2 id="Auto-Burn"><a href="#Auto-Burn" class="headerlink" title="Auto-Burn"></a>Auto-Burn</h2><h3 id="Rule"><a href="#Rule" class="headerlink" title="Rule"></a>Rule</h3><p>The more the price of BNB decreases, the more BNB will be burned.</p>
+<p>When the total supply is lower than 1B, the burn process stops (BEP-95 still works).</p>
+<h3 id="Formula"><a href="#Formula" class="headerlink" title="Formula"></a>Formula</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">B = N * 1000 / (P + K)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>B: how many BNB to burn</li>
+<li>N: new BNB amount of this quarter</li>
+<li>P: average price</li>
+<li>K: constant value, 1000</li>
+</ul>
+<p>More detail about <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.binance.com/en/blog/ecosystem/introducing-bnb-autoburn-a-new-protocol-for-the-quarterly-bnb-burn-421499824684903205">Auto-Burn</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/03/17/laravel-sync-data-from-an-existing-database/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -551,20 +645,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
