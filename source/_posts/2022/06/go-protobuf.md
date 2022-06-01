@@ -64,8 +64,9 @@ project/
 ### Compile
 ```shell
 $ cd proto
-$ protoc --go_out=. *.proto
+$ protoc --go_out=plugins=grpc:. service.proto   
 ```
+`plugins=grpc` is needed or the output file will lack some functions
 
 ### Install `grpc`
 ```shell
