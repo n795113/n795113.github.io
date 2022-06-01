@@ -201,10 +201,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2022-06-01 21:57:43 / 修改時間：22:21:51" itemprop="dateCreated datePublished" datetime="2022-06-01T21:57:43+08:00">2022-06-01</time>
+              <time title="創建時間：2022-06-01 21:57:43" itemprop="dateCreated datePublished" datetime="2022-06-01T21:57:43+08:00">2022-06-01</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2022-06-02 00:40:57" itemprop="dateModified" datetime="2022-06-02T00:40:57+08:00">2022-06-02</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -245,8 +251,8 @@
 <p>Scaffolding:</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">project/</span><br><span class="line">└── proto/</span><br><span class="line">   └── package.proto</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h3 id="Compile"><a href="#Compile" class="headerlink" title="Compile"></a>Compile</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> proto</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">protoc --go_out=. *.proto</span></span><br></pre></td></tr></table></figure>
-
+<h3 id="Compile"><a href="#Compile" class="headerlink" title="Compile"></a>Compile</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> proto</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">protoc --go_out=plugins=grpc:. service.proto</span>   </span><br></pre></td></tr></table></figure>
+<p><code>plugins=grpc</code> is needed or the output file will lack some functions</p>
 <h3 id="Install-grpc"><a href="#Install-grpc" class="headerlink" title="Install grpc"></a>Install <code>grpc</code></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">go get -u google.golang.org/grpc</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ul>
