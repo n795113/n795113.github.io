@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://n795113.github.io/pipeline-td-portfolio/index.html</loc>
+    <loc>http://n795113.github.io/portfolio/index.html</loc>
     
     <lastmod>2022-06-06</lastmod>
     
@@ -11,7 +11,16 @@
   </url>
   
   <url>
-    <loc>http://n795113.github.io/portfolio/a.html</loc>
+    <loc>http://n795113.github.io/portfolio/backend-developer.html</loc>
+    
+    <lastmod>2022-06-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://n795113.github.io/portfolio/pipeline-td.html</loc>
     
     <lastmod>2022-06-06</lastmod>
     
@@ -23,15 +32,6 @@
     <loc>http://n795113.github.io/2022/06/01/go-protobuf/</loc>
     
     <lastmod>2022-06-01</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://n795113.github.io/portfolio/index.html</loc>
-    
-    <lastmod>2022-05-30</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
