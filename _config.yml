@@ -3,9 +3,9 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Great Plateau
-subtitle: 工程師的初始台地
-description: '學習筆記、轉職諮詢'
+title: DeV_V Blog
+subtitle: 'backend | crypto | pipeline'
+description: 'Software Engineer'
 keywords:
   - web develop
   - backend
@@ -13,7 +13,7 @@ keywords:
   - react
   - crypto
 author: Leon Chen
-language: zh-TW
+language: en
 timezone: 'Asia/Taipei'
 
 # URL
