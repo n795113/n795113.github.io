@@ -3,13 +3,9 @@ title: 👋 I'm Leon
 date: 2022-03-17 09:01:24
 ---
 
-- 🌱 I’m currently learning **Rust & Go.**
-- 👯 I’m looking to collaborate on **projects on Solana.**
-- 💬 Ask me about: **PHP (Laravel), Rust, Go, React, and even computer animation 🤣**
-- ⚡ Fun fact: **an ex-3D-animator dreamed to work Pixar 🦄**
-
-<h3 align="left">Languages and Tools:</h3>
-Go, Rust, PHP, Javascript
+- 🌱 An Experienced Software Engineer with artistic background
+- 👯 I’m interested in Low level stuffs, Crypto, and Animations
+- 💬 Experienced languages: PHP, Javascript, Python, Go, Rust, C
 
 <h3>Connect with me:</h3>
 
