@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://n795113.github.io/about/index.html</loc>
+    
+    <lastmod>2022-06-15</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://n795113.github.io/portfolio/rigger.html</loc>
     
     <lastmod>2022-06-15</lastmod>
@@ -158,15 +167,6 @@
     <loc>http://n795113.github.io/2022/04/28/rust-checked-sub-n-unwrap-or/</loc>
     
     <lastmod>2022-04-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://n795113.github.io/about/index.html</loc>
-    
-    <lastmod>2022-04-20</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
