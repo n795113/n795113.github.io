@@ -12,7 +12,7 @@ date: 2022-06-06 22:09:45
 ### [Castle Generator](https://github.com/n795113/mel-castle-creator)
 ![](https://user-images.githubusercontent.com/23650308/172132439-9f8df203-e568-4feb-8f53-a975d4f035b7.gif)
 
-### Bezier based facial rig
+### Bezier Based Facial Rig
 [Full Project](https://mixcode.tv/disney-junior-ident-series-2019)
 
 ![](https://cdnb.artstation.com/p/assets/images/images/015/596/623/original/light-fish-chen-flexible-face-combine.gif?1589187556)
