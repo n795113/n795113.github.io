@@ -1,3 +1,4 @@
+http://n795113.github.io/2022/06/16/maya-api-hello-world/
 http://n795113.github.io/about/index.html
 http://n795113.github.io/portfolio/rigger.html
 http://n795113.github.io/portfolio/pipeline-td.html
@@ -55,6 +56,8 @@ http://n795113.github.io/tags/hash/
 http://n795113.github.io/tags/javascript/
 http://n795113.github.io/tags/go/
 http://n795113.github.io/tags/grpc/
+http://n795113.github.io/tags/maya/
+http://n795113.github.io/tags/python/
 http://n795113.github.io/categories/%E5%AD%B8%E7%BF%92/
 http://n795113.github.io/categories/Tech/
 http://n795113.github.io/categories/Crypto/
@@ -64,3 +67,4 @@ http://n795113.github.io/categories/Tech/React/
 http://n795113.github.io/categories/Tech/Rust/
 http://n795113.github.io/categories/Tech/Javascript/
 http://n795113.github.io/categories/Tech/Go/
+http://n795113.github.io/categories/Tech/Maya/

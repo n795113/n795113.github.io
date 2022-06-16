@@ -188,6 +188,86 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/06/16/maya-api-hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leon Chen">
+      <meta itemprop="description" content="Software Engineer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DeV_V Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/06/16/maya-api-hello-world/" class="post-title-link" itemprop="url">Maya API: Hello world!</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-06-16 23:17:33 / Modified: 23:33:26" itemprop="dateCreated datePublished" datetime="2022-06-16T23:17:33+08:00">2022-06-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/Maya/" itemprop="url" rel="index"><span itemprop="name">Maya</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Write a custom Maya command that print “Hello world!” in Maya console.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> maya.api.OpenMaya <span class="keyword">as</span> api</span><br><span class="line"></span><br><span class="line"><span class="comment"># Must include to use Maya API 2.0</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">maya_useNewAPI</span>():</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">HelloWorldCmd</span>(api.MPxCommand):</span><br><span class="line">    kCmdName = <span class="string">&#x27;helloWorld&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        api.MPxCommand.__init__(self)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">creator</span>():</span><br><span class="line">        <span class="keyword">return</span> HelloWorldCmd()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">doIt</span>(<span class="params">self, arg_list</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Hello world!&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># initialize and uninitialize functions are</span></span><br><span class="line"><span class="comment"># needed to be loaded by Maya Plug-in Manager </span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">initializePlugin</span>(<span class="params">mobject</span>):</span><br><span class="line">    fn_plugin = api.MFnPlugin(mobject)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        fn_plugin.registerCommand(</span><br><span class="line">            HelloWorldCmd.kCmdName,</span><br><span class="line">            HelloWorldCmd.creator</span><br><span class="line">        )</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        sys.stderr.write(<span class="string">&quot;Fail to register plugin: &quot;</span> + HelloWorldCmd.kCmdName)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">uninitializePlugin</span>(<span class="params">mobject</span>):</span><br><span class="line">    fn_plugin = api.MFnPlugin(mobject)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        fn_plugin.deregisterCommand(</span><br><span class="line">            HelloWorldCmd.kCmdName</span><br><span class="line">        )</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        sys.stderr.write(<span class="string">&quot;Fail to deregister plugin: &quot;</span> + HelloWorldCmd.kCmdName)</span><br></pre></td></tr></table></figure>
+
+<p>Open Maya Plug-in Manager, and hit “Browse” to load our command.</p>
+<img src="/2022/06/16/maya-api-hello-world/plugin-manager.png" class="" width="500">
+<p>Then we can run our command</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helloworld;</span><br></pre></td></tr></table></figure>
+
+<p>We can also call it in Python:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> maya <span class="keyword">import</span> cmds</span><br><span class="line">cmds.helloWorld</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/06/01/go-protobuf/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1043,135 +1123,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/04/22/learn-solana-cli/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Leon Chen">
-      <meta itemprop="description" content="Software Engineer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DeV_V Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/04/22/learn-solana-cli/" class="post-title-link" itemprop="url">Learn Solana CLI</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-04-22 08:19:39" itemprop="dateCreated datePublished" datetime="2022-04-22T08:19:39+08:00">2022-04-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-04-28 01:16:25" itemprop="dateModified" datetime="2022-04-28T01:16:25+08:00">2022-04-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Crypto/" itemprop="url" rel="index"><span itemprop="name">Crypto</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Wallet-types"><a href="#Wallet-types" class="headerlink" title="Wallet types"></a>Wallet types</h3><ul>
-<li>file</li>
-<li>paper</li>
-<li>hardware</li>
-</ul>
-<h3 id="Create-wallet"><a href="#Create-wallet" class="headerlink" title="Create wallet"></a>Create wallet</h3><p>create wallet (key-pair)</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// file wallet</span><br><span class="line">solana-keygen new --outfile YOUR-PRIVATE-KEY-FILE-PATH</span><br><span class="line">// paper wallet</span><br><span class="line">solana-keygen new --no-outfile</span><br></pre></td></tr></table></figure>
-
-<p>the public key will display on the terminal<br>if you didn’t save the pubkey, it’s fine.<br>we can get the pubkey from private-key</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">solana-keygen pubkey YOUR-PRIVATE-KEY-FILE-PATH</span><br></pre></td></tr></table></figure>
-
-<p>Verify key-pair</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">solana-keygen verify PUBKEY PRIVATE-KEY-FILE-PATH</span><br></pre></td></tr></table></figure>
-
-<h3 id="Interact-with-wallet"><a href="#Interact-with-wallet" class="headerlink" title="Interact with wallet"></a>Interact with wallet</h3><ul>
-<li><code>pubkey</code> aka. <code>address</code> aka. <code>wallet address</code></li>
-</ul>
-<p>config</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">solana config get</span><br></pre></td></tr></table></figure>
-
-<p>set URL to dev-net for developing</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">solana config set --url https://api.devnet.solana.com</span><br></pre></td></tr></table></figure>
-
-<p>send 1 SOL to address</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">solana airdrop 1 PUBKEY</span><br></pre></td></tr></table></figure>
-
-<p>get balance of address</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">solana balance PUBKEY</span><br></pre></td></tr></table></figure>
-
-<p>transfer</p>
-<ul>
-<li>from</li>
-<li>to</li>
-<li>amount</li>
-<li>fee-payer</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">solana transfer --from &lt;KEYPAIR&gt; \</span><br><span class="line">&lt;RECIPIENT_ACCOUNT_ADDRESS&gt; &lt;AMOUNT&gt; \</span><br><span class="line">--fee-payer &lt;KEYPAIR&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Stake"><a href="#Stake" class="headerlink" title="Stake"></a>Stake</h2><h3 id="create-stake-account"><a href="#create-stake-account" class="headerlink" title="create stake account"></a>create stake account</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// first create a keypair for account address</span><br><span class="line">solana-keygen new --no-passphrase -o stake-account.json</span><br><span class="line"></span><br><span class="line">// then create account</span><br><span class="line">solana create-stake-account --from &lt;KEYPAIR&gt; stake-account.json &lt;AMOUNT&gt; \</span><br><span class="line">    --stake-authority &lt;KEYPAIR&gt; --withdraw-authority &lt;KEYPAIR&gt; \</span><br><span class="line">    --fee-payer &lt;KEYPAIR&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="get-account"><a href="#get-account" class="headerlink" title="get account"></a>get account</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">solana stake-account &lt;STAKE_ACCOUNT_ADDRESS&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="update-account-auth"><a href="#update-account-auth" class="headerlink" title="update account auth"></a>update account auth</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">solana stake-authorize &lt;STAKE_ACCOUNT_ADDRESS&gt; \</span><br><span class="line">    --stake-authority &lt;KEYPAIR&gt; --new-stake-authority &lt;PUBKEY&gt; \</span><br><span class="line">    --fee-payer &lt;KEYPAIR&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Delegate-Stake-質押"><a href="#Delegate-Stake-質押" class="headerlink" title="Delegate Stake (質押)"></a>Delegate Stake (質押)</h2><h3 id="list-available-validators"><a href="#list-available-validators" class="headerlink" title="list available validators"></a>list available validators</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">solana validators</span><br></pre></td></tr></table></figure>
-<h3 id="delegate"><a href="#delegate" class="headerlink" title="delegate"></a>delegate</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">solana delegate-stake --stake-authority &lt;KEYPAIR&gt; &lt;STAKE_ACCOUNT_ADDRESS&gt; &lt;VOTE_ACCOUNT_ADDRESS&gt; \</span><br><span class="line">    --fee-payer &lt;KEYPAIR&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="deactive"><a href="#deactive" class="headerlink" title="deactive"></a>deactive</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">solana deactivate-stake --stake-authority &lt;KEYPAIR&gt; &lt;STAKE_ACCOUNT_ADDRESS&gt; \</span><br><span class="line">    --fee-payer &lt;KEYPAIR&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="withdraw-sol"><a href="#withdraw-sol" class="headerlink" title="withdraw sol"></a>withdraw sol</h3><p>only work when the stake-account deactived</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">solana withdraw-stake --withdraw-authority &lt;KEYPAIR&gt; &lt;STAKE_ACCOUNT_ADDRESS&gt; &lt;RECIPIENT_ADDRESS&gt; &lt;AMOUNT&gt; \</span><br><span class="line">    --fee-payer &lt;KEYPAIR&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="split"><a href="#split" class="headerlink" title="split"></a>split</h3><p>You may want to delegate stake to additional validators while your existing stake is not eligible for withdrawal. It might not be eligible because it is currently staked, cooling down, or locked up. To transfer tokens from an existing stake account to a new one</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">solana split-stake --stake-authority &lt;KEYPAIR&gt; &lt;STAKE_ACCOUNT_ADDRESS&gt; &lt;NEW_STAKE_ACCOUNT_KEYPAIR&gt; &lt;AMOUNT&gt; \</span><br><span class="line">    --fee-payer &lt;KEYPAIR&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.solana.com/cli/usage">https://docs.solana.com/cli/usage</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1241,20 +1192,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

@@ -188,6 +188,135 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/04/22/learn-solana-cli/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leon Chen">
+      <meta itemprop="description" content="Software Engineer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DeV_V Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/04/22/learn-solana-cli/" class="post-title-link" itemprop="url">Learn Solana CLI</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-04-22 08:19:39" itemprop="dateCreated datePublished" datetime="2022-04-22T08:19:39+08:00">2022-04-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-04-28 01:16:25" itemprop="dateModified" datetime="2022-04-28T01:16:25+08:00">2022-04-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Crypto/" itemprop="url" rel="index"><span itemprop="name">Crypto</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Wallet-types"><a href="#Wallet-types" class="headerlink" title="Wallet types"></a>Wallet types</h3><ul>
+<li>file</li>
+<li>paper</li>
+<li>hardware</li>
+</ul>
+<h3 id="Create-wallet"><a href="#Create-wallet" class="headerlink" title="Create wallet"></a>Create wallet</h3><p>create wallet (key-pair)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// file wallet</span><br><span class="line">solana-keygen new --outfile YOUR-PRIVATE-KEY-FILE-PATH</span><br><span class="line">// paper wallet</span><br><span class="line">solana-keygen new --no-outfile</span><br></pre></td></tr></table></figure>
+
+<p>the public key will display on the terminal<br>if you didn’t save the pubkey, it’s fine.<br>we can get the pubkey from private-key</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">solana-keygen pubkey YOUR-PRIVATE-KEY-FILE-PATH</span><br></pre></td></tr></table></figure>
+
+<p>Verify key-pair</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">solana-keygen verify PUBKEY PRIVATE-KEY-FILE-PATH</span><br></pre></td></tr></table></figure>
+
+<h3 id="Interact-with-wallet"><a href="#Interact-with-wallet" class="headerlink" title="Interact with wallet"></a>Interact with wallet</h3><ul>
+<li><code>pubkey</code> aka. <code>address</code> aka. <code>wallet address</code></li>
+</ul>
+<p>config</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">solana config get</span><br></pre></td></tr></table></figure>
+
+<p>set URL to dev-net for developing</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">solana config set --url https://api.devnet.solana.com</span><br></pre></td></tr></table></figure>
+
+<p>send 1 SOL to address</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">solana airdrop 1 PUBKEY</span><br></pre></td></tr></table></figure>
+
+<p>get balance of address</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">solana balance PUBKEY</span><br></pre></td></tr></table></figure>
+
+<p>transfer</p>
+<ul>
+<li>from</li>
+<li>to</li>
+<li>amount</li>
+<li>fee-payer</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">solana transfer --from &lt;KEYPAIR&gt; \</span><br><span class="line">&lt;RECIPIENT_ACCOUNT_ADDRESS&gt; &lt;AMOUNT&gt; \</span><br><span class="line">--fee-payer &lt;KEYPAIR&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Stake"><a href="#Stake" class="headerlink" title="Stake"></a>Stake</h2><h3 id="create-stake-account"><a href="#create-stake-account" class="headerlink" title="create stake account"></a>create stake account</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// first create a keypair for account address</span><br><span class="line">solana-keygen new --no-passphrase -o stake-account.json</span><br><span class="line"></span><br><span class="line">// then create account</span><br><span class="line">solana create-stake-account --from &lt;KEYPAIR&gt; stake-account.json &lt;AMOUNT&gt; \</span><br><span class="line">    --stake-authority &lt;KEYPAIR&gt; --withdraw-authority &lt;KEYPAIR&gt; \</span><br><span class="line">    --fee-payer &lt;KEYPAIR&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="get-account"><a href="#get-account" class="headerlink" title="get account"></a>get account</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">solana stake-account &lt;STAKE_ACCOUNT_ADDRESS&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="update-account-auth"><a href="#update-account-auth" class="headerlink" title="update account auth"></a>update account auth</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">solana stake-authorize &lt;STAKE_ACCOUNT_ADDRESS&gt; \</span><br><span class="line">    --stake-authority &lt;KEYPAIR&gt; --new-stake-authority &lt;PUBKEY&gt; \</span><br><span class="line">    --fee-payer &lt;KEYPAIR&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Delegate-Stake-質押"><a href="#Delegate-Stake-質押" class="headerlink" title="Delegate Stake (質押)"></a>Delegate Stake (質押)</h2><h3 id="list-available-validators"><a href="#list-available-validators" class="headerlink" title="list available validators"></a>list available validators</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">solana validators</span><br></pre></td></tr></table></figure>
+<h3 id="delegate"><a href="#delegate" class="headerlink" title="delegate"></a>delegate</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">solana delegate-stake --stake-authority &lt;KEYPAIR&gt; &lt;STAKE_ACCOUNT_ADDRESS&gt; &lt;VOTE_ACCOUNT_ADDRESS&gt; \</span><br><span class="line">    --fee-payer &lt;KEYPAIR&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="deactive"><a href="#deactive" class="headerlink" title="deactive"></a>deactive</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">solana deactivate-stake --stake-authority &lt;KEYPAIR&gt; &lt;STAKE_ACCOUNT_ADDRESS&gt; \</span><br><span class="line">    --fee-payer &lt;KEYPAIR&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="withdraw-sol"><a href="#withdraw-sol" class="headerlink" title="withdraw sol"></a>withdraw sol</h3><p>only work when the stake-account deactived</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">solana withdraw-stake --withdraw-authority &lt;KEYPAIR&gt; &lt;STAKE_ACCOUNT_ADDRESS&gt; &lt;RECIPIENT_ADDRESS&gt; &lt;AMOUNT&gt; \</span><br><span class="line">    --fee-payer &lt;KEYPAIR&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="split"><a href="#split" class="headerlink" title="split"></a>split</h3><p>You may want to delegate stake to additional validators while your existing stake is not eligible for withdrawal. It might not be eligible because it is currently staked, cooling down, or locked up. To transfer tokens from an existing stake account to a new one</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">solana split-stake --stake-authority &lt;KEYPAIR&gt; &lt;STAKE_ACCOUNT_ADDRESS&gt; &lt;NEW_STAKE_ACCOUNT_KEYPAIR&gt; &lt;AMOUNT&gt; \</span><br><span class="line">    --fee-payer &lt;KEYPAIR&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.solana.com/cli/usage">https://docs.solana.com/cli/usage</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/04/21/level-up-github-profile/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -972,92 +1101,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/03/17/involution/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Leon Chen">
-      <meta itemprop="description" content="Software Engineer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DeV_V Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/03/17/involution/" class="post-title-link" itemprop="url">內卷 Involution</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2022-03-17 22:52:36 / Modified: 23:03:16" itemprop="dateCreated datePublished" datetime="2022-03-17T22:52:36+08:00">2022-03-17</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%B8%E7%BF%92/" itemprop="url" rel="index"><span itemprop="name">學習</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>最近看中國視頻學到的新詞。</p>
-<hr>
-<h2 id="什麼是「內卷」"><a href="#什麼是「內卷」" class="headerlink" title="什麼是「內卷」"></a>什麼是「內卷」</h2><p>簡單定義：低級的循環往復</p>
-<p>從農場、工廠、互聯網創作，都是產出供給，而供給需要被有效的消費掉</p>
-<p>在需求不變的情況下，新生產力(新工人)投入，可能導致以下兩種情況：</p>
-<ul>
-<li>削價競爭，也就是「內卷」</li>
-<li>淘汰多餘的生產力(工人)</li>
-</ul>
-<hr>
-<h2 id="中國內卷化的原因"><a href="#中國內卷化的原因" class="headerlink" title="中國內卷化的原因"></a>中國內卷化的原因</h2><p>出口需求飽和，但國內消費又不足夠填補</p>
-<p>國內消費需求低的可能原因：</p>
-<ul>
-<li>繳了各種貸款(房貸、車貸)沒錢消費</li>
-<li>勞工普遍低薪</li>
-<li>再分配(稅收)沒分到一般大眾</li>
-</ul>
-<hr>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.youtube.com/watch?v=OuZND1JLvH4">工资太低？什么都难做？究竟是什么导致中国这些年的”突然内卷化”？【Eng Sub】What caused China’s Involution&#x2F;Neijuanhua? Rich Poor Gap?</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1127,20 +1170,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
