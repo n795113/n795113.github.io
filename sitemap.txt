@@ -1,6 +1,6 @@
+http://n795113.github.io/portfolio/rigger.html
 http://n795113.github.io/2022/06/16/maya-api-hello-world/
 http://n795113.github.io/about/index.html
-http://n795113.github.io/portfolio/rigger.html
 http://n795113.github.io/portfolio/pipeline-td.html
 http://n795113.github.io/portfolio/backend-developer.html
 http://n795113.github.io/portfolio/index.html
