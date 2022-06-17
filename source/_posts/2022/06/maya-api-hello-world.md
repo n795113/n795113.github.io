@@ -1,5 +1,5 @@
 ---
-title: "Maya API: Hello world!"
+title: "Maya Python API: Hello world!"
 date: 2022-06-16 23:17:33
 categories: [Tech, Maya]
 tags:
@@ -7,6 +7,8 @@ tags:
   - python
 ---
 Write a custom Maya command that print "Hello world!" in Maya console.
+There are Python API 1.0 and 2.0. The syntax would be different. 
+We will integrate with API 2.0 in this example.
 
 ```python
 import sys
