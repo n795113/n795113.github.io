@@ -25,4 +25,4 @@ date: 2022-06-06 22:09:45
 ### Other
 - [Artstation](https://www.artstation.com/lightfishchen)
 - [GitHub](https://github.com/n795113?tab=repositories&q=maya)
-- [PDF Resume](/portfolio/pipeline-td/Pipeline-TD-Resume.pdf)
+- [PDF Resume](/portfolio/rigger/Rigger-Resume.pdf)
