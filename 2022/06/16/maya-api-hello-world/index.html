@@ -20,16 +20,16 @@
     var CONFIG = {"hostname":"n795113.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Write a custom Maya command that print “Hello world!” in Maya console. 12345678910111213141516171819202122232425262728293031323334353637383940import sysimport maya.api.OpenMaya as api# Must include to">
+  <meta name="description" content="Write a custom Maya command that print “Hello world!” in Maya console.There are Python API 1.0 and 2.0. The syntax would be different.We will integrate with API 2.0 in this example. 123456789101112131">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Maya API: Hello world!">
+<meta property="og:title" content="Maya Python API: Hello world!">
 <meta property="og:url" content="http://n795113.github.io/2022/06/16/maya-api-hello-world/index.html">
 <meta property="og:site_name" content="DeV_V Blog">
-<meta property="og:description" content="Write a custom Maya command that print “Hello world!” in Maya console. 12345678910111213141516171819202122232425262728293031323334353637383940import sysimport maya.api.OpenMaya as api# Must include to">
+<meta property="og:description" content="Write a custom Maya command that print “Hello world!” in Maya console.There are Python API 1.0 and 2.0. The syntax would be different.We will integrate with API 2.0 in this example. 123456789101112131">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://n795113.github.io/2022/06/16/maya-api-hello-world/plugin-manager.png">
 <meta property="article:published_time" content="2022-06-16T15:17:33.000Z">
-<meta property="article:modified_time" content="2022-06-16T15:33:26.832Z">
+<meta property="article:modified_time" content="2022-06-17T15:09:52.961Z">
 <meta property="article:author" content="Leon Chen">
 <meta property="article:tag" content="maya">
 <meta property="article:tag" content="python">
@@ -49,7 +49,7 @@
   };
 </script>
 
-  <title>Maya API: Hello world! | DeV_V Blog</title>
+  <title>Maya Python API: Hello world! | DeV_V Blog</title>
   
 
 
@@ -203,7 +203,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Maya API: Hello world!
+          Maya Python API: Hello world!
         </h1>
 
         <div class="post-meta">
@@ -212,10 +212,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-06-16 23:17:33 / Modified: 23:33:26" itemprop="dateCreated datePublished" datetime="2022-06-16T23:17:33+08:00">2022-06-16</time>
+              <time title="Created: 2022-06-16 23:17:33" itemprop="dateCreated datePublished" datetime="2022-06-16T23:17:33+08:00">2022-06-16</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-06-17 23:09:52" itemprop="dateModified" datetime="2022-06-17T23:09:52+08:00">2022-06-17</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -241,7 +247,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Write a custom Maya command that print “Hello world!” in Maya console.</p>
+        <p>Write a custom Maya command that print “Hello world!” in Maya console.<br>There are Python API 1.0 and 2.0. The syntax would be different.<br>We will integrate with API 2.0 in this example.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> maya.api.OpenMaya <span class="keyword">as</span> api</span><br><span class="line"></span><br><span class="line"><span class="comment"># Must include to use Maya API 2.0</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">maya_useNewAPI</span>():</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">HelloWorldCmd</span>(api.MPxCommand):</span><br><span class="line">    kCmdName = <span class="string">&#x27;helloWorld&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        api.MPxCommand.__init__(self)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">creator</span>():</span><br><span class="line">        <span class="keyword">return</span> HelloWorldCmd()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">doIt</span>(<span class="params">self, arg_list</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Hello world!&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># initialize and uninitialize functions are</span></span><br><span class="line"><span class="comment"># needed to be loaded by Maya Plug-in Manager </span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">initializePlugin</span>(<span class="params">mobject</span>):</span><br><span class="line">    fn_plugin = api.MFnPlugin(mobject)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        fn_plugin.registerCommand(</span><br><span class="line">            HelloWorldCmd.kCmdName,</span><br><span class="line">            HelloWorldCmd.creator</span><br><span class="line">        )</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        sys.stderr.write(<span class="string">&quot;Fail to register plugin: &quot;</span> + HelloWorldCmd.kCmdName)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">uninitializePlugin</span>(<span class="params">mobject</span>):</span><br><span class="line">    fn_plugin = api.MFnPlugin(mobject)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        fn_plugin.deregisterCommand(</span><br><span class="line">            HelloWorldCmd.kCmdName</span><br><span class="line">        )</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        sys.stderr.write(<span class="string">&quot;Fail to deregister plugin: &quot;</span> + HelloWorldCmd.kCmdName)</span><br></pre></td></tr></table></figure>
 
 <p>Open Maya Plug-in Manager, and hit “Browse” to load our command.</p>

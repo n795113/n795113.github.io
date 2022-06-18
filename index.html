@@ -202,7 +202,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/06/16/maya-api-hello-world/" class="post-title-link" itemprop="url">Maya API: Hello world!</a>
+            <a href="/2022/06/16/maya-api-hello-world/" class="post-title-link" itemprop="url">Maya Python API: Hello world!</a>
         </h2>
 
         <div class="post-meta">
@@ -211,10 +211,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-06-16 23:17:33 / Modified: 23:33:26" itemprop="dateCreated datePublished" datetime="2022-06-16T23:17:33+08:00">2022-06-16</time>
+              <time title="Created: 2022-06-16 23:17:33" itemprop="dateCreated datePublished" datetime="2022-06-16T23:17:33+08:00">2022-06-16</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-06-17 23:09:52" itemprop="dateModified" datetime="2022-06-17T23:09:52+08:00">2022-06-17</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -240,7 +246,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Write a custom Maya command that print “Hello world!” in Maya console.</p>
+          <p>Write a custom Maya command that print “Hello world!” in Maya console.<br>There are Python API 1.0 and 2.0. The syntax would be different.<br>We will integrate with API 2.0 in this example.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> maya.api.OpenMaya <span class="keyword">as</span> api</span><br><span class="line"></span><br><span class="line"><span class="comment"># Must include to use Maya API 2.0</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">maya_useNewAPI</span>():</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">HelloWorldCmd</span>(api.MPxCommand):</span><br><span class="line">    kCmdName = <span class="string">&#x27;helloWorld&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        api.MPxCommand.__init__(self)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">creator</span>():</span><br><span class="line">        <span class="keyword">return</span> HelloWorldCmd()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">doIt</span>(<span class="params">self, arg_list</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Hello world!&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># initialize and uninitialize functions are</span></span><br><span class="line"><span class="comment"># needed to be loaded by Maya Plug-in Manager </span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">initializePlugin</span>(<span class="params">mobject</span>):</span><br><span class="line">    fn_plugin = api.MFnPlugin(mobject)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        fn_plugin.registerCommand(</span><br><span class="line">            HelloWorldCmd.kCmdName,</span><br><span class="line">            HelloWorldCmd.creator</span><br><span class="line">        )</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        sys.stderr.write(<span class="string">&quot;Fail to register plugin: &quot;</span> + HelloWorldCmd.kCmdName)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">uninitializePlugin</span>(<span class="params">mobject</span>):</span><br><span class="line">    fn_plugin = api.MFnPlugin(mobject)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        fn_plugin.deregisterCommand(</span><br><span class="line">            HelloWorldCmd.kCmdName</span><br><span class="line">        )</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        sys.stderr.write(<span class="string">&quot;Fail to deregister plugin: &quot;</span> + HelloWorldCmd.kCmdName)</span><br></pre></td></tr></table></figure>
 
 <p>Open Maya Plug-in Manager, and hit “Browse” to load our command.</p>
