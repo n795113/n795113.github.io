@@ -1,3 +1,4 @@
+http://n795113.github.io/2022/03/17/burn-of-bnb/
 http://n795113.github.io/2022/06/23/maya-api-debug-on-mac/
 http://n795113.github.io/2022/06/23/maya-api-basics/
 http://n795113.github.io/2022/06/16/maya-api-hello-world/
@@ -28,7 +29,6 @@ http://n795113.github.io/2022/03/28/react-how-to-append-jsx/
 http://n795113.github.io/2022/03/22/css-flex/
 http://n795113.github.io/2022/03/17/laravel-sync-data-from-an-existing-database/
 http://n795113.github.io/2022/03/17/laravel-migration-from-an-existing-database/
-http://n795113.github.io/2022/03/17/burn-of-bnb/
 http://n795113.github.io/2022/03/18/meta-knowledge/
 http://n795113.github.io/2022/03/18/hexo-accessing-non-existent-property-xxx-of-module-exports-inside-circular-dependency/
 http://n795113.github.io/2022/03/16/how-to-display-math-equations-on-github/
