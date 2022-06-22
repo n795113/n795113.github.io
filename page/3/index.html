@@ -188,6 +188,89 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/03/18/hexo-accessing-non-existent-property-xxx-of-module-exports-inside-circular-dependency/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leon Chen">
+      <meta itemprop="description" content="Software Engineer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DeV_V Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/18/hexo-accessing-non-existent-property-xxx-of-module-exports-inside-circular-dependency/" class="post-title-link" itemprop="url">Hexo: Accessing non-existent property 'xxx' of module exports inside circular dependency</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-03-18 10:08:04 / Modified: 14:53:01" itemprop="dateCreated datePublished" datetime="2022-03-18T10:08:04+08:00">2022-03-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Error"><a href="#Error" class="headerlink" title="Error"></a>Error</h2><p>I got this error when I run <code>hexo server</code>. The site still works but it made feel unsatisfied…</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(node:87224) Warning: Accessing non-existent property &#x27;lineno&#x27; of module exports inside circular dependency</span><br><span class="line">(Use `node --trace-warnings ...` to show where the warning was created)</span><br><span class="line">(node:87224) Warning: Accessing non-existent property &#x27;column&#x27; of module exports inside circular dependency</span><br><span class="line">(node:87224) Warning: Accessing non-existent property &#x27;filename&#x27; of module exports inside circular dependency</span><br><span class="line">(node:87224) Warning: Accessing non-existent property &#x27;lineno&#x27; of module exports inside circular dependency</span><br><span class="line">(node:87224) Warning: Accessing non-existent property &#x27;column&#x27; of module exports inside circular dependency</span><br><span class="line">(node:87224) Warning: Accessing non-existent property &#x27;filename&#x27; of module exports inside circular dependency</span><br></pre></td></tr></table></figure>
+
+<h3 id="My-dependencies"><a href="#My-dependencies" class="headerlink" title="My dependencies:"></a>My dependencies:</h3><ul>
+<li>node: v16.8.0</li>
+<li>hexo: 6.1.0</li>
+<li>hexo-cli: 4.3.0</li>
+</ul>
+<hr>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Append below code to <code>package.json</code> then run <code>yarn install</code> or <code>npm install</code>. The error should be fixed.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;resolutions&quot;: &#123;</span><br><span class="line">  &quot;stylus&quot;: &quot;^0.54.8&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.haoyizebo.com/posts/710984d0/">https://www.haoyizebo.com/posts/710984d0/</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/03/17/involution/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -741,7 +824,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
