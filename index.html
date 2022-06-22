@@ -188,6 +188,80 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/06/23/maya-api-debug-on-mac/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leon Chen">
+      <meta itemprop="description" content="Software Engineer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DeV_V Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/06/23/maya-api-debug-on-mac/" class="post-title-link" itemprop="url">Maya API For C++: How To Debug On Mac</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-06-23 03:19:13 / Modified: 03:42:12" itemprop="dateCreated datePublished" datetime="2022-06-23T03:19:13+08:00">2022-06-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/Maya/" itemprop="url" rel="index"><span itemprop="name">Maya</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>There is no <strong>output window</strong> in Mac’s Maya so I can’t print out text by <code>std::out</code>. The only way I know is to use <code>Global::displayInfo</code>. However, <code>Global::displayInfo</code> only accepts <code>MString</code>. I haven’t digged into what <code>MString</code> is yet but just provide some examples here. Hope you can get the basic idea:)</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Global::<span class="built_in">displayInfo</span>(<span class="string">&quot;hello&quot;</span>); <span class="comment">// Works</span></span><br><span class="line"></span><br><span class="line">string str = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">Global::<span class="built_in">displayInfo</span>(str); <span class="comment">// This will fail</span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> str[<span class="number">10</span>];</span><br><span class="line"><span class="built_in">sprintf</span>(str, <span class="string">&quot;hello&quot;</span>); <span class="comment">// Writes content to `str`</span></span><br><span class="line">Global::<span class="built_in">displayInfo</span>(str); <span class="comment">// Works</span></span><br></pre></td></tr></table></figure>
+<p>In this way, we can also print out <strong>numeric types</strong>!</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">flaot value = <span class="number">100.0f</span>;</span><br><span class="line"><span class="type">char</span> str[<span class="number">10</span>];</span><br><span class="line"></span><br><span class="line"><span class="built_in">sprintf</span>(str, <span class="string">&quot;value:%f&quot;</span>, value);</span><br><span class="line">Global::<span class="built_in">displayInfo</span>(str);</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/06/23/maya-api-basics/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -992,85 +1066,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/04/28/rust-checked-sub-n-unwrap-or/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Leon Chen">
-      <meta itemprop="description" content="Software Engineer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DeV_V Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/04/28/rust-checked-sub-n-unwrap-or/" class="post-title-link" itemprop="url">Rust: checked_sub & unwrap_or</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2022-04-28 00:34:33 / Modified: 01:14:53" itemprop="dateCreated datePublished" datetime="2022-04-28T00:34:33+08:00">2022-04-28</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tech/Rust/" itemprop="url" rel="index"><span itemprop="name">Rust</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Just a quick note for these two functions I learned today.</p>
-<p><code>checked_sub</code> is used to check if the abstraction of an integer overflows. For example:</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">num_u32</span>: <span class="type">u32</span> = <span class="number">0</span>;</span><br><span class="line">num_u32 -= <span class="number">1</span>; <span class="comment">// overflow</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">num_i32</span> = i32::MIN; <span class="comment">// -2147483648</span></span><br><span class="line">num_i32 -= <span class="number">1</span>; <span class="comment">// overflow</span></span><br></pre></td></tr></table></figure>
-
-<p>To prevent it, we can use the combo of <code>checked_sub</code> and <code>unwrap_or</code>. <code>checked_sub</code> will return <code>Option&lt;self&gt;</code> which means if there is no overflow occurs, we get <code>Some(substraction_result)</code>, else we will get <code>None</code>. <code>unwarp_or</code> can then give the result a default value if we get <code>None</code> or just unwrap <code>Some(substraction_result)</code> to return <code>substraction_result</code>. Let’s look at the code.</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">num_i32</span> = i32::MIN + <span class="number">1</span>; <span class="comment">// -2147483648 + 1</span></span><br><span class="line"></span><br><span class="line">num_i32 = num_i32.<span class="title function_ invoke__">checked_sub</span>(<span class="number">1</span>).<span class="title function_ invoke__">unwrap_or</span>(i32::MIN); <span class="comment">// -2147483648</span></span><br><span class="line"></span><br><span class="line">num_i32 = num_i32.<span class="title function_ invoke__">checked_sub</span>(<span class="number">1</span>).<span class="title function_ invoke__">unwrap_or</span>(<span class="number">100</span>); <span class="comment">// 100</span></span><br><span class="line"><span class="comment">// Since it overflows, it will return the default value </span></span><br><span class="line"><span class="comment">// that we give to unwrap_or which is 100 for this example</span></span><br></pre></td></tr></table></figure>
-
-<p>That’s it for today!</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1140,7 +1135,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1153,7 +1148,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

@@ -1,3 +1,4 @@
+http://n795113.github.io/2022/06/23/maya-api-debug-on-mac/
 http://n795113.github.io/2022/06/23/maya-api-basics/
 http://n795113.github.io/2022/06/16/maya-api-hello-world/
 http://n795113.github.io/portfolio/rigger.html
@@ -59,6 +60,7 @@ http://n795113.github.io/tags/go/
 http://n795113.github.io/tags/grpc/
 http://n795113.github.io/tags/maya/
 http://n795113.github.io/tags/python/
+http://n795113.github.io/tags/c/
 http://n795113.github.io/categories/%E5%AD%B8%E7%BF%92/
 http://n795113.github.io/categories/Tech/
 http://n795113.github.io/categories/Crypto/

@@ -20,29 +20,21 @@
     var CONFIG = {"hostname":"n795113.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Character TD Reel   Bezier Based Facial RigFull Project  Controller Manager Tweener Castle Generator Other Artstation GitHub PDF Resume">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Rigger Portfolio">
-<meta property="og:url" content="http://n795113.github.io/portfolio/rigger.html">
+  <meta name="description" content="There is no output window in Mac’s Maya so I can’t print out text by std::out. The only way I know is to use Global::displayInfo. However, Global::displayInfo only accepts MString. I haven’t digged in">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Maya API For C++: How To Debug On Mac">
+<meta property="og:url" content="http://n795113.github.io/2022/06/23/maya-api-debug-on-mac/index.html">
 <meta property="og:site_name" content="DeV_V Blog">
-<meta property="og:description" content="Character TD Reel   Bezier Based Facial RigFull Project  Controller Manager Tweener Castle Generator Other Artstation GitHub PDF Resume">
+<meta property="og:description" content="There is no output window in Mac’s Maya so I can’t print out text by std::out. The only way I know is to use Global::displayInfo. However, Global::displayInfo only accepts MString. I haven’t digged in">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://cdnb.artstation.com/p/assets/images/images/015/596/623/original/light-fish-chen-flexible-face-combine.gif?1589187556">
-<meta property="og:image" content="https://user-images.githubusercontent.com/23650308/172152977-ef9a6a5f-8b41-473c-871e-4180a6acf4ab.gif">
-<meta property="og:image" content="https://user-images.githubusercontent.com/23650308/172175600-ec0a9371-6d67-469c-af6a-84016f3c477b.gif">
-<meta property="og:image" content="https://user-images.githubusercontent.com/23650308/172132439-9f8df203-e568-4feb-8f53-a975d4f035b7.gif">
-<meta property="article:published_time" content="2022-06-06T14:09:45.000Z">
-<meta property="article:modified_time" content="2022-06-17T15:04:15.936Z">
+<meta property="article:published_time" content="2022-06-22T19:19:13.000Z">
+<meta property="article:modified_time" content="2022-06-22T19:42:12.321Z">
 <meta property="article:author" content="Leon Chen">
-<meta property="article:tag" content="web develop">
-<meta property="article:tag" content="backend">
-<meta property="article:tag" content="php">
-<meta property="article:tag" content="react">
-<meta property="article:tag" content="crypto">
+<meta property="article:tag" content="maya">
+<meta property="article:tag" content="c++">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdnb.artstation.com/p/assets/images/images/015/596/623/original/light-fish-chen-flexible-face-combine.gif?1589187556">
 
-<link rel="canonical" href="http://n795113.github.io/portfolio/rigger">
+<link rel="canonical" href="http://n795113.github.io/2022/06/23/maya-api-debug-on-mac/">
 
 
 <script id="page-configurations">
@@ -50,13 +42,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Rigger Portfolio | DeV_V Blog
-</title>
+  <title>Maya API For C++: How To Debug On Mac | DeV_V Blog</title>
   
 
 
@@ -189,56 +180,99 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
-          <div class="content page posts-expand">
+          <div class="content post posts-expand">
             
 
     
-    
-    
-    <div class="post-block" lang="en">
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://n795113.github.io/2022/06/23/maya-api-debug-on-mac/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leon Chen">
+      <meta itemprop="description" content="Software Engineer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DeV_V Blog">
+    </span>
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Maya API For C++: How To Debug On Mac
+        </h1>
 
-<h1 class="post-title" itemprop="name headline">Rigger Portfolio
-</h1>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
 
-<div class="post-meta">
+              <time title="Created: 2022-06-23 03:19:13 / Modified: 03:42:12" itemprop="dateCreated datePublished" datetime="2022-06-23T03:19:13+08:00">2022-06-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/Maya/" itemprop="url" rel="index"><span itemprop="name">Maya</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>There is no <strong>output window</strong> in Mac’s Maya so I can’t print out text by <code>std::out</code>. The only way I know is to use <code>Global::displayInfo</code>. However, <code>Global::displayInfo</code> only accepts <code>MString</code>. I haven’t digged into what <code>MString</code> is yet but just provide some examples here. Hope you can get the basic idea:)</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Global::<span class="built_in">displayInfo</span>(<span class="string">&quot;hello&quot;</span>); <span class="comment">// Works</span></span><br><span class="line"></span><br><span class="line">string str = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">Global::<span class="built_in">displayInfo</span>(str); <span class="comment">// This will fail</span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> str[<span class="number">10</span>];</span><br><span class="line"><span class="built_in">sprintf</span>(str, <span class="string">&quot;hello&quot;</span>); <span class="comment">// Writes content to `str`</span></span><br><span class="line">Global::<span class="built_in">displayInfo</span>(str); <span class="comment">// Works</span></span><br></pre></td></tr></table></figure>
+<p>In this way, we can also print out <strong>numeric types</strong>!</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">flaot value = <span class="number">100.0f</span>;</span><br><span class="line"><span class="type">char</span> str[<span class="number">10</span>];</span><br><span class="line"></span><br><span class="line"><span class="built_in">sprintf</span>(str, <span class="string">&quot;value:%f&quot;</span>, value);</span><br><span class="line">Global::<span class="built_in">displayInfo</span>(str);</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/maya/" rel="tag"># maya</a>
+              <a href="/tags/c/" rel="tag"># c++</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/06/23/maya-api-basics/" rel="prev" title="Maya API Basics">
+      <i class="fa fa-chevron-left"></i> Maya API Basics
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
-          <h3 id="Character-TD-Reel"><a href="#Character-TD-Reel" class="headerlink" title="Character TD Reel"></a>Character TD Reel</h3><iframe src="https://player.vimeo.com/video/390245100?h=1d8fbf699c" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://vimeo.com/390245100">
-
-<h3 id="Bezier-Based-Facial-Rig"><a href="#Bezier-Based-Facial-Rig" class="headerlink" title="Bezier Based Facial Rig"></a>Bezier Based Facial Rig</h3><p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://mixcode.tv/disney-junior-ident-series-2019">Full Project</a></p>
-<p><img src="https://cdnb.artstation.com/p/assets/images/images/015/596/623/original/light-fish-chen-flexible-face-combine.gif?1589187556"></p>
-<h3 id="Controller-Manager"><a href="#Controller-Manager" class="headerlink" title="Controller Manager"></a><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/n795113/controller-manager">Controller Manager</a></h3><p><img src="https://user-images.githubusercontent.com/23650308/172152977-ef9a6a5f-8b41-473c-871e-4180a6acf4ab.gif"></p>
-<h3 id="Tweener"><a href="#Tweener" class="headerlink" title="Tweener"></a><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/n795113/tweener">Tweener</a></h3><p><img src="https://user-images.githubusercontent.com/23650308/172175600-ec0a9371-6d67-469c-af6a-84016f3c477b.gif"></p>
-<h3 id="Castle-Generator"><a href="#Castle-Generator" class="headerlink" title="Castle Generator"></a><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/n795113/mel-castle-creator">Castle Generator</a></h3><p><img src="https://user-images.githubusercontent.com/23650308/172132439-9f8df203-e568-4feb-8f53-a975d4f035b7.gif"></p>
-<h3 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h3><ul>
-<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.artstation.com/lightfishchen">Artstation</a></li>
-<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/n795113?tab=repositories&q=maya">GitHub</a></li>
-<li><a href="/portfolio/rigger/Rigger-Resume.pdf">PDF Resume</a></li>
-</ul>
-
-      </div>
-      
-      
-      
-    </div>
-    
-
-    
-    
-    
 
 
           </div>
@@ -289,7 +323,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Character-TD-Reel"><span class="nav-number">1.</span> <span class="nav-text">Character TD Reel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bezier-Based-Facial-Rig"><span class="nav-number">2.</span> <span class="nav-text">Bezier Based Facial Rig</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Controller-Manager"><span class="nav-number">3.</span> <span class="nav-text">Controller Manager</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tweener"><span class="nav-number">4.</span> <span class="nav-text">Tweener</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Castle-Generator"><span class="nav-number">5.</span> <span class="nav-text">Castle Generator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Other"><span class="nav-number">6.</span> <span class="nav-text">Other</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
