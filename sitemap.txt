@@ -1,3 +1,6 @@
+http://n795113.github.io/2022/04/22/learn-solana-cli/
+http://n795113.github.io/2022/04/22/understand-solana-token/
+http://n795113.github.io/2022/04/15/stepn-should-i-mint-shoebox/
 http://n795113.github.io/2022/03/17/burn-of-bnb/
 http://n795113.github.io/2022/06/23/maya-api-debug-on-mac/
 http://n795113.github.io/2022/06/23/maya-api-basics/
@@ -14,12 +17,9 @@ http://n795113.github.io/2022/05/05/leetcode-str-str/
 http://n795113.github.io/2022/05/05/leetcode-rebuild-tree-from-inord-and-preord-traversal/
 http://n795113.github.io/2022/04/30/koko-eating-bananas/
 http://n795113.github.io/2022/04/28/leetcode34-find-first-and-last-position-of-element-in-sorted-array/
-http://n795113.github.io/2022/04/15/stepn-should-i-mint-shoebox/
-http://n795113.github.io/2022/04/22/understand-solana-token/
 http://n795113.github.io/2022/04/13/rust-string-101/
 http://n795113.github.io/2022/04/13/rust-print-and-formatting/
 http://n795113.github.io/2022/04/21/level-up-github-profile/
-http://n795113.github.io/2022/04/22/learn-solana-cli/
 http://n795113.github.io/2022/04/28/rust-checked-sub-n-unwrap-or/
 http://n795113.github.io/categories/index.html
 http://n795113.github.io/tags/index.html
@@ -61,7 +61,6 @@ http://n795113.github.io/tags/c/
 http://n795113.github.io/tags/python/
 http://n795113.github.io/tags/javascript/
 http://n795113.github.io/tags/hash/
-http://n795113.github.io/categories/Crypto/
 http://n795113.github.io/categories/Tech/
 http://n795113.github.io/categories/Tech/PHP/
 http://n795113.github.io/categories/Tech/CSS/
@@ -71,3 +70,4 @@ http://n795113.github.io/categories/Tech/Rust/
 http://n795113.github.io/categories/Tech/Go/
 http://n795113.github.io/categories/Tech/Maya/
 http://n795113.github.io/categories/Tech/Javascript/
+http://n795113.github.io/categories/Crypto-Blockchain/
