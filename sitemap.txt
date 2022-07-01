@@ -1,3 +1,4 @@
+http://n795113.github.io/2022/07/01/first-opengl-app-on-mac-xcode/
 http://n795113.github.io/portfolio/pipeline-td.html
 http://n795113.github.io/2022/04/22/learn-solana-cli/
 http://n795113.github.io/2022/04/22/understand-solana-token/
@@ -61,6 +62,8 @@ http://n795113.github.io/tags/c/
 http://n795113.github.io/tags/python/
 http://n795113.github.io/tags/javascript/
 http://n795113.github.io/tags/hash/
+http://n795113.github.io/tags/opengl/
+http://n795113.github.io/tags/xcode/
 http://n795113.github.io/categories/Tech/
 http://n795113.github.io/categories/Tech/PHP/
 http://n795113.github.io/categories/Tech/CSS/
